@@ -1,0 +1,81 @@
+<section class="bg-brand-graphite text-white relative overflow-hidden -mt-[7.25rem] pt-[7.25rem]">
+  <div class="absolute inset-0 grid-lines opacity-[0.05] pointer-events-none"></div>
+  <div class="container-x relative py-16 lg:py-24">
+    <div class="max-w-3xl" data-reveal>
+      <span class="eyebrow !text-brand-amber">{{ 'dealers.eyebrow' | t }}</span>
+      <h1 class="mt-3 text-display-lg text-white text-balance">{{ 'dealers.title' | t }}</h1>
+      <p class="mt-5 text-lg text-white/70">{{ 'dealers.subtitle' | t }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-x grid lg:grid-cols-2 gap-12 items-start">
+    <!-- Benefits -->
+    <div data-reveal>
+      <h2 class="text-display-md text-balance">{{ 'dealers.benefits_title' | t }}</h2>
+      <ul class="mt-8 space-y-4">
+        @for (b of benefits(); track b) {
+          <li class="flex items-start gap-4">
+            <span class="w-7 h-7 rounded-full bg-brand-leaf/15 text-brand-leaf grid place-items-center text-sm mt-0.5 shrink-0">✓</span>
+            <span class="text-brand-ink/80">{{ b }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Form -->
+    <div data-reveal data-reveal-delay="120">
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="card border border-brand-fog p-8 space-y-4">
+        <h2 class="font-display font-bold text-xl">{{ 'dealers.form_title' | t }}</h2>
+        <div>
+          <label class="label">{{ 'cta.name' | t }}</label>
+          <input formControlName="name" type="text" class="input" />
+          @if (invalid('name')) { <p class="text-xs text-red-500 mt-1">{{ 'form.required' | t }}</p> }
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="label">{{ 'cta.company' | t }}</label>
+            <input formControlName="company" type="text" class="input" />
+          </div>
+          <div>
+            <label class="label">{{ 'cta.phone' | t }}</label>
+            <input formControlName="phone" type="tel" class="input" />
+            @if (invalid('phone')) { <p class="text-xs text-red-500 mt-1">{{ 'form.phone_invalid' | t }}</p> }
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="label">{{ 'dealers.region' | t }}</label>
+            <select formControlName="region" class="input">
+              @for (r of regions; track r) { <option [value]="r">{{ r }}</option> }
+            </select>
+          </div>
+          <div>
+            <label class="label">{{ 'dealers.terms' | t }}</label>
+            <select formControlName="terms" class="input">
+              <option value="sales">{{ 'dealers.terms_sales' | t }}</option>
+              <option value="service">{{ 'dealers.terms_service' | t }}</option>
+              <option value="both">{{ 'dealers.terms_both' | t }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="absolute -left-[9999px]" aria-hidden="true">
+          <label>Website<input formControlName="website" type="text" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <button type="submit" class="btn-primary w-full !py-4" [disabled]="state() === 'sending'">
+          {{ (state() === 'sending' ? 'cta.sending' : 'dealers.submit') | t }}
+        </button>
+        @if (state() === 'success') { <p class="text-sm font-medium text-brand-moss">{{ 'cta.success' | t }}</p> }
+        @if (state() === 'error') { <p class="text-sm font-medium text-red-500">{{ 'cta.error' | t }}</p> }
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="tenders" class="section bg-brand-cloud">
+  <div class="container-x" data-reveal>
+    <h2 class="text-display-md text-balance">{{ 'dealers.tenders_title' | t }}</h2>
+    <p class="mt-4 text-lg text-brand-ink/70 max-w-2xl">{{ 'dealers.tenders_text' | t }}</p>
+  </div>
+</section>

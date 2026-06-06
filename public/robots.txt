@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://krilak.ru/sitemap.xml

@@ -1,0 +1,44 @@
+<section class="bg-brand-graphite text-white relative overflow-hidden -mt-[7.25rem] pt-[7.25rem]">
+  <div class="absolute inset-0 grid-lines opacity-[0.05] pointer-events-none"></div>
+  <div class="container-x relative py-16 lg:py-24">
+    <div class="max-w-3xl" data-reveal>
+      <span class="eyebrow !text-brand-amber">{{ 'solutions.eyebrow' | t }}</span>
+      <h1 class="mt-3 text-display-lg text-white text-balance">{{ 'solutions.title' | t }}</h1>
+      <p class="mt-5 text-lg text-white/70">{{ 'solutions.subtitle' | t }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-x">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      @for (item of items; track item.key; let i = $index) {
+        <article class="group bg-white rounded-2xl overflow-hidden hover-rise shadow-card border border-brand-fog" data-reveal [attr.data-reveal-delay]="(i % 3) * 80">
+          <div class="h-44 bg-gradient-to-br {{ item.gradient }} relative">
+            <div class="absolute inset-0 grid-lines opacity-20"></div>
+            <div class="absolute top-5 left-5 text-white"><span class="pill-on-dark">{{ item.badge }}</span></div>
+            <div class="absolute bottom-5 right-5 text-white/30 text-7xl font-display font-bold leading-none">{{ item.n }}</div>
+          </div>
+          <div class="p-7">
+            <h2 class="font-display font-bold text-xl">{{ 'solutions.items.' + item.key + '.title' | t }}</h2>
+            <p class="text-sm text-brand-ink/60 mt-2">{{ 'solutions.items.' + item.key + '.description' | t }}</p>
+            <a [routerLink]="'/configurator' | loc" class="link-arrow mt-5 text-sm">{{ 'configurator_block.cta' | t }}</a>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section bg-brand-graphite text-white relative overflow-hidden">
+  <div class="absolute inset-0 grid-lines opacity-[0.04] pointer-events-none"></div>
+  <div class="container-x relative grid lg:grid-cols-2 gap-12 items-center">
+    <div data-reveal>
+      <h2 class="text-display-lg text-white text-balance">{{ 'cta.title' | t }}</h2>
+      <p class="mt-5 text-lg text-white/70 max-w-lg">{{ 'cta.subtitle' | t }}</p>
+    </div>
+    <div data-reveal data-reveal-delay="120">
+      <app-quote-form variant="dark" [leadTitle]="'KRILAK — заявка (Решения)'" source="/solutions" />
+    </div>
+  </div>
+</section>

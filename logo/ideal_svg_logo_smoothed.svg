@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 662 553" role="img" aria-labelledby="title desc">
+  <title id="title">Smoothed unified Agrobank-style logo</title>
+  <desc id="desc">Cleaned and smoothed single SVG with corrected alignment, softened curves and removed small bumps.</desc>
+  <g fill="#5DA32F">
+    <!-- left flowing base -->
+    <path d="M24 428 C54 419 85 407 105 394 C106 412 106 431 106 449 C78 445 50 437 24 428 Z"/>
+
+    <!-- second vertical leaf -->
+    <path d="M119 386 C133 379 146 370 156 359 L156 448 C144 449 132 450 120 450 C118 429 117 407 119 386 Z"/>
+
+    <!-- third vertical leaf -->
+    <path d="M170 342 C184 329 197 315 207 304 L207 435 C195 440 182 444 170 446 Z"/>
+
+    <!-- left side of central tower -->
+    <path d="M219 289 C238 255 252 217 256 184 L260 151 L260 405 C260 411 257 416 252 419 L219 433 Z"/>
+
+    <!-- main smooth body -->
+    <path d="M274 151 C286 205 307 253 337 287 C383 339 448 346 527 322 C565 310 609 301 655 302 L654 454 L438 469 C406 471 383 468 360 458 L292 424 C280 418 273 410 273 398 Z"/>
+
+    <!-- top ring, balanced and smooth -->
+    <path fill-rule="evenodd" d="
+      M194 120
+      C194 101 229 92 274 92
+      C319 92 354 101 354 120
+      C354 139 320 148 291 147
+      L290 136
+      C318 135 333 128 333 120
+      C333 110 307 103 274 103
+      C241 103 215 110 215 120
+      C215 130 242 137 260 135
+      L260 147
+      C228 148 194 139 194 120 Z"/>
+  </g>
+</svg>

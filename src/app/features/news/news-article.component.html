@@ -1,0 +1,29 @@
+@if (article(); as a) {
+  <article class="section">
+    <div class="container-x max-w-3xl">
+      <a [routerLink]="'/news' | loc" class="text-sm text-brand-leaf font-semibold hover:gap-2 inline-flex items-center gap-1" data-reveal>← {{ 'news.back' | t }}</a>
+      <div class="mt-6 flex items-center gap-3" data-reveal>
+        <span class="pill-{{ a.accent }}">{{ a.category }}</span>
+        <time class="text-sm text-brand-ink/50">{{ a.date }}</time>
+      </div>
+      <h1 class="mt-4 text-display-md text-balance" data-reveal>{{ a.title }}</h1>
+      <p class="mt-5 text-lg text-brand-ink/70" data-reveal>{{ a.excerpt }}</p>
+      <div class="prose prose-lg max-w-none mt-10 text-brand-ink/80" data-reveal>
+        @for (para of a.body; track $index) {
+          <p class="mb-5 leading-relaxed">{{ para }}</p>
+        }
+      </div>
+      <div class="mt-12 pt-8 border-t border-brand-fog flex flex-wrap gap-3" data-reveal>
+        <a [routerLink]="'/configurator' | loc" class="btn-primary">{{ 'configurator_block.cta' | t }}</a>
+        <a [routerLink]="'/contacts' | loc" class="btn-ghost">{{ 'nav.contacts' | t }}</a>
+      </div>
+    </div>
+  </article>
+} @else {
+  <section class="section">
+    <div class="container-x text-center">
+      <h1 class="text-display-md">{{ 'notfound.title' | t }}</h1>
+      <a [routerLink]="'/news' | loc" class="btn-primary mt-8">{{ 'news.back' | t }}</a>
+    </div>
+  </section>
+}

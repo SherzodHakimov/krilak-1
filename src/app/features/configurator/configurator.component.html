@@ -1,0 +1,172 @@
+<section class="bg-brand-graphite text-white relative overflow-hidden -mt-[7.25rem] pt-[7.25rem]">
+  <div class="absolute inset-0 grid-lines opacity-[0.05] pointer-events-none"></div>
+  <div class="container-x relative py-14 lg:py-20">
+    <div class="max-w-2xl">
+      <span class="eyebrow !text-brand-amber">{{ 'configurator_block.eyebrow' | t }}</span>
+      <h1 class="mt-3 text-display-md text-white text-balance">{{ 'configurator_block.title' | t }}</h1>
+      <p class="mt-4 text-white/70">{{ 'configurator_block.subtitle' | t }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container-x max-w-3xl">
+    <div class="bg-white rounded-3xl border border-brand-fog shadow-card-hover p-6 sm:p-10">
+      <!-- progress -->
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-xs uppercase tracking-wider text-brand-ink/50">{{ step() }} / 5</span>
+        <span class="text-xs text-brand-leaf font-semibold">{{ progress() | number: '1.0-0' }}%</span>
+      </div>
+      <div class="h-1 rounded-full bg-brand-cloud mb-10">
+        <div class="h-full bg-leaf-gradient rounded-full transition-all duration-500" [style.width.%]="progress()"></div>
+      </div>
+
+      <!-- STEP 1: object type -->
+      @if (step() === 1) {
+        <h2 class="font-display font-bold text-2xl mb-6">{{ 'configurator_block.step_1' | t }}</h2>
+        <div class="grid sm:grid-cols-2 gap-3">
+          @for (o of objectTypes; track o.id) {
+            <button
+              type="button"
+              (click)="selectObjectType(o.id)"
+              class="text-left p-5 rounded-2xl border transition-all"
+              [class]="objectType() === o.id ? 'border-brand-leaf bg-brand-leaf/5' : 'border-brand-fog hover:border-brand-graphite'"
+            >
+              <div class="text-3xl mb-3">{{ o.icon }}</div>
+              <div class="font-display font-semibold">{{ o.name }}</div>
+              <div class="text-xs text-brand-ink/60 mt-1">{{ o.description }}</div>
+            </button>
+          }
+        </div>
+      }
+
+      <!-- STEP 2: structure -->
+      @if (step() === 2) {
+        <h2 class="font-display font-bold text-2xl mb-6">{{ 'configurator_block.step_2' | t }}</h2>
+        <div class="grid sm:grid-cols-3 gap-3">
+          @for (s of structures; track s.id) {
+            <button
+              type="button"
+              (click)="selectStructure(s.id)"
+              class="text-center p-5 rounded-2xl border transition-all"
+              [class]="structure() === s.id ? 'border-brand-leaf bg-brand-leaf/5' : 'border-brand-fog hover:border-brand-graphite'"
+            >
+              <div class="text-3xl mb-2">{{ s.icon }}</div>
+              <div class="font-display font-semibold text-sm">{{ s.name }}</div>
+            </button>
+          }
+        </div>
+      }
+
+      <!-- STEP 3: rating -->
+      @if (step() === 3) {
+        <h2 class="font-display font-bold text-2xl mb-6">{{ 'configurator_block.step_4' | t }}</h2>
+        <div class="grid grid-cols-3 sm:grid-cols-4 gap-2">
+          @for (r of availableRatings(); track r) {
+            <button
+              type="button"
+              (click)="selectRating(r)"
+              class="px-3 py-3 rounded-xl text-sm font-semibold transition-all"
+              [class]="rating() === r ? 'bg-brand-leaf text-white' : 'border border-brand-fog hover:border-brand-leaf hover:bg-brand-leaf/5'"
+            >
+              {{ r }}
+            </button>
+          }
+        </div>
+      }
+
+      <!-- STEP 4: area + conditions -->
+      @if (step() === 4) {
+        <h2 class="font-display font-bold text-2xl mb-6">{{ 'configurator_block.step_3' | t }}</h2>
+        <div class="space-y-6">
+          <div>
+            <label class="label">{{ 'configurator_block.step_3' | t }} ({{ 'projects.area' | t }})</label>
+            <input type="number" min="1" [value]="area() ?? ''" (input)="onArea($event)" class="input !py-4" placeholder="1000" />
+          </div>
+          <div>
+            <label class="label">{{ 'configurator_block.step_5' | t }}</label>
+            <div class="grid sm:grid-cols-3 gap-3">
+              @for (c of conditions; track c.id) {
+                <button
+                  type="button"
+                  (click)="conditionId.set(c.id)"
+                  class="text-left p-4 rounded-2xl border transition-all"
+                  [class]="conditionId() === c.id ? 'border-brand-leaf bg-brand-leaf/5' : 'border-brand-fog hover:border-brand-graphite'"
+                >
+                  <div class="font-display font-semibold text-sm">{{ c.name }}</div>
+                  <div class="text-xs text-brand-ink/60 mt-1">{{ c.description }}</div>
+                </button>
+              }
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- STEP 5: result + lead -->
+      @if (step() === 5) {
+        @if (recommendation(); as rec) {
+          <div class="rounded-2xl bg-brand-graphite text-white p-6 sm:p-8">
+            <div class="text-xs uppercase tracking-wider text-brand-amber">{{ 'configurator_block.step_5' | t }}</div>
+            <h2 class="font-display font-bold text-2xl mt-2">{{ rec.name }}</h2>
+            <div class="text-xs text-white/50 mt-1">SKU: {{ rec.sku }}</div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6">
+              <div>
+                <div class="text-2xl font-display font-bold text-brand-leaf">{{ rec.consumption }}</div>
+                <div class="text-xs text-white/60">{{ rec.consumptionUnit }}</div>
+              </div>
+              <div>
+                <div class="text-2xl font-display font-bold text-brand-leaf">{{ rec.totalConsumption }}</div>
+                <div class="text-xs text-white/60">{{ rec.consumptionUnit }} · {{ area() }} м²</div>
+              </div>
+              <div>
+                <div class="text-2xl font-display font-bold text-brand-amber">≈ {{ rec.estimate | number: '1.0-0' }} ₽</div>
+                <div class="text-xs text-white/60">{{ rating() }}</div>
+              </div>
+            </div>
+          </div>
+
+          <form [formGroup]="leadForm" (ngSubmit)="submitLead()" novalidate class="mt-8 space-y-4">
+            <p class="text-sm text-brand-ink/70">{{ 'cta.subtitle' | t }}</p>
+            <div class="grid sm:grid-cols-3 gap-4">
+              <div>
+                <label class="label">{{ 'cta.name' | t }}</label>
+                <input formControlName="name" type="text" class="input" />
+                @if (invalid('name')) { <p class="text-xs text-red-500 mt-1">{{ 'form.required' | t }}</p> }
+              </div>
+              <div>
+                <label class="label">{{ 'cta.phone' | t }}</label>
+                <input formControlName="phone" type="tel" class="input" />
+                @if (invalid('phone')) { <p class="text-xs text-red-500 mt-1">{{ 'form.phone_invalid' | t }}</p> }
+              </div>
+              <div>
+                <label class="label">{{ 'cta.email' | t }}</label>
+                <input formControlName="email" type="email" class="input" />
+                @if (invalid('email')) { <p class="text-xs text-red-500 mt-1">{{ 'form.email_invalid' | t }}</p> }
+              </div>
+            </div>
+            <div class="absolute -left-[9999px]" aria-hidden="true">
+              <label>Website<input formControlName="website" type="text" tabindex="-1" autocomplete="off" /></label>
+            </div>
+            <button type="submit" class="btn-primary w-full !py-4" [disabled]="state() === 'sending'">
+              {{ (state() === 'sending' ? 'cta.sending' : 'cta.submit') | t }}
+            </button>
+            @if (state() === 'success') { <p class="text-sm font-medium text-brand-moss">{{ 'cta.success' | t }}</p> }
+            @if (state() === 'error') { <p class="text-sm font-medium text-red-500">{{ 'cta.error' | t }}</p> }
+          </form>
+        } @else {
+          <p class="text-brand-ink/60">{{ 'catalog.nothing' | t }}</p>
+        }
+      }
+
+      <!-- nav -->
+      <div class="flex items-center justify-between mt-10 pt-6 border-t border-brand-fog">
+        <button type="button" (click)="prev()" class="btn-ghost !py-2.5 !px-4 text-sm" [disabled]="step() === 1">← {{ 'configurator_block.step_1' | t }}</button>
+        @if (step() < 5) {
+          <button type="button" (click)="next()" class="btn-primary !py-2.5 !px-5 text-sm" [disabled]="!canAdvance()">{{ 'configurator_block.cta' | t }} →</button>
+        } @else {
+          <a [routerLink]="'/catalog' | loc" class="btn-ghost !py-2.5 !px-4 text-sm">{{ 'categories.view_all' | t }}</a>
+        }
+      </div>
+    </div>
+  </div>
+</section>

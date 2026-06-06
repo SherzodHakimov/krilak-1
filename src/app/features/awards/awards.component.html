@@ -1,0 +1,29 @@
+<section class="bg-brand-graphite text-white relative overflow-hidden -mt-[7.25rem] pt-[7.25rem]">
+  <div class="absolute inset-0 grid-lines opacity-[0.05] pointer-events-none"></div>
+  <div class="container-x relative py-16 lg:py-24">
+    <div class="max-w-3xl" data-reveal>
+      <span class="eyebrow !text-brand-amber">{{ 'awards.all' | t }}</span>
+      <h1 class="mt-3 text-display-lg text-white text-balance">{{ 'awards.title' | t }}</h1>
+      <p class="mt-5 text-lg text-white/70">{{ 'awards.subtitle' | t }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-x">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      @for (a of awards(); track a.year + a.title; let i = $index) {
+        <div class="card-bordered p-5 flex flex-col gap-3" data-reveal [attr.data-reveal-delay]="(i % 4) * 60">
+          <div class="flex items-center justify-between">
+            <span class="text-3xl">{{ a.icon }}</span>
+            <span class="text-xs font-mono font-semibold text-brand-leaf">{{ a.year }}</span>
+          </div>
+          <div>
+            <div class="text-sm font-semibold leading-tight">{{ a.title }}</div>
+            <div class="text-xs text-brand-ink/60 mt-1">{{ a.org }}</div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

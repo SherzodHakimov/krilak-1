@@ -1,0 +1,234 @@
+﻿{
+  "objectTypes": [
+    { "id": "industrial", "name": "Промышленный", "icon": "🏭", "description": "Цеха, заводы, НПЗ, склады, ангары" },
+    { "id": "civic", "name": "Общественный", "icon": "🏢", "description": "ТРЦ, офисы, стадионы, аэропорты, гостиницы" },
+    { "id": "infra", "name": "Инфраструктура", "icon": "🚇", "description": "Метро, тоннели, мосты, дата-центры, АЭС" },
+    { "id": "housing", "name": "Жильё и соц.", "icon": "🏘️", "description": "Жилые дома, школы, больницы" }
+  ],
+  "structures": [
+    { "id": "steel", "name": "Металлоконструкции", "icon": "▣", "unit": "м²" },
+    { "id": "concrete", "name": "Бетон / ж/б", "icon": "▤", "unit": "м²" },
+    { "id": "wood", "name": "Дерево", "icon": "▥", "unit": "м²" },
+    { "id": "cable", "name": "Кабельные линии", "icon": "⌇", "unit": "м" },
+    { "id": "duct", "name": "Воздуховоды", "icon": "◎", "unit": "м²" },
+    { "id": "penetration", "name": "Проходки", "icon": "▦", "unit": "шт" }
+  ],
+  "ratings": ["R15", "R30", "R45", "R60", "R90", "R120", "R150", "R180", "R240"],
+  "conditions": [
+    { "id": "indoor", "name": "Внутри помещений", "description": "Сухие, отапливаемые" },
+    { "id": "outdoor", "name": "Наружное применение", "description": "Атмосферные осадки, УФ" },
+    { "id": "aggressive", "name": "Агрессивная среда", "description": "Химия, морской воздух, ЛВЖ" }
+  ],
+  "matrix": [
+    {
+      "structure": "steel",
+      "rating": "R30",
+      "conditions": ["indoor", "outdoor", "aggressive"],
+      "sku": "KR-S-01",
+      "name": "КрилаК-СУПЕР",
+      "consumption": 0.85,
+      "consumption_unit": "кг/м²",
+      "price_per_unit": 580
+    },
+    {
+      "structure": "steel",
+      "rating": "R45",
+      "conditions": ["indoor", "outdoor"],
+      "sku": "KR-S-01",
+      "name": "КрилаК-СУПЕР",
+      "consumption": 1.2,
+      "consumption_unit": "кг/м²",
+      "price_per_unit": 580
+    },
+    {
+      "structure": "steel",
+      "rating": "R60",
+      "conditions": ["indoor", "outdoor"],
+      "sku": "KR-S-01",
+      "name": "КрилаК-СУПЕР",
+      "consumption": 1.6,
+      "consumption_unit": "кг/м²",
+      "price_per_unit": 580
+    },
+    {
+      "structure": "steel",
+      "rating": "R90",
+      "conditions": ["indoor"],
+      "sku": "KR-S-01",
+      "name": "КрилаК-СУПЕР",
+      "consumption": 2.0,
+      "consumption_unit": "кг/м²",
+      "price_per_unit": 580
+    },
+    {
+      "structure": "steel",
+      "rating": "R120",
+      "conditions": ["indoor"],
+      "sku": "KR-S-01",
+      "name": "КрилаК-СУПЕР",
+      "consumption": 2.4,
+      "consumption_unit": "кг/м²",
+      "price_per_unit": 580
+    },
+    {
+      "structure": "steel",
+      "rating": "R150",
+      "conditions": ["indoor", "outdoor", "aggressive"],
+      "sku": "KR-P-01",
+      "name": "КрилаК-Плита ПРО (15 мм)",
+      "consumption": 1.0,
+      "consumption_unit": "м²/м²",
+      "price_per_unit": 4200
+    },
+    {
+      "structure": "steel",
+      "rating": "R180",
+      "conditions": ["indoor", "outdoor", "aggressive"],
+      "sku": "KR-P-01",
+      "name": "КрилаК-Плита ПРО (25 мм)",
+      "consumption": 1.0,
+      "consumption_unit": "м²/м²",
+      "price_per_unit": 5800
+    },
+    {
+      "structure": "steel",
+      "rating": "R240",
+      "conditions": ["indoor", "outdoor", "aggressive"],
+      "sku": "KR-P-01",
+      "name": "КрилаК-Плита ПРО (40 мм)",
+      "consumption": 1.0,
+      "consumption_unit": "м²/м²",
+      "price_per_unit": 8400
+    },
+    {
+      "structure": "concrete",
+      "rating": "R60",
+      "conditions": ["indoor", "outdoor"],
+      "sku": "KR-S-02",
+      "name": "КрилаК-МОНО (15 мм)",
+      "consumption": 12.0,
+      "consumption_unit": "кг/м²",
+      "price_per_unit": 110
+    },
+    {
+      "structure": "concrete",
+      "rating": "R120",
+      "conditions": ["indoor", "outdoor", "aggressive"],
+      "sku": "KR-S-02",
+      "name": "КрилаК-МОНО (30 мм)",
+      "consumption": 22.0,
+      "consumption_unit": "кг/м²",
+      "price_per_unit": 110
+    },
+    {
+      "structure": "concrete",
+      "rating": "R180",
+      "conditions": ["indoor", "outdoor", "aggressive"],
+      "sku": "KR-S-02",
+      "name": "КрилаК-МОНО (45 мм)",
+      "consumption": 32.0,
+      "consumption_unit": "кг/м²",
+      "price_per_unit": 110
+    },
+    {
+      "structure": "wood",
+      "rating": "R30",
+      "conditions": ["indoor"],
+      "sku": "KR-S-04",
+      "name": "КрилаК-ДЕРЕВО",
+      "consumption": 0.4,
+      "consumption_unit": "кг/м²",
+      "price_per_unit": 420
+    },
+    {
+      "structure": "wood",
+      "rating": "R45",
+      "conditions": ["indoor"],
+      "sku": "KR-S-04",
+      "name": "КрилаК-ДЕРЕВО",
+      "consumption": 0.6,
+      "consumption_unit": "кг/м²",
+      "price_per_unit": 420
+    },
+    {
+      "structure": "cable",
+      "rating": "R45",
+      "conditions": ["indoor"],
+      "sku": "KR-S-03",
+      "name": "КрилаК-КАБЕЛЬ",
+      "consumption": 0.7,
+      "consumption_unit": "кг/м",
+      "price_per_unit": 920
+    },
+    {
+      "structure": "cable",
+      "rating": "R60",
+      "conditions": ["indoor"],
+      "sku": "KR-S-03",
+      "name": "КрилаК-КАБЕЛЬ",
+      "consumption": 0.9,
+      "consumption_unit": "кг/м",
+      "price_per_unit": 920
+    },
+    {
+      "structure": "cable",
+      "rating": "R90",
+      "conditions": ["indoor"],
+      "sku": "KR-S-03",
+      "name": "КрилаК-КАБЕЛЬ",
+      "consumption": 1.2,
+      "consumption_unit": "кг/м",
+      "price_per_unit": 920
+    },
+    {
+      "structure": "duct",
+      "rating": "R60",
+      "conditions": ["indoor"],
+      "sku": "KR-S-05",
+      "name": "КрилаК-ВЕНТ",
+      "consumption": 1.4,
+      "consumption_unit": "кг/м²",
+      "price_per_unit": 740
+    },
+    {
+      "structure": "duct",
+      "rating": "R120",
+      "conditions": ["indoor"],
+      "sku": "KR-S-05",
+      "name": "КрилаК-ВЕНТ",
+      "consumption": 2.4,
+      "consumption_unit": "кг/м²",
+      "price_per_unit": 740
+    },
+    {
+      "structure": "penetration",
+      "rating": "R60",
+      "conditions": ["indoor"],
+      "sku": "KR-C-01",
+      "name": "Муфта КрилаК (Ø50)",
+      "consumption": 1.0,
+      "consumption_unit": "шт/проходка",
+      "price_per_unit": 1850
+    },
+    {
+      "structure": "penetration",
+      "rating": "R120",
+      "conditions": ["indoor"],
+      "sku": "KR-C-01",
+      "name": "Муфта КрилаК (Ø110)",
+      "consumption": 1.0,
+      "consumption_unit": "шт/проходка",
+      "price_per_unit": 3200
+    },
+    {
+      "structure": "penetration",
+      "rating": "R180",
+      "conditions": ["indoor"],
+      "sku": "KR-C-01",
+      "name": "Муфта КрилаК EI180 (Ø200)",
+      "consumption": 1.0,
+      "consumption_unit": "шт/проходка",
+      "price_per_unit": 5400
+    }
+  ]
+}

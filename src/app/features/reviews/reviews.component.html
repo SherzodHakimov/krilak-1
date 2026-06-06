@@ -1,0 +1,27 @@
+<section class="bg-brand-graphite text-white relative overflow-hidden -mt-[7.25rem] pt-[7.25rem]">
+  <div class="absolute inset-0 grid-lines opacity-[0.05] pointer-events-none"></div>
+  <div class="container-x relative py-16 lg:py-24">
+    <div class="max-w-3xl" data-reveal>
+      <span class="eyebrow !text-brand-amber">{{ 'reviews.eyebrow' | t }}</span>
+      <h1 class="mt-3 text-display-lg text-white text-balance">{{ 'reviews.title' | t }}</h1>
+      <p class="mt-5 text-lg text-white/70">{{ 'reviews.subtitle' | t }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-x">
+    <div class="grid md:grid-cols-2 gap-5">
+      @for (r of reviews(); track r.author + r.role; let i = $index) {
+        <figure class="card-bordered p-8" data-reveal [attr.data-reveal-delay]="(i % 2) * 80">
+          <div class="text-5xl text-brand-leaf/30 font-display leading-none">“</div>
+          <blockquote class="text-lg text-brand-graphite -mt-4">{{ r.text }}</blockquote>
+          <figcaption class="mt-6 pt-6 border-t border-brand-fog">
+            <div class="font-display font-semibold">{{ r.author }}</div>
+            <div class="text-sm text-brand-ink/60">{{ r.role }}</div>
+          </figcaption>
+        </figure>
+      }
+    </div>
+  </div>
+</section>

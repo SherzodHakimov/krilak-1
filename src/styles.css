@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-brand-graphite: 15 22 32;
+    --color-brand-leaf: 93 170 47;
+    --color-brand-moss: 61 122 29;
+    --color-brand-amber: 243 163 58;
+    --color-brand-steel: 30 91 186;
+    --color-brand-cloud: 244 245 247;
+    --grid-line: rgba(15, 22, 32, 0.06);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body text-brand-graphite bg-white antialiased;
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-display tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-brand-leaf text-white;
+  }
+
+  hr {
+    @apply border-brand-fog;
+  }
+}
+
+@layer components {
+  /* ---- Buttons ---- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm tracking-wide transition-all duration-200 whitespace-nowrap;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-leaf text-white shadow-card hover:bg-brand-moss hover:shadow-card-hover hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply btn bg-brand-graphite text-white hover:bg-brand-ink;
+  }
+
+  .btn-ghost {
+    @apply btn border border-brand-fog text-brand-graphite hover:border-brand-graphite hover:bg-brand-cloud;
+  }
+
+  .btn-amber {
+    @apply btn bg-brand-amber text-brand-graphite hover:brightness-95;
+  }
+
+  .btn-on-dark {
+    @apply btn bg-white/10 text-white border border-white/15 backdrop-blur hover:bg-white/20;
+  }
+
+  /* ---- Pills / badges ---- */
+  .pill {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium tracking-wide uppercase;
+  }
+
+  .pill-leaf { @apply pill bg-brand-spring text-brand-moss; }
+  .pill-steel { @apply pill bg-brand-steel/10 text-brand-steel; }
+  .pill-amber { @apply pill bg-brand-amber/15 text-amber-700; }
+  .pill-cloud { @apply pill bg-brand-cloud text-brand-graphite; }
+  .pill-on-dark { @apply pill bg-white/10 text-white border border-white/15; }
+
+  /* ---- Cards ---- */
+  .card {
+    @apply bg-white rounded-2xl shadow-card transition-all duration-300 hover:shadow-card-hover;
+  }
+
+  .card-bordered {
+    @apply bg-white rounded-2xl border border-brand-fog transition-all duration-300 hover:border-brand-graphite hover:-translate-y-1;
+  }
+
+  /* ---- Containers ---- */
+  .container-x {
+    @apply mx-auto w-full max-w-[1280px] px-5 sm:px-8 lg:px-12;
+  }
+
+  .section {
+    @apply py-20 lg:py-28;
+  }
+
+  .section-tight {
+    @apply py-12 lg:py-16;
+  }
+
+  /* ---- Eyebrow ---- */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-leaf;
+  }
+
+  .eyebrow::before {
+    content: "";
+    @apply inline-block w-6 h-px bg-brand-leaf;
+  }
+
+  /* ---- Inputs ---- */
+  .input {
+    @apply w-full rounded-xl border border-brand-fog bg-white px-4 py-3 text-sm text-brand-graphite placeholder:text-brand-mist focus:outline-none focus:ring-2 focus:ring-brand-leaf/40 focus:border-brand-leaf transition;
+  }
+
+  .input-on-dark {
+    @apply input bg-white/5 border-white/15 text-white placeholder:text-white/40 focus:bg-white/10;
+  }
+
+  .label {
+    @apply text-xs font-medium uppercase tracking-wider text-brand-ink/70 mb-1.5 block;
+  }
+
+  /* ---- Grid lines decoration ---- */
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* ---- Metric ---- */
+  .metric-number {
+    @apply font-display font-bold text-display-md leading-none;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .metric-label {
+    @apply text-sm text-brand-ink/60 mt-2;
+  }
+
+  /* ---- Link arrow ---- */
+  .link-arrow {
+    @apply inline-flex items-center gap-2 font-semibold text-brand-leaf hover:gap-3 transition-all duration-200;
+  }
+
+  .link-arrow::after {
+    content: "→";
+    @apply transition-transform duration-200;
+  }
+
+  /* ---- Tag chip ---- */
+  .chip {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-brand-cloud text-xs font-medium text-brand-ink/70;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+  .mask-fade-r {
+    -webkit-mask-image: linear-gradient(to right, black 80%, transparent);
+            mask-image: linear-gradient(to right, black 80%, transparent);
+  }
+  .scrollbar-none { scrollbar-width: none; }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .hover-rise { @apply transition-transform duration-300 hover:-translate-y-1; }
+}
+
+/* Scroll reveal — applied by RevealDirective (IntersectionObserver) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
