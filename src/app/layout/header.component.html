@@ -62,7 +62,12 @@
       </a>
 
       <nav class="hidden lg:flex items-center gap-1" aria-label="Primary">
-        <div class="relative" [class.is-open]="dropdownOpen()">
+        <div
+          class="relative"
+          [class.is-open]="dropdownOpen()"
+          (mouseenter)="openDropdown()"
+          (mouseleave)="closeDropdownDelayed()"
+        >
           <button
             (click)="toggleDropdown()"
             class="px-4 py-2 rounded-full font-semibold text-sm text-white [.is-scrolled_&]:text-brand-graphite hover:bg-white/10 [.is-scrolled_&]:hover:bg-brand-cloud transition-colors flex items-center gap-1.5"

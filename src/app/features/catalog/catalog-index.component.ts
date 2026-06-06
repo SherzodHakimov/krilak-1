@@ -42,4 +42,8 @@ export class CatalogIndexComponent {
   onSearch(event: Event): void {
     this.query.set((event.target as HTMLInputElement).value);
   }
+
+  categoryIcon(slug: string): string {
+    return this.catalog.categoryBySlug(slug)?.icon ?? '▣';
+  }
 }

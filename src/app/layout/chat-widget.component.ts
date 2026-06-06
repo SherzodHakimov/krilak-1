@@ -1,31 +1,54 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../core/i18n/translate.pipe';
-import { LocalizePathPipe } from '../core/i18n/localize-path.pipe';
 
-/** Floating contact widget (Telegram / WhatsApp / callback). */
+/** Floating contact widget (WhatsApp / Telegram / callback). */
 @Component({
   selector: 'app-chat-widget',
-  imports: [RouterLink, TranslatePipe, LocalizePathPipe],
+  imports: [TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '(document:keydown.escape)': 'open.set(false)' },
   template: `
     <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
       @if (open()) {
-        <div class="w-72 bg-white rounded-2xl shadow-card-hover border border-brand-fog p-5 animate-fade-up">
-          <h3 class="font-display font-bold text-base text-brand-graphite">{{ 'chat.title' | t }}</h3>
-          <p class="text-xs text-brand-ink/60 mt-1">{{ 'chat.subtitle' | t }}</p>
-          <div class="mt-4 space-y-2">
-            <a href="https://t.me/krilak" target="_blank" rel="noopener" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-brand-cloud text-sm font-medium">
-              <span class="w-8 h-8 rounded-lg bg-brand-steel/10 text-brand-steel grid place-items-center">✈</span>
-              {{ 'chat.telegram' | t }}
+        <div class="w-[320px] bg-white rounded-2xl shadow-card-hover border border-brand-fog overflow-hidden animate-fade-up">
+          <div class="p-5 bg-brand-graphite text-white flex items-start justify-between">
+            <div>
+              <h3 class="font-display font-semibold text-base">{{ 'chat.title' | t }}</h3>
+              <p class="text-xs text-white/60 mt-1">{{ 'chat.subtitle' | t }}</p>
+            </div>
+            <button
+              type="button"
+              (click)="open.set(false)"
+              class="w-8 h-8 rounded-full hover:bg-white/10 grid place-items-center"
+              aria-label="Close"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M3 9l6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+            </button>
+          </div>
+          <div class="p-4 space-y-2">
+            <a href="https://wa.me/74957440052" target="_blank" rel="noopener" class="flex items-center gap-3 p-3 rounded-xl hover:bg-brand-cloud">
+              <span class="w-9 h-9 rounded-full bg-emerald-500 text-white grid place-items-center text-sm font-bold">W</span>
+              <span class="flex-1">
+                <span class="block text-sm font-semibold">{{ 'chat.whatsapp' | t }}</span>
+                <span class="block text-xs text-brand-ink/60">{{ 'footer.phone' | t }}</span>
+              </span>
+              <span class="text-brand-ink/40">→</span>
             </a>
-            <a href="https://wa.me/74957440052" target="_blank" rel="noopener" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-brand-cloud text-sm font-medium">
-              <span class="w-8 h-8 rounded-lg bg-brand-leaf/10 text-brand-leaf grid place-items-center">✆</span>
-              {{ 'chat.whatsapp' | t }}
+            <a href="https://t.me/krilak" target="_blank" rel="noopener" class="flex items-center gap-3 p-3 rounded-xl hover:bg-brand-cloud">
+              <span class="w-9 h-9 rounded-full bg-sky-500 text-white grid place-items-center text-sm font-bold">T</span>
+              <span class="flex-1">
+                <span class="block text-sm font-semibold">{{ 'chat.telegram' | t }}</span>
+                <span class="block text-xs text-brand-ink/60">&#64;krilak</span>
+              </span>
+              <span class="text-brand-ink/40">→</span>
             </a>
-            <a [routerLink]="'/contacts' | loc" (click)="open.set(false)" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-brand-cloud text-sm font-medium">
-              <span class="w-8 h-8 rounded-lg bg-brand-amber/15 text-amber-700 grid place-items-center">☎</span>
-              {{ 'chat.call' | t }}
+            <a href="tel:+74957440052" class="flex items-center gap-3 p-3 rounded-xl hover:bg-brand-cloud">
+              <span class="w-9 h-9 rounded-full bg-brand-graphite text-white grid place-items-center text-sm font-bold">☎</span>
+              <span class="flex-1">
+                <span class="block text-sm font-semibold">{{ 'chat.call' | t }}</span>
+                <span class="block text-xs text-brand-ink/60">{{ 'footer.phone' | t }}</span>
+              </span>
+              <span class="text-brand-ink/40">→</span>
             </a>
           </div>
         </div>

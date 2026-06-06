@@ -26,7 +26,7 @@
           <a [routerLink]="'/configurator' | loc" class="btn-primary !text-base !py-4 !px-7">
             <span>{{ 'hero.cta_primary' | t }}</span><span>→</span>
           </a>
-          <a [routerLink]="'/contacts' | loc" class="btn-on-dark !text-base !py-4 !px-7">{{ 'hero.cta_secondary' | t }}</a>
+          <a href="#cta" class="btn-on-dark !text-base !py-4 !px-7">{{ 'hero.cta_secondary' | t }}</a>
         </div>
       </div>
 
@@ -34,10 +34,10 @@
         <div class="relative">
           <div class="bg-white/[0.04] backdrop-blur-xl border border-white/10 rounded-3xl p-7 shadow-card-hover">
             <div class="flex items-center justify-between mb-6">
-              <span class="text-xs text-white/50 uppercase tracking-wider">Live · KRILAK</span>
+              <span class="text-xs text-white/50 uppercase tracking-wider">{{ 'hero.live' | t }}</span>
               <span class="flex items-center gap-1.5 text-xs text-emerald-400">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>{{ 'footer.schedule' | t }}</span>
+                <span>{{ 'hero.status_live' | t }}</span>
               </span>
             </div>
             <div class="grid grid-cols-2 gap-4">
@@ -58,11 +58,21 @@
                 <div class="text-xs text-white/60 mt-1">{{ 'hero.trust_4_label' | t }}</div>
               </div>
             </div>
+            <div class="mt-6 pt-6 border-t border-white/10">
+              <div class="text-xs text-white/50 mb-3">{{ 'hero.protect' | t }}</div>
+              <div class="flex items-center gap-3 text-white/80 text-xs flex-wrap">
+                <span class="pill-on-dark">АЭС</span>
+                <span class="pill-on-dark">Метро</span>
+                <span class="pill-on-dark">Дата-центры</span>
+                <span class="pill-on-dark">ТРЦ</span>
+                <span class="pill-on-dark">Стадионы</span>
+              </div>
+            </div>
           </div>
           <div class="absolute -bottom-6 -right-6 hidden lg:block">
             <div class="bg-brand-leaf text-white rounded-2xl px-5 py-4 shadow-card-hover rotate-[-3deg]">
-              <div class="text-[10px] uppercase tracking-wider opacity-70">R240 · АЭС</div>
-              <div class="font-display font-bold text-base mt-1">{{ 'meta.tagline' | t }}</div>
+              <div class="text-[10px] uppercase tracking-wider opacity-70">{{ 'hero.current' | t }}</div>
+              <div class="font-display font-bold text-base mt-1">{{ 'hero.current_value' | t }}</div>
             </div>
           </div>
         </div>
@@ -104,16 +114,20 @@
   <div class="container-x">
     <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
       <div data-reveal>
-        <span class="eyebrow">{{ 'meta.tagline' | t }}</span>
+        <span class="eyebrow">{{ 'roles.eyebrow' | t }}</span>
         <h2 class="mt-3 text-display-md text-brand-graphite text-balance">{{ 'roles.title' | t }}</h2>
       </div>
+      <p class="text-sm text-brand-ink/70 max-w-md" data-reveal>{{ 'roles.intro' | t }}</p>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      @for (role of ['designer', 'supplier', 'installer', 'owner']; track role; let i = $index) {
-        <a [routerLink]="'/contacts' | loc" class="card-bordered p-6 group" data-reveal [attr.data-reveal-delay]="i * 80">
-          <div class="w-12 h-12 rounded-xl bg-brand-graphite text-brand-amber grid place-items-center mb-5 group-hover:bg-brand-leaf transition-colors font-display font-bold">{{ i + 1 }}</div>
-          <h3 class="font-display font-semibold text-lg">{{ 'roles.' + role | t }}</h3>
-          <p class="text-sm text-brand-ink/60 mt-2">{{ 'roles.' + role + '_hint' | t }}</p>
+      @for (role of roles; track role.key; let i = $index) {
+        <a [routerLink]="role.link | loc" class="card-bordered p-6 group" data-reveal [attr.data-reveal-delay]="i * 80">
+          <div class="w-12 h-12 rounded-xl bg-brand-graphite text-brand-amber grid place-items-center mb-5 group-hover:bg-brand-leaf transition-colors">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path [attr.d]="role.icon" /></svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg">{{ 'roles.' + role.key | t }}</h3>
+          <p class="text-sm text-brand-ink/60 mt-2">{{ 'roles.' + role.key + '_hint' | t }}</p>
+          <span class="link-arrow mt-5 text-sm">{{ 'roles.' + role.key + '_cta' | t }}</span>
         </a>
       }
     </div>
@@ -210,17 +224,21 @@
           <div class="absolute -inset-2 bg-leaf-gradient blur-2xl opacity-15 rounded-3xl"></div>
           <div class="relative bg-white rounded-3xl border border-brand-fog shadow-card-hover p-8">
             <div class="flex items-center justify-between mb-6">
-              <span class="text-xs uppercase tracking-wider text-brand-ink/50">{{ 'configurator_block.step_4' | t }}</span>
+              <span class="text-xs uppercase tracking-wider text-brand-ink/50">{{ 'configurator_block.step_label' | t }}</span>
               <span class="text-xs text-brand-leaf font-semibold">80%</span>
             </div>
             <div class="h-1 rounded-full bg-brand-cloud mb-8"><div class="h-full w-4/5 bg-leaf-gradient rounded-full"></div></div>
-            <h3 class="font-display font-bold text-2xl mb-6">{{ 'configurator_block.step_4' | t }}</h3>
+            <h3 class="font-display font-bold text-2xl mb-2">{{ 'configurator_block.step_4' | t }}</h3>
+            <p class="text-sm text-brand-ink/60 mb-7">{{ 'configurator_block.question' | t }}</p>
             <div class="grid grid-cols-4 gap-2 mb-8">
               @for (r of ['R15', 'R30', 'R45', 'R60', 'R90', 'R120', 'R180', 'R240']; track r) {
-                <span class="px-3 py-3 rounded-xl text-sm font-semibold text-center {{ r === 'R60' ? 'bg-brand-leaf text-white' : 'border border-brand-fog' }}">{{ r }}</span>
+                <button type="button" class="px-3 py-3 rounded-xl text-sm font-semibold {{ r === 'R60' ? 'bg-brand-leaf text-white' : 'border border-brand-fog hover:border-brand-leaf hover:bg-brand-leaf/5' }}">{{ r }}</button>
               }
             </div>
-            <a [routerLink]="'/configurator' | loc" class="btn-primary w-full !py-3">{{ 'configurator_block.cta' | t }} →</a>
+            <div class="flex items-center justify-between pt-6 border-t border-brand-fog">
+              <button type="button" class="btn-ghost !py-2.5 !px-4 text-xs">{{ 'configurator_block.back' | t }}</button>
+              <a [routerLink]="'/configurator' | loc" class="btn-primary !py-2.5 !px-5 text-xs">{{ 'configurator_block.next' | t }}</a>
+            </div>
           </div>
         </div>
       </div>
@@ -238,7 +256,10 @@
         <h2 class="mt-3 text-display-lg text-white text-balance">{{ 'projects.title' | t }}</h2>
         <p class="mt-4 text-lg text-white/70 max-w-lg">{{ 'projects.subtitle' | t }}</p>
       </div>
-      <a [routerLink]="'/projects' | loc" class="btn-amber self-start">{{ 'projects.view_all' | t }}</a>
+      <div class="flex gap-3">
+        <a [routerLink]="'/projects' | loc" class="btn-on-dark">{{ 'projects.view_map' | t }}</a>
+        <a [routerLink]="'/projects' | loc" class="btn-amber">{{ 'projects.view_all' | t }}</a>
+      </div>
     </div>
     <div class="grid md:grid-cols-3 gap-5">
       @for (p of projects(); track p.slug; let i = $index) {
@@ -261,6 +282,64 @@
           </div>
         </article>
       }
+    </div>
+  </div>
+</section>
+
+<!-- ========== MAP PREVIEW ========== -->
+<section class="section">
+  <div class="container-x">
+    <div class="grid lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-4 order-2 lg:order-1" data-reveal>
+        <span class="eyebrow">{{ 'map.eyebrow' | t }}</span>
+        <h2 class="mt-3 text-display-md text-balance">{{ 'map.title' | t }}</h2>
+        <p class="mt-5 text-lg text-brand-ink/70">{{ 'map.subtitle' | t }}</p>
+        <div class="mt-8 space-y-4">
+          <div class="flex items-baseline gap-3"><span class="metric-number text-brand-leaf text-3xl">80</span><span class="text-sm text-brand-ink/60">{{ 'map.m1' | t }}</span></div>
+          <div class="flex items-baseline gap-3"><span class="metric-number text-brand-leaf text-3xl">7K+</span><span class="text-sm text-brand-ink/60">{{ 'map.m2' | t }}</span></div>
+          <div class="flex items-baseline gap-3"><span class="metric-number text-brand-leaf text-3xl">12</span><span class="text-sm text-brand-ink/60">{{ 'map.m3' | t }}</span></div>
+        </div>
+        <a [routerLink]="'/projects' | loc" class="btn-secondary mt-10">{{ 'map.cta' | t }}</a>
+      </div>
+      <div class="lg:col-span-8 order-1 lg:order-2" data-reveal data-reveal-delay="120">
+        <a [routerLink]="'/projects' | loc" class="block relative aspect-[4/3] lg:aspect-[16/10] rounded-3xl overflow-hidden bg-brand-cloud border border-brand-fog hover-rise">
+          <svg viewBox="0 0 800 500" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="g1" cx="50%" cy="50%"><stop offset="0%" stop-color="#5DAA2F" stop-opacity="0.6" /><stop offset="100%" stop-color="#5DAA2F" stop-opacity="0" /></radialGradient>
+              <pattern id="dotmap" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1" fill="#0F1620" opacity="0.15" />
+              </pattern>
+            </defs>
+            <rect width="800" height="500" fill="url(#dotmap)" />
+            <path d="M70 280 L120 220 L180 230 L240 210 L300 220 L350 200 L420 215 L500 195 L580 210 L650 200 L720 220 L740 280 L720 320 L680 340 L620 330 L560 350 L500 330 L440 340 L380 320 L320 340 L260 320 L200 340 L140 320 L90 310 Z" fill="#1B2330" opacity="0.92" />
+            <g>
+              <circle cx="180" cy="270" r="6" fill="#5DAA2F" /><circle cx="180" cy="270" r="14" fill="url(#g1)" />
+              <circle cx="250" cy="290" r="4" fill="#F3A33A" />
+              <circle cx="320" cy="275" r="5" fill="#5DAA2F" /><circle cx="320" cy="275" r="12" fill="url(#g1)" />
+              <circle cx="400" cy="285" r="4" fill="#F3A33A" />
+              <circle cx="470" cy="260" r="6" fill="#5DAA2F" /><circle cx="470" cy="260" r="14" fill="url(#g1)" />
+              <circle cx="540" cy="280" r="4" fill="#F3A33A" />
+              <circle cx="600" cy="275" r="5" fill="#5DAA2F" />
+              <circle cx="670" cy="265" r="4" fill="#F3A33A" />
+              <circle cx="710" cy="285" r="5" fill="#5DAA2F" />
+              <circle cx="140" cy="295" r="3" fill="#F3A33A" />
+              <circle cx="280" cy="310" r="4" fill="#F3A33A" />
+              <circle cx="360" cy="305" r="3" fill="#F3A33A" />
+              <circle cx="500" cy="305" r="3" fill="#F3A33A" />
+            </g>
+            <g font-family="Inter" font-size="11" fill="#0F1620">
+              <text x="195" y="265">Москва</text>
+              <text x="335" y="270">Казань</text>
+              <text x="485" y="255">Екатеринбург</text>
+              <text x="720" y="285">Владивосток</text>
+            </g>
+          </svg>
+          <div class="absolute bottom-5 right-5 bg-white rounded-xl shadow-card-hover px-4 py-3 flex items-center gap-3">
+            <span class="flex w-2.5 h-2.5 rounded-full bg-brand-leaf animate-pulse"></span>
+            <span class="text-xs font-semibold">{{ 'map.badge' | t }}</span>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -288,15 +367,19 @@
 <section class="section">
   <div class="container-x">
     <div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
-      <span class="eyebrow">{{ 'awards.all' | t }}</span>
+      <span class="eyebrow">{{ 'awards.eyebrow' | t }}</span>
       <h2 class="mt-3 text-display-lg text-balance">{{ 'awards.title' | t }}</h2>
       <p class="mt-4 text-lg text-brand-ink/70">{{ 'awards.subtitle' | t }}</p>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-      @for (a of [{ y: '2019', i: '🏆' }, { y: '2018', i: '🥇' }, { y: '2017', i: '⭐' }, { y: '2016', i: '🛡️' }, { y: '2015', i: '📜' }]; track a.y; let idx = $index) {
+      @for (a of awards; track a.key; let idx = $index) {
         <div class="card-bordered aspect-[3/4] p-4 flex flex-col justify-between" data-reveal [attr.data-reveal-delay]="idx * 60">
           <div class="text-xs uppercase tracking-wider text-brand-leaf font-semibold">{{ a.y }}</div>
-          <div><div class="text-3xl mb-2">{{ a.i }}</div></div>
+          <div>
+            <div class="text-3xl mb-2">{{ a.i }}</div>
+            <div class="text-sm font-semibold leading-tight">{{ 'awards.items.' + a.key + '.title' | t }}</div>
+            <div class="text-xs text-brand-ink/60 mt-1">{{ 'awards.items.' + a.key + '.sub' | t }}</div>
+          </div>
         </div>
       }
       <a [routerLink]="'/awards' | loc" class="bg-brand-graphite text-white aspect-[3/4] p-4 flex flex-col justify-between rounded-2xl hover:bg-brand-ink transition-colors group" data-reveal data-reveal-delay="300">
@@ -339,7 +422,7 @@
 </section>
 
 <!-- ========== CTA ========== -->
-<section class="section bg-brand-graphite text-white relative overflow-hidden">
+<section id="cta" class="section bg-brand-graphite text-white relative overflow-hidden">
   <div class="absolute inset-0 grid-lines opacity-[0.04] pointer-events-none"></div>
   <div class="absolute -right-32 -top-32 w-[480px] h-[480px] bg-leaf-gradient rounded-full blur-3xl opacity-25 pointer-events-none"></div>
   <div class="container-x relative grid lg:grid-cols-2 gap-12 items-center">
@@ -347,6 +430,14 @@
       <span class="pill-on-dark">{{ 'hero.eyebrow' | t }}</span>
       <h2 class="mt-5 text-display-lg text-white text-balance">{{ 'cta.title' | t }}</h2>
       <p class="mt-5 text-lg text-white/70 max-w-lg text-pretty">{{ 'cta.subtitle' | t }}</p>
+      <ul class="mt-8 space-y-3 text-sm text-white/80">
+        @for (b of ['benefit_1', 'benefit_2', 'benefit_3']; track b) {
+          <li class="flex items-start gap-3">
+            <span class="w-5 h-5 rounded-full bg-brand-leaf/20 text-brand-amber grid place-items-center text-xs mt-0.5">✓</span>
+            <span>{{ 'cta.' + b | t }}</span>
+          </li>
+        }
+      </ul>
     </div>
     <div data-reveal data-reveal-delay="120">
       <app-quote-form variant="dark" [leadTitle]="'KRILAK — заявка с главной'" source="/" />

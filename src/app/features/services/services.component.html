@@ -1,28 +1,41 @@
 <section class="bg-brand-graphite text-white relative overflow-hidden -mt-[7.25rem] pt-[7.25rem]">
-  <div class="absolute inset-0 grid-lines opacity-[0.05] pointer-events-none"></div>
-  <div class="container-x relative py-16 lg:py-24">
-    <div class="max-w-3xl" data-reveal>
-      <span class="eyebrow !text-brand-amber">{{ 'services.eyebrow' | t }}</span>
-      <h1 class="mt-3 text-display-lg text-white text-balance">{{ 'services.title' | t }}</h1>
-      <p class="mt-5 text-lg text-white/70">{{ 'services.subtitle' | t }}</p>
-    </div>
+  <div class="absolute inset-0 grid-lines opacity-[0.06] pointer-events-none"></div>
+  <div class="container-x relative py-16 lg:py-20">
+    <nav class="text-xs text-white/50 flex items-center gap-2 mb-6" data-reveal>
+      <a [routerLink]="'' | loc" class="hover:text-white">{{ 'nav.home' | t }}</a><span>/</span>
+      <span class="text-white">{{ 'nav.services' | t }}</span>
+    </nav>
+    <h1 class="text-display-lg text-white text-balance">{{ 'services.title' | t }}</h1>
+    <p class="text-lg text-white/70 mt-5 max-w-2xl">{{ 'services.subtitle' | t }}</p>
   </div>
 </section>
 
 <section class="section">
-  <div class="container-x">
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-      @for (item of items; track item.key; let i = $index) {
-        <div class="card-bordered p-7 group" data-reveal [attr.data-reveal-delay]="(i % 3) * 80">
-          <div class="w-12 h-12 rounded-xl bg-brand-graphite text-brand-amber grid place-items-center mb-5 text-xl group-hover:bg-brand-leaf transition-colors">{{ item.icon }}</div>
-          <h2 class="font-display font-bold text-xl">{{ 'services.items.' + item.key + '.title' | t }}</h2>
-          <p class="text-sm text-brand-ink/60 mt-2">{{ 'services.items.' + item.key + '.description' | t }}</p>
+  <div class="container-x grid lg:grid-cols-2 gap-6">
+    @for (item of items; track item.key; let i = $index) {
+      <article class="card-bordered p-8" data-reveal [attr.data-reveal-delay]="(i % 2) * 60">
+        <div class="flex items-start justify-between gap-4 mb-4">
+          <div class="w-14 h-14 rounded-2xl bg-brand-leaf text-white grid place-items-center text-2xl">{{ item.icon }}</div>
+          <span class="pill-cloud">{{ item.n }}</span>
         </div>
-      }
+        <h2 class="font-display font-bold text-2xl">{{ 'services.items.' + item.key + '.title' | t }}</h2>
+        <p class="text-brand-ink/70 mt-3">{{ 'services.items.' + item.key + '.description' | t }}</p>
+      </article>
+    }
+  </div>
+</section>
+
+<section class="section bg-brand-graphite text-white relative overflow-hidden">
+  <div class="absolute inset-0 grid-lines opacity-[0.04] pointer-events-none"></div>
+  <div class="absolute -right-32 -top-32 w-[480px] h-[480px] bg-leaf-gradient rounded-full blur-3xl opacity-25 pointer-events-none"></div>
+  <div class="container-x relative grid lg:grid-cols-2 gap-12 items-center">
+    <div data-reveal>
+      <span class="pill-on-dark">{{ 'hero.eyebrow' | t }}</span>
+      <h2 class="mt-5 text-display-lg text-white text-balance">{{ 'cta.title' | t }}</h2>
+      <p class="mt-5 text-lg text-white/70 max-w-lg text-pretty">{{ 'cta.subtitle' | t }}</p>
     </div>
-    <div class="mt-12 flex flex-wrap gap-3" data-reveal>
-      <a [routerLink]="'/configurator' | loc" class="btn-primary">{{ 'configurator_block.cta' | t }}</a>
-      <a [routerLink]="'/contacts' | loc" class="btn-ghost">{{ 'nav.quote' | t }}</a>
+    <div data-reveal data-reveal-delay="120">
+      <app-quote-form variant="dark" [leadTitle]="'KRILAK — заявка (Услуги)'" source="/services" />
     </div>
   </div>
 </section>

@@ -1,19 +1,31 @@
 <!-- HERO -->
 <section class="bg-brand-graphite text-white relative overflow-hidden -mt-[7.25rem] pt-[7.25rem]">
-  <div class="absolute inset-0 grid-lines opacity-[0.05] pointer-events-none"></div>
-  <div class="container-x relative py-16 lg:py-24">
-    <div class="max-w-3xl" data-reveal>
-      <span class="eyebrow !text-brand-amber">{{ 'categories.eyebrow' | t }}</span>
-      <h1 class="mt-3 text-display-lg text-white text-balance">{{ 'catalog.title' | t }}</h1>
-      <p class="mt-5 text-lg text-white/70">{{ 'catalog.subtitle' | t }}</p>
-      <div class="mt-8 max-w-xl">
-        <input
-          type="search"
-          [value]="query()"
-          (input)="onSearch($event)"
-          [attr.placeholder]="'catalog.search_ph' | t"
-          class="input-on-dark !py-4"
-        />
+  <div class="absolute inset-0 grid-lines opacity-[0.06] pointer-events-none"></div>
+  <div class="absolute -top-1/3 right-0 w-[600px] h-[600px] rounded-full bg-leaf-gradient blur-3xl opacity-20 pointer-events-none"></div>
+  <div class="container-x relative py-16 lg:py-20">
+    <nav class="text-xs text-white/50 flex items-center gap-2 mb-6" data-reveal>
+      <a [routerLink]="'' | loc" class="hover:text-white">{{ 'nav.home' | t }}</a><span>/</span>
+      <span class="text-white">{{ 'catalog.title' | t }}</span>
+    </nav>
+    <div class="grid lg:grid-cols-12 gap-8 items-end">
+      <div class="lg:col-span-7" data-reveal>
+        <span class="pill-on-dark"><span class="w-1.5 h-1.5 rounded-full bg-brand-leaf"></span><span>{{ 'catalog.hero_pill' | t }}</span></span>
+        <h1 class="text-display-lg text-white mt-5 text-balance">{{ 'catalog.title' | t }}</h1>
+        <p class="text-lg text-white/70 mt-5 max-w-2xl">{{ 'catalog.subtitle' | t }}</p>
+      </div>
+      <div class="lg:col-span-5" data-reveal data-reveal-delay="120">
+        <div class="bg-white/[0.06] border border-white/10 backdrop-blur rounded-2xl p-2">
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-white/40 ml-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            <input
+              type="search"
+              [value]="query()"
+              (input)="onSearch($event)"
+              [attr.placeholder]="'catalog.search_ph' | t"
+              class="input-on-dark !bg-transparent !border-0 !rounded-none"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -22,7 +34,10 @@
 <!-- CATEGORIES -->
 <section class="section">
   <div class="container-x">
-    <h2 class="text-display-md mb-10" data-reveal>{{ 'catalog.all' | t }}</h2>
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10" data-reveal>
+      <h2 class="text-display-md text-balance">{{ 'catalog.directions_title' | t }}</h2>
+      <a [routerLink]="'/configurator' | loc" class="btn-ghost shrink-0">{{ 'catalog.help_cta' | t }}</a>
+    </div>
     @if (filteredCategories().length === 0) {
       <p class="text-brand-ink/60">{{ 'catalog.nothing' | t }}</p>
     } @else {
@@ -32,9 +47,9 @@
             <div class="text-5xl mb-6 text-brand-leaf">{{ cat.icon }}</div>
             <h3 class="font-display font-bold text-xl">{{ cat.name }}</h3>
             <p class="text-sm text-brand-ink/60 mt-2">{{ cat.description }}</p>
-            <div class="mt-6 flex items-center justify-between">
-              <span class="chip">{{ cat.productsCount }} {{ 'catalog.products_count' | t }}</span>
-              <span class="text-brand-leaf group-hover:translate-x-1 transition-transform">→</span>
+            <div class="mt-6 pt-6 border-t border-brand-fog flex items-center justify-between text-xs">
+              <span class="text-brand-ink/50">{{ cat.productsCount }}+ SKU</span>
+              <span class="font-semibold text-brand-leaf group-hover:translate-x-1 transition-transform">→</span>
             </div>
           </a>
         }
@@ -46,21 +61,27 @@
 <!-- FEATURED PRODUCTS -->
 <section class="section bg-brand-cloud">
   <div class="container-x">
-    <h2 class="text-display-md mb-10" data-reveal>{{ 'catalog.products' | t }}</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10" data-reveal>
+      <div>
+        <span class="eyebrow">{{ 'catalog.featured_eyebrow' | t }}</span>
+        <h2 class="text-display-md mt-3 text-balance">{{ 'catalog.featured_title' | t }}</h2>
+      </div>
+      <a [routerLink]="'/configurator' | loc" class="btn-ghost shrink-0">{{ 'catalog.analog_cta' | t }}</a>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
       @for (p of featured(); track p.sku; let i = $index) {
-        <a [routerLink]="'/catalog/product/' + p.sku | loc" class="card border border-brand-fog p-6 group block" data-reveal [attr.data-reveal-delay]="(i % 3) * 60">
-          <div class="flex items-start justify-between gap-3">
-            <h3 class="font-display font-bold text-lg group-hover:text-brand-leaf transition-colors">{{ p.name }}</h3>
-            @if (p.rating.length) {
-              <span class="pill-leaf shrink-0">{{ p.rating[p.rating.length - 1] }}</span>
+        <a [routerLink]="'/catalog/product/' + p.sku | loc" class="card p-6 group block" data-reveal [attr.data-reveal-delay]="(i % 4) * 60">
+          <div class="aspect-square bg-brand-cloud rounded-xl mb-5 flex items-center justify-center text-6xl text-brand-ink/40 group-hover:bg-brand-leaf/5 transition-colors">{{ categoryIcon(p.category) }}</div>
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            @for (r of p.rating.slice(0, 3); track r) {
+              <span class="pill-leaf">{{ r }}</span>
             }
           </div>
-          <p class="text-sm text-brand-ink/60 mt-2">{{ p.subtitle }}</p>
-          <div class="flex flex-wrap gap-1.5 mt-4">
-            @for (tag of p.tags; track tag) {
-              <span class="chip">{{ tag }}</span>
-            }
+          <h3 class="font-display font-bold text-lg">{{ p.name }}</h3>
+          <p class="text-sm text-brand-ink/60 mt-1">{{ p.subtitle }}</p>
+          <div class="mt-5 pt-5 border-t border-brand-fog flex items-center justify-between">
+            <span class="text-xs font-mono text-brand-ink/50">{{ p.sku }}</span>
+            <span class="text-xs font-semibold text-brand-leaf group-hover:translate-x-1 transition-transform">{{ 'catalog.details' | t }}</span>
           </div>
         </a>
       }

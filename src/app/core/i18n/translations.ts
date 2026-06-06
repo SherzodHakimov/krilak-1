@@ -20,6 +20,7 @@ const ru: Dictionary = {
   },
   brand: { prefix: 'Ассоциация', name: 'КРИЛАК' },
   nav: {
+    home: 'Главная',
     products: 'Продукция',
     solutions: 'Решения',
     services: 'Услуги',
@@ -33,15 +34,22 @@ const ru: Dictionary = {
     search_placeholder: 'Найти продукт, ТУ, сертификат…'
   },
   roles: {
+    eyebrow: 'Сегментация',
     title: 'Я ищу решение для своей роли:',
+    intro:
+      'За 35 лет мы выстроили отдельные сценарии для каждой роли — материалы, документы и формат общения подобраны под вашу задачу.',
     designer: 'Проектировщик',
     designer_hint: 'ТУ, паспорта, расчёт расхода',
+    designer_cta: 'Открыть библиотеку',
     supplier: 'Снабженец',
     supplier_hint: 'Прайс, КП, реквизиты, тендеры',
+    supplier_cta: 'Запросить КП',
     installer: 'Монтажник',
     installer_hint: 'Техкарта, обучение, сервис',
+    installer_cta: 'Скачать техкарты',
     owner: 'Заказчик',
-    owner_hint: 'Кейсы, лицензии, гарантии'
+    owner_hint: 'Кейсы, лицензии, гарантии',
+    owner_cta: 'Смотреть кейсы'
   },
   hero: {
     eyebrow: 'С 1991 года · 55+ наград',
@@ -50,14 +58,19 @@ const ru: Dictionary = {
       'Ассоциация «КРИЛАК» — производитель полного цикла: огнезащитные составы, противопожарные конструкции, системы обнаружения и пожаротушения. От лаборатории до объекта в любой точке России.',
     cta_primary: 'Подобрать решение за 60 секунд',
     cta_secondary: 'Получить коммерческое предложение',
-    trust_1: '1991',
-    trust_1_label: 'Год основания',
+    live: 'Live · 28.05.2026',
+    status_live: 'Производство активно',
+    trust_1: '35',
+    trust_1_label: 'лет защиты с 1991',
     trust_2: '55+',
-    trust_2_label: 'Наград и премий',
-    trust_3: '10 000+ т',
-    trust_3_label: 'Огнезащиты в год',
+    trust_2_label: 'наград и сертификатов',
+    trust_3: '7K+',
+    trust_3_label: 'реализованных объектов',
     trust_4: '80',
-    trust_4_label: 'Регионов работы'
+    trust_4_label: 'регионов работы',
+    protect: 'Защищаем объекты',
+    current: 'Текущий проект',
+    current_value: 'Огнезащита R240 · АЭС'
   },
   metrics: {
     title: 'КрилаК в цифрах',
@@ -91,9 +104,27 @@ const ru: Dictionary = {
     subtitle:
       'За 35 лет мы выработали отраслевые регламенты под уникальные требования критической инфраструктуры',
     items: {
-      energy: { title: 'ТЭК и энергетика', description: 'АЭС, ТЭЦ, нефтегаз — R180 и выше, агрессивные среды' },
-      transport: { title: 'Метро и транспорт', description: 'Туннели, депо, вокзалы — EI120, дым, эвакуация' },
-      retail: { title: 'ТРЦ и общественные здания', description: 'Высотные центры, стадионы, аэропорты' },
+      energy: {
+        title: 'ТЭК и энергетика',
+        description: 'АЭС, ТЭЦ, нефтегаз — R180 и выше, агрессивные среды',
+        p1: 'КрилаК-СУПЕР для металлоконструкций',
+        p2: 'КрилаК-КАБЕЛЬ для кабельных линий',
+        p3: 'Огнезащитные плиты PRO'
+      },
+      transport: {
+        title: 'Метро и транспорт',
+        description: 'Туннели, депо, вокзалы — EI120, дым, эвакуация',
+        p1: 'Муфты КрилаК EI180',
+        p2: 'Двери EI60/EI90',
+        p3: 'Извещатели ИП 212'
+      },
+      retail: {
+        title: 'ТРЦ и общественные здания',
+        description: 'Высотные центры, стадионы, аэропорты',
+        p1: 'Декоративные ЛКМ',
+        p2: 'Дверные комплекты',
+        p3: 'Пожарные шкафы'
+      },
       industry: { title: 'Промышленность и склады', description: 'Логистика, цеха, склады ГСМ и АХОВ' },
       data: { title: 'Дата-центры', description: 'Газовое пожаротушение, ранние датчики' },
       housing: { title: 'ЖКХ и социальные объекты', description: 'Жильё, школы, больницы — комфорт и стандарт' }
@@ -103,13 +134,17 @@ const ru: Dictionary = {
     eyebrow: 'Конфигуратор',
     title: 'Подберите огнезащиту за 60 секунд',
     subtitle:
-      '5 шагов до точной рекомендации продукта, расчёта расхода и оценочной сметы.',
+      '5 шагов до точной рекомендации продукта, расчёта расхода и оценочной сметы. Все данные сохраняются в личном кабинете.',
     step_1: 'Тип объекта',
-    step_2: 'Конструкция',
+    step_2: 'Тип конструкции',
     step_3: 'Площадь',
     step_4: 'Класс огнестойкости',
-    step_5: 'Получите расчёт',
-    cta: 'Открыть конфигуратор'
+    step_5: 'Получите расчёт и КП',
+    cta: 'Открыть конфигуратор',
+    step_label: 'Шаг 4 из 5',
+    question: 'Какой предел огнестойкости требует проект?',
+    back: '← Назад',
+    next: 'Далее → расчёт'
   },
   projects: {
     eyebrow: 'Реализованные объекты',
@@ -120,17 +155,38 @@ const ru: Dictionary = {
     area: 'Площадь',
     rating: 'Огнестойкость',
     year: 'Год',
-    all_industries: 'Все отрасли'
+    all_industries: 'Все объекты',
+    hero_pill: '7 000+ объектов · 80 регионов',
+    open_map: 'Открыть интерактивную карту →'
+  },
+  map: {
+    eyebrow: 'География работы',
+    title: 'Карта объектов «КрилаК»',
+    subtitle:
+      'Более 7 000 проектов в 80 регионах России и СНГ — от Калининграда до Камчатки. Найдите объект рядом с вами.',
+    m1: 'регионов России',
+    m2: 'реализованных объектов',
+    m3: 'отраслей промышленности',
+    cta: 'Открыть интерактивную карту →',
+    badge: '120 объектов в Москве и МО'
   },
   clients: {
     title: 'Нам доверяют',
     subtitle: 'Крупнейшие промышленные предприятия, госкомпании, генподрядчики и проектные институты'
   },
   awards: {
+    eyebrow: 'Признание',
     title: 'Награды и сертификаты',
     subtitle: 'Подтверждённое качество, признанное отраслью и государством',
     archive: 'Открыть архив',
-    all: 'Все награды'
+    all: 'Все награды',
+    items: {
+      a2019: { title: 'Лучшая фирма России', sub: 'Всероссийский конкурс' },
+      a2018: { title: 'Премия «Бренд года»', sub: 'Огнезащита' },
+      a2017: { title: '2-я Всероссийская выставка', sub: 'Лауреат' },
+      a2016: { title: 'ISO 9001 ресертификация', sub: 'Качество' },
+      a2015: { title: 'Лицензия МЧС', sub: 'Бессрочная' }
+    }
   },
   news: {
     title: 'Экспертный блог',
@@ -152,7 +208,10 @@ const ru: Dictionary = {
     sending: 'Отправляем…',
     success: 'Спасибо! Заявка отправлена — инженер свяжется с вами в ближайшее время.',
     error: 'Не удалось отправить заявку. Попробуйте ещё раз или позвоните нам.',
-    consent: 'Нажимая «Отправить», я соглашаюсь с политикой обработки персональных данных'
+    consent: 'Нажимая «Отправить», я соглашаюсь с политикой обработки персональных данных',
+    benefit_1: 'Подбор продукта под класс огнестойкости и тип объекта',
+    benefit_2: 'Бесплатный выезд инженера на объекты в Москве и МО',
+    benefit_3: 'Образцы для проектной экспертизы — за наш счёт'
   },
   form: {
     required: 'Заполните это поле',
@@ -203,7 +262,20 @@ const ru: Dictionary = {
     related: 'Похожие продукты',
     request: 'Запросить КП',
     back_to_catalog: 'Назад в каталог',
-    products_count: 'продуктов'
+    products_count: 'продуктов',
+    directions_title: '8 направлений защиты',
+    help_cta: 'Не знаю что выбрать → конфигуратор',
+    featured_eyebrow: 'Хиты продаж',
+    featured_title: 'Рекомендуемые продукты',
+    analog_cta: 'Подобрать аналог →',
+    certified: 'Сертифицировано ГОСТ Р',
+    warranty: 'Гарантия до 30 лет',
+    filter_all: 'Все',
+    filter_nothing: 'Под выбранный фильтр продуктов нет',
+    details: 'Подробнее →',
+    calc_cta: 'Рассчитать в конфигураторе →',
+    analog: 'Подобрать аналог',
+    hero_pill: '129+ SKU · 8 категорий'
   },
   services: {
     eyebrow: 'Услуги',
@@ -263,6 +335,9 @@ const ru: Dictionary = {
     phone_label: 'Телефон',
     email_label: 'Email',
     schedule_label: 'Часы работы',
+    reps_title: 'Региональные представители',
+    rep_production: 'Производство',
+    rep_dealer: 'Дилер',
     form_title: 'Написать нам',
     topic: 'Тема обращения',
     topics: {
@@ -288,6 +363,7 @@ const en: Dictionary = {
   },
   brand: { prefix: 'Association', name: 'KRILAK' },
   nav: {
+    home: 'Home',
     products: 'Products',
     solutions: 'Solutions',
     services: 'Services',
@@ -301,15 +377,22 @@ const en: Dictionary = {
     search_placeholder: 'Find a product, datasheet, certificate…'
   },
   roles: {
+    eyebrow: 'Segmentation',
     title: 'I am looking for a solution as:',
+    intro:
+      'Over 35 years we have built dedicated playbooks for every role — materials, documents and the way we communicate are tailored to your task.',
     designer: 'Designer / Engineer',
     designer_hint: 'Datasheets, certificates, consumption',
+    designer_cta: 'Open the library',
     supplier: 'Procurement',
     supplier_hint: 'Pricing, quotes, tenders, banking details',
+    supplier_cta: 'Request a quote',
     installer: 'Installer',
     installer_hint: 'Tech cards, training, service',
+    installer_cta: 'Download tech cards',
     owner: 'Decision maker',
-    owner_hint: 'Cases, licences, warranties'
+    owner_hint: 'Cases, licences, warranties',
+    owner_cta: 'View cases'
   },
   hero: {
     eyebrow: 'Since 1991 · 55+ awards',
@@ -318,14 +401,19 @@ const en: Dictionary = {
       'Krilak is a full-cycle producer: passive fire protection coatings, fire-rated structures, detection and suppression systems. From our lab to your site, anywhere in Russia.',
     cta_primary: 'Configure a solution in 60s',
     cta_secondary: 'Request a commercial offer',
-    trust_1: '1991',
-    trust_1_label: 'Founded',
+    live: 'Live · 28.05.2026',
+    status_live: 'Production active',
+    trust_1: '35',
+    trust_1_label: 'years of protection since 1991',
     trust_2: '55+',
-    trust_2_label: 'Awards & honours',
-    trust_3: '10,000+ t',
-    trust_3_label: 'Coatings produced yearly',
+    trust_2_label: 'awards & certificates',
+    trust_3: '7K+',
+    trust_3_label: 'projects delivered',
     trust_4: '80',
-    trust_4_label: 'Regions served'
+    trust_4_label: 'regions served',
+    protect: 'We protect',
+    current: 'Current project',
+    current_value: 'Fire protection R240 · NPP'
   },
   metrics: {
     title: 'Krilak by the numbers',
@@ -357,9 +445,27 @@ const en: Dictionary = {
     title: 'Where we deliver protection',
     subtitle: 'Industry-specific playbooks built over 35 years of critical infrastructure work',
     items: {
-      energy: { title: 'Energy & oil and gas', description: 'Nuclear, thermal, petrochem — R180+, harsh environments' },
-      transport: { title: 'Metro & transport', description: 'Tunnels, depots, stations — EI120, smoke & evac' },
-      retail: { title: 'Malls & public', description: 'High-rises, stadiums, airports' },
+      energy: {
+        title: 'Energy & oil and gas',
+        description: 'Nuclear, thermal, petrochem — R180+, harsh environments',
+        p1: 'KrilaK-SUPER for steel structures',
+        p2: 'KrilaK-CABLE for cable lines',
+        p3: 'Fire-protection panels PRO'
+      },
+      transport: {
+        title: 'Metro & transport',
+        description: 'Tunnels, depots, stations — EI120, smoke & evac',
+        p1: 'KrilaK couplings EI180',
+        p2: 'Doors EI60/EI90',
+        p3: 'Detectors IP 212'
+      },
+      retail: {
+        title: 'Malls & public',
+        description: 'High-rises, stadiums, airports',
+        p1: 'Decorative coatings',
+        p2: 'Door sets',
+        p3: 'Fire cabinets'
+      },
       industry: { title: 'Industry & warehousing', description: 'Logistics, plants, hazardous storage' },
       data: { title: 'Data centres', description: 'Gas suppression, early-warning detection' },
       housing: { title: 'Housing & social', description: 'Residential, schools, hospitals' }
@@ -368,13 +474,18 @@ const en: Dictionary = {
   configurator_block: {
     eyebrow: 'Configurator',
     title: 'Pick the right fire protection in 60 seconds',
-    subtitle: 'Five steps to a precise product recommendation, consumption estimate and budget figure.',
+    subtitle:
+      'Five steps to a precise product recommendation, consumption estimate and budget figure. Everything is saved in your account.',
     step_1: 'Object type',
-    step_2: 'Structure',
+    step_2: 'Structure type',
     step_3: 'Area',
     step_4: 'Fire rating',
-    step_5: 'Get a quote',
-    cta: 'Open the configurator'
+    step_5: 'Get a calculation and quote',
+    cta: 'Open the configurator',
+    step_label: 'Step 4 of 5',
+    question: 'What fire-resistance rating does the project require?',
+    back: '← Back',
+    next: 'Next → calculation'
   },
   projects: {
     eyebrow: 'Projects delivered',
@@ -385,17 +496,38 @@ const en: Dictionary = {
     area: 'Area',
     rating: 'Fire rating',
     year: 'Year',
-    all_industries: 'All industries'
+    all_industries: 'All projects',
+    hero_pill: '7,000+ projects · 80 regions',
+    open_map: 'Open the interactive map →'
+  },
+  map: {
+    eyebrow: 'Geography',
+    title: 'Krilak project map',
+    subtitle:
+      'Over 7,000 projects across 80 regions of Russia and the CIS — from Kaliningrad to Kamchatka. Find a site near you.',
+    m1: 'regions of Russia',
+    m2: 'projects delivered',
+    m3: 'industries',
+    cta: 'Open the interactive map →',
+    badge: '120 sites in Moscow and the region'
   },
   clients: {
     title: 'Trusted by',
     subtitle: 'Major industrial enterprises, state corporations, general contractors and design institutes'
   },
   awards: {
+    eyebrow: 'Recognition',
     title: 'Awards & certifications',
     subtitle: 'Quality recognised by the industry and the state',
     archive: 'Open the archive',
-    all: 'All awards'
+    all: 'All awards',
+    items: {
+      a2019: { title: 'Best company in Russia', sub: 'National competition' },
+      a2018: { title: '“Brand of the Year” award', sub: 'Fire protection' },
+      a2017: { title: '2nd All-Russian exhibition', sub: 'Laureate' },
+      a2016: { title: 'ISO 9001 recertification', sub: 'Quality' },
+      a2015: { title: 'EMERCOM licence', sub: 'Perpetual' }
+    }
   },
   news: {
     title: 'Expert insights',
@@ -417,7 +549,10 @@ const en: Dictionary = {
     sending: 'Sending…',
     success: 'Thank you! Your request has been sent — an engineer will contact you shortly.',
     error: 'Could not send the request. Please try again or call us.',
-    consent: 'By submitting, I agree to the privacy policy'
+    consent: 'By submitting, I agree to the privacy policy',
+    benefit_1: 'Product selection by fire-resistance rating and object type',
+    benefit_2: 'Free engineer visit to sites in Moscow and the region',
+    benefit_3: 'Samples for design expertise — at our expense'
   },
   form: {
     required: 'This field is required',
@@ -468,7 +603,20 @@ const en: Dictionary = {
     related: 'Related products',
     request: 'Request a quote',
     back_to_catalog: 'Back to catalog',
-    products_count: 'products'
+    products_count: 'products',
+    directions_title: '8 areas of protection',
+    help_cta: 'Not sure what to choose → configurator',
+    featured_eyebrow: 'Best sellers',
+    featured_title: 'Recommended products',
+    analog_cta: 'Find an analog →',
+    certified: 'GOST R certified',
+    warranty: 'Warranty up to 30 years',
+    filter_all: 'All',
+    filter_nothing: 'No products match the selected filter',
+    details: 'Details →',
+    calc_cta: 'Calculate in the configurator →',
+    analog: 'Find an analog',
+    hero_pill: '129+ SKU · 8 categories'
   },
   services: {
     eyebrow: 'Services',
@@ -528,6 +676,9 @@ const en: Dictionary = {
     phone_label: 'Phone',
     email_label: 'Email',
     schedule_label: 'Working hours',
+    reps_title: 'Regional representatives',
+    rep_production: 'Production',
+    rep_dealer: 'Dealer',
     form_title: 'Write to us',
     topic: 'Topic',
     topics: {

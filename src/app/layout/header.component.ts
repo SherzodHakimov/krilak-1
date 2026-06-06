@@ -94,4 +94,18 @@ export class HeaderComponent {
   toggleDropdown(): void {
     this.dropdownOpen.update((v) => !v);
   }
+
+  private dropdownTimer: ReturnType<typeof setTimeout> | null = null;
+
+  openDropdown(): void {
+    if (this.dropdownTimer) {
+      clearTimeout(this.dropdownTimer);
+      this.dropdownTimer = null;
+    }
+    this.dropdownOpen.set(true);
+  }
+
+  closeDropdownDelayed(): void {
+    this.dropdownTimer = setTimeout(() => this.dropdownOpen.set(false), 120);
+  }
 }

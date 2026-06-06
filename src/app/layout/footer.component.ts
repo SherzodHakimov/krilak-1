@@ -29,6 +29,7 @@ export class FooterComponent {
   readonly partnerLinks = [
     { path: '/dealers', key: 'footer.dealers' },
     { path: '/dealers', key: 'footer.tenders' },
+    { path: '/contacts', key: 'footer.documents' },
     { path: '/configurator', key: 'nav.configurator' }
   ];
 }

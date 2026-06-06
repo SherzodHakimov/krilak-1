@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
@@ -27,7 +27,26 @@ export class CategoryComponent {
   readonly category = computed(() => this.catalog.categoryBySlug(this.slug()));
   readonly products = computed(() => this.catalog.productsByCategory(this.slug()));
 
+  readonly ratings = computed(() =>
+    Array.from(new Set(this.products().flatMap((p) => p.rating))).sort()
+  );
+  readonly activeFilter = signal('all');
+  readonly filteredProducts = computed(() => {
+    const f = this.activeFilter();
+    return f === 'all' ? this.products() : this.products().filter((p) => p.rating.includes(f));
+  });
+
+  setFilter(value: string): void {
+    this.activeFilter.set(value);
+  }
+
   constructor() {
+    // Reset the active filter whenever the category changes.
+    effect(() => {
+      this.slug();
+      this.activeFilter.set('all');
+    });
+
     usePageSeo(() => {
       const cat = this.category();
       return {

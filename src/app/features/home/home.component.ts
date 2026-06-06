@@ -35,6 +35,21 @@ export class HomeComponent {
   readonly projects = computed(() => this.projectsSvc.all().slice(0, 3));
   readonly latestNews = computed(() => this.newsSvc.all().slice(0, 3));
 
+  readonly roles = [
+    { key: 'designer', icon: 'M3 12 12 3l9 9M5 10v11h14V10', link: '/solutions' },
+    { key: 'supplier', icon: 'M3 7h18l-2 12H5L3 7zM8 7V5a4 4 0 1 1 8 0v2', link: '/dealers' },
+    { key: 'installer', icon: 'M14 7l3 3-7 7-3-3 7-7zm0 0 5-5 3 3-5 5', link: '/services' },
+    { key: 'owner', icon: 'M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z', link: '/about' }
+  ];
+
+  readonly awards = [
+    { y: '2019', i: '🏆', key: 'a2019' },
+    { y: '2018', i: '🥇', key: 'a2018' },
+    { y: '2017', i: '⭐', key: 'a2017' },
+    { y: '2016', i: '🛡️', key: 'a2016' },
+    { y: '2015', i: '📜', key: 'a2015' }
+  ];
+
   readonly solutions = [
     { key: 'energy', badge: 'R240 · EI180', gradient: 'from-brand-graphite to-brand-steel/40', n: '01' },
     { key: 'transport', badge: 'EI120 · СОУЭ', gradient: 'from-brand-leaf to-brand-moss', n: '02' },

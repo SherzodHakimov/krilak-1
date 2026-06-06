@@ -17,12 +17,12 @@ export class SolutionsComponent {
   private readonly i18n = inject(TranslationService);
 
   readonly items = [
-    { key: 'energy', badge: 'R240 · EI180', gradient: 'from-brand-graphite to-brand-steel/40', n: '01' },
-    { key: 'transport', badge: 'EI120 · СОУЭ', gradient: 'from-brand-leaf to-brand-moss', n: '02' },
-    { key: 'retail', badge: 'МР · ППБ', gradient: 'from-brand-amber to-brand-leaf', n: '03' },
-    { key: 'industry', badge: 'R90 · ЛВЖ', gradient: 'from-brand-steel to-brand-graphite', n: '04' },
-    { key: 'data', badge: 'Газовое · VESDA', gradient: 'from-emerald-700 to-brand-graphite', n: '05' },
-    { key: 'housing', badge: 'К0 · СНиП', gradient: 'from-brand-ink to-brand-leaf/60', n: '06' }
+    { key: 'energy', icon: '⚡', badge: 'R180 · R240', bullets: ['p1', 'p2', 'p3'] },
+    { key: 'transport', icon: '🚇', badge: 'EI120 · СОУЭ', bullets: ['p1', 'p2', 'p3'] },
+    { key: 'retail', icon: '🏙️', badge: 'МР · ППБ', bullets: ['p1', 'p2', 'p3'] },
+    { key: 'industry', icon: '🏭', badge: 'R90 · ЛВЖ', bullets: [] as string[] },
+    { key: 'data', icon: '🖥️', badge: 'Газовое · VESDA', bullets: [] as string[] },
+    { key: 'housing', icon: '🏘️', badge: 'К0 · СНиП', bullets: [] as string[] }
   ];
 
   constructor() {

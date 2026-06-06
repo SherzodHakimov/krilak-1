@@ -9,10 +9,18 @@ import { TranslationService } from '../../core/i18n/translation.service';
 import { usePageSeo } from '../../core/seo/page-seo';
 import { CatalogService } from '../../core/data/catalog.service';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { QuoteFormComponent } from '../../shared/quote-form.component';
 
 @Component({
   selector: 'app-product',
-  imports: [RouterLink, KeyValuePipe, TranslatePipe, LocalizePathPipe, RevealDirective],
+  imports: [
+    RouterLink,
+    KeyValuePipe,
+    TranslatePipe,
+    LocalizePathPipe,
+    RevealDirective,
+    QuoteFormComponent
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './product.component.html'
 })
@@ -29,12 +37,6 @@ export class ProductComponent {
   readonly category = computed(() => {
     const p = this.product();
     return p ? this.catalog.categoryBySlug(p.category) : undefined;
-  });
-  readonly related = computed(() => {
-    const p = this.product();
-    return p
-      ? this.catalog.productsByCategory(p.category).filter((r) => r.sku !== p.sku).slice(0, 3)
-      : [];
   });
 
   constructor() {

@@ -1,10 +1,20 @@
 <section class="bg-brand-graphite text-white relative overflow-hidden -mt-[7.25rem] pt-[7.25rem]">
-  <div class="absolute inset-0 grid-lines opacity-[0.05] pointer-events-none"></div>
-  <div class="container-x relative py-16 lg:py-24">
-    <div class="max-w-3xl" data-reveal>
-      <span class="eyebrow !text-brand-amber">{{ 'projects.eyebrow' | t }}</span>
-      <h1 class="mt-3 text-display-lg text-white text-balance">{{ 'projects.title' | t }}</h1>
-      <p class="mt-5 text-lg text-white/70">{{ 'projects.subtitle' | t }}</p>
+  <div class="absolute inset-0 grid-lines opacity-[0.06] pointer-events-none"></div>
+  <div class="absolute -bottom-1/3 left-0 w-[700px] h-[700px] rounded-full bg-leaf-gradient blur-3xl opacity-15 pointer-events-none"></div>
+  <div class="container-x relative py-16 lg:py-20">
+    <nav class="text-xs text-white/50 flex items-center gap-2 mb-6" data-reveal>
+      <a [routerLink]="'' | loc" class="hover:text-white">{{ 'nav.home' | t }}</a><span>/</span>
+      <span class="text-white">{{ 'nav.projects' | t }}</span>
+    </nav>
+    <div class="grid lg:grid-cols-12 gap-8 items-end">
+      <div class="lg:col-span-7" data-reveal>
+        <span class="pill-on-dark"><span class="w-1.5 h-1.5 rounded-full bg-brand-amber"></span><span>{{ 'projects.hero_pill' | t }}</span></span>
+        <h1 class="text-display-lg text-white mt-5 text-balance">{{ 'projects.title' | t }}</h1>
+        <p class="text-lg text-white/70 mt-5 max-w-2xl">{{ 'projects.subtitle' | t }}</p>
+      </div>
+      <div class="lg:col-span-5 lg:text-right" data-reveal data-reveal-delay="120">
+        <a href="#projects-grid" class="btn-amber">{{ 'projects.open_map' | t }}</a>
+      </div>
     </div>
   </div>
 </section>
@@ -12,46 +22,60 @@
 <section class="section">
   <div class="container-x">
     <!-- Filter chips -->
-    <div class="flex flex-wrap gap-2 mb-10" data-reveal>
+    <div class="flex flex-wrap items-center gap-2 mb-10" data-reveal>
       <button
+        type="button"
         (click)="setFilter('all')"
-        class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors"
-        [class]="activeIndustry() === 'all' ? 'bg-brand-leaf text-white border-brand-leaf' : 'border-brand-fog text-brand-graphite hover:border-brand-graphite'"
+        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-colors {{ activeIndustry() === 'all' ? 'bg-brand-graphite text-white' : 'bg-brand-cloud text-brand-graphite hover:bg-brand-fog' }}"
       >
-        {{ 'projects.all_industries' | t }}
+        {{ 'projects.all_industries' | t }} <span class="ml-1 opacity-50">{{ total }}</span>
       </button>
       @for (ind of industries; track ind.id) {
         <button
+          type="button"
           (click)="setFilter(ind.id)"
-          class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors"
-          [class]="activeIndustry() === ind.id ? 'bg-brand-leaf text-white border-brand-leaf' : 'border-brand-fog text-brand-graphite hover:border-brand-graphite'"
+          class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-colors {{ activeIndustry() === ind.id ? 'bg-brand-graphite text-white' : 'bg-brand-cloud text-brand-graphite hover:bg-brand-fog' }}"
         >
           {{ ind.label }}
         </button>
       }
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div id="projects-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       @for (p of projects(); track p.slug; let i = $index) {
-        <article class="card border border-brand-fog overflow-hidden hover-rise" data-reveal [attr.data-reveal-delay]="(i % 3) * 60">
-          <div class="h-48 bg-gradient-to-br {{ p.color }} relative">
+        <article class="bg-white border border-brand-fog rounded-2xl overflow-hidden hover-rise group" data-reveal [attr.data-reveal-delay]="(i % 3) * 60">
+          <div class="h-52 bg-gradient-to-br {{ p.color }} relative">
             <div class="absolute inset-0 grid-lines opacity-20"></div>
             <span class="absolute top-4 left-4 pill-on-dark">{{ p.year }}</span>
             <span class="absolute top-4 right-4 pill bg-brand-leaf text-white">{{ p.rating }}</span>
+            <div class="absolute bottom-4 left-4 text-white text-xs uppercase tracking-wider opacity-80">{{ p.industryLabel }}</div>
           </div>
           <div class="p-6">
-            <div class="flex items-center gap-2 text-xs text-brand-ink/50 mb-2">
-              <span>{{ p.industryLabel }}</span><span>·</span><span>{{ p.city }}</span>
-            </div>
-            <h2 class="font-display font-bold text-lg">{{ p.name }}</h2>
-            <p class="text-sm text-brand-ink/60 mt-2 line-clamp-3">{{ p.summary }}</p>
-            <div class="flex items-center gap-4 mt-5 pt-5 border-t border-brand-fog text-xs text-brand-ink/50">
-              <span>{{ 'projects.area' | t }}: {{ p.area }} м²</span>
-              <span>{{ 'projects.rating' | t }}: {{ p.rating }}</span>
+            <div class="text-xs text-brand-ink/50 mb-2">{{ p.city }} · {{ p.region }}</div>
+            <h2 class="font-display font-bold text-lg leading-snug">{{ p.name }}</h2>
+            <p class="text-sm text-brand-ink/60 mt-2 line-clamp-2">{{ p.summary }}</p>
+            <div class="mt-5 pt-5 border-t border-brand-fog flex items-center justify-between text-xs">
+              <span class="text-brand-ink/50">S: {{ area(p.area) }} м²</span>
+              <span class="font-semibold text-brand-leaf group-hover:translate-x-1 transition-transform">{{ 'catalog.details' | t }}</span>
             </div>
           </div>
         </article>
       }
+    </div>
+  </div>
+</section>
+
+<section class="section bg-brand-graphite text-white relative overflow-hidden">
+  <div class="absolute inset-0 grid-lines opacity-[0.04] pointer-events-none"></div>
+  <div class="absolute -right-32 -top-32 w-[480px] h-[480px] bg-leaf-gradient rounded-full blur-3xl opacity-25 pointer-events-none"></div>
+  <div class="container-x relative grid lg:grid-cols-2 gap-12 items-center">
+    <div data-reveal>
+      <span class="pill-on-dark">{{ 'hero.eyebrow' | t }}</span>
+      <h2 class="mt-5 text-display-lg text-white text-balance">{{ 'cta.title' | t }}</h2>
+      <p class="mt-5 text-lg text-white/70 max-w-lg text-pretty">{{ 'cta.subtitle' | t }}</p>
+    </div>
+    <div data-reveal data-reveal-delay="120">
+      <app-quote-form variant="dark" [leadTitle]="'KRILAK — заявка (Проекты)'" source="/projects" />
     </div>
   </div>
 </section>
