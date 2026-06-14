@@ -8,6 +8,7 @@ import { usePageSeo } from '../../core/seo/page-seo';
 import { TelegramService } from '../../core/telegram/telegram.service';
 import { SubmitState } from '../../core/telegram/telegram.types';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { controlInvalid, submitLead } from '../../shared/lead-form';
 
 @Component({
   selector: 'app-contacts',
@@ -46,50 +47,33 @@ export class ContactsComponent {
 
   constructor() {
     usePageSeo(() => ({
-      title: `${this.i18n.translate('contacts.title')} — КРИЛАК`,
+      title: `${this.i18n.translate('contacts.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
       description: this.i18n.translate('contacts.subtitle'),
       path: '/contacts'
     }));
   }
 
   invalid(control: 'name' | 'phone' | 'email'): boolean {
-    const c = this.form.controls[control];
-    return c.invalid && (c.touched || c.dirty);
+    return controlInvalid(this.form, control);
   }
 
   submit(): void {
-    if (this.state() === 'sending') {
-      return;
-    }
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
     const v = this.form.getRawValue();
-    if (v.website) {
-      this.state.set('success');
-      return;
-    }
-    this.state.set('sending');
-    this.telegram
-      .send({
-        title: 'KRILAK — обращение с сайта',
-        source: '/contacts',
-        fields: [
-          { label: this.i18n.translate('cta.name'), value: v.name },
-          { label: this.i18n.translate('cta.company'), value: v.company },
-          { label: this.i18n.translate('cta.phone'), value: v.phone },
-          { label: this.i18n.translate('cta.email'), value: v.email },
-          { label: this.i18n.translate('contacts.topic'), value: this.i18n.translate('contacts.topics.' + v.topic) },
-          { label: this.i18n.translate('cta.object'), value: v.message }
-        ]
-      })
-      .subscribe({
-        next: () => {
-          this.state.set('success');
-          this.form.reset({ topic: 'quote' });
-        },
-        error: () => this.state.set('error')
-      });
+    submitLead({
+      state: this.state,
+      form: this.form,
+      telegram: this.telegram,
+      title: 'KRILAK — обращение с сайта',
+      source: '/contacts',
+      fields: () => [
+        { label: this.i18n.translate('cta.name'), value: v.name },
+        { label: this.i18n.translate('cta.company'), value: v.company },
+        { label: this.i18n.translate('cta.phone'), value: v.phone },
+        { label: this.i18n.translate('cta.email'), value: v.email },
+        { label: this.i18n.translate('contacts.topic'), value: this.i18n.translate('contacts.topics.' + v.topic) },
+        { label: this.i18n.translate('cta.object'), value: v.message }
+      ],
+      resetValue: { topic: 'quote' }
+    });
   }
 }

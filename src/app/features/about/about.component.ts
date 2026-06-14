@@ -6,6 +6,7 @@ import { TranslationService } from '../../core/i18n/translation.service';
 import { usePageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { CounterDirective } from '../../shared/counter.directive';
+import { PageHeroComponent } from '../../shared/page-hero.component';
 
 interface Milestone {
   year: string;
@@ -14,7 +15,14 @@ interface Milestone {
 
 @Component({
   selector: 'app-about',
-  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, CounterDirective],
+  imports: [
+    RouterLink,
+    TranslatePipe,
+    LocalizePathPipe,
+    RevealDirective,
+    CounterDirective,
+    PageHeroComponent
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './about.component.html'
 })
@@ -38,7 +46,7 @@ export class AboutComponent {
 
   constructor() {
     usePageSeo(() => ({
-      title: `${this.i18n.translate('about.title')} — КРИЛАК`,
+      title: `${this.i18n.translate('about.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
       description: this.i18n.translate('about.subtitle'),
       path: '/about'
     }));

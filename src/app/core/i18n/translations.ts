@@ -16,7 +16,8 @@ const ru: Dictionary = {
     title: 'КРИЛАК — комплексная огнезащита и пожарная безопасность с 1991 года',
     description:
       'Ассоциация «КРИЛАК» — российский производитель огнезащитных материалов, противопожарных конструкций и оборудования. 35 лет, 55+ наград, объекты в 80 регионах.',
-    tagline: 'Огнезащита и пожарная безопасность'
+    tagline: 'Огнезащита и пожарная безопасность',
+    brand_suffix: 'КРИЛАК'
   },
   brand: { prefix: 'Ассоциация', name: 'КрилаК' },
   nav: {
@@ -73,7 +74,13 @@ const ru: Dictionary = {
     trust_4_label: 'регионов работы',
     protect: 'Защищаем объекты',
     current: 'Текущий проект',
-    current_value: 'Огнезащита R240 · АЭС'
+    current_value: 'Огнезащита R240 · АЭС',
+    certs: 'ГОСТ Р · ISO 9001 · ЕАЭС',
+    sector_npp: 'АЭС',
+    sector_metro: 'Метро',
+    sector_dc: 'Дата-центры',
+    sector_mall: 'ТРЦ',
+    sector_stadium: 'Стадионы'
   },
   metrics: {
     title: 'КрилаК в цифрах',
@@ -83,6 +90,8 @@ const ru: Dictionary = {
     m3_label: 'Объектов защищены огнезащитой КрилаК',
     m4_label: 'Производственная мощность по огнезащите'
   },
+  units: { m2: 'м²', tpy: 'т/год' },
+  geo: { map_aria: 'Карта федеральных округов России' },
   categories: {
     eyebrow: 'Каталог продукции',
     title: 'Полный спектр огнезащиты и пожаробезопасности',
@@ -373,7 +382,8 @@ const en: Dictionary = {
     title: 'Krilak — Comprehensive Fire Protection Since 1991',
     description:
       'Krilak Association — Russian manufacturer of fire-protection coatings, fire-rated structures and equipment. 35 years, 55+ awards, projects in 80 regions.',
-    tagline: 'Fire protection & safety'
+    tagline: 'Fire protection & safety',
+    brand_suffix: 'KRILAK'
   },
   brand: { prefix: 'Association', name: 'KrilaK' },
   nav: {
@@ -430,7 +440,13 @@ const en: Dictionary = {
     trust_4_label: 'regions served',
     protect: 'We protect',
     current: 'Current project',
-    current_value: 'Fire protection R240 · NPP'
+    current_value: 'Fire protection R240 · NPP',
+    certs: 'GOST R · ISO 9001 · EAEU',
+    sector_npp: 'NPP',
+    sector_metro: 'Metro',
+    sector_dc: 'Data centres',
+    sector_mall: 'Malls',
+    sector_stadium: 'Stadiums'
   },
   metrics: {
     title: 'Krilak by the numbers',
@@ -440,6 +456,8 @@ const en: Dictionary = {
     m3_label: 'Sites protected by Krilak',
     m4_label: 'Annual coatings output'
   },
+  units: { m2: 'm²', tpy: 't/yr' },
+  geo: { map_aria: 'Map of the federal districts of Russia' },
   categories: {
     eyebrow: 'Product catalog',
     title: 'A full spectrum of passive and active fire protection',

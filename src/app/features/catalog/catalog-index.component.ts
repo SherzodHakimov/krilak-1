@@ -33,7 +33,7 @@ export class CatalogIndexComponent {
 
   constructor() {
     usePageSeo(() => ({
-      title: `${this.i18n.translate('catalog.title')} — КРИЛАК`,
+      title: `${this.i18n.translate('catalog.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
       description: this.i18n.translate('catalog.subtitle'),
       path: '/catalog'
     }));

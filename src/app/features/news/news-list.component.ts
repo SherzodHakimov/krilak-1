@@ -7,10 +7,11 @@ import { usePageSeo } from '../../core/seo/page-seo';
 import { NewsService } from '../../core/data/news.service';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { DmyDatePipe } from '../../shared/dmy-date.pipe';
+import { PageHeroComponent } from '../../shared/page-hero.component';
 
 @Component({
   selector: 'app-news-list',
-  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, DmyDatePipe],
+  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, DmyDatePipe, PageHeroComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './news-list.component.html'
 })
@@ -22,7 +23,7 @@ export class NewsListComponent {
 
   constructor() {
     usePageSeo(() => ({
-      title: `${this.i18n.translate('news.title')} — КРИЛАК`,
+      title: `${this.i18n.translate('news.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
       description: this.i18n.translate('news.subtitle'),
       path: '/news'
     }));

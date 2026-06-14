@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
 import { usePageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { PageHeroComponent } from '../../shared/page-hero.component';
 
 interface Award {
   year: string;
@@ -13,7 +13,7 @@ interface Award {
 
 @Component({
   selector: 'app-awards',
-  imports: [TranslatePipe, RevealDirective],
+  imports: [RevealDirective, PageHeroComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './awards.component.html'
 })
@@ -42,7 +42,7 @@ export class AwardsComponent {
 
   constructor() {
     usePageSeo(() => ({
-      title: `${this.i18n.translate('awards.title')} — КРИЛАК`,
+      title: `${this.i18n.translate('awards.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
       description: this.i18n.translate('awards.subtitle'),
       path: '/awards'
     }));

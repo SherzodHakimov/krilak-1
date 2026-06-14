@@ -5,11 +5,11 @@ import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
 import { usePageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
-import { QuoteFormComponent } from '../../shared/quote-form.component';
+import { CtaSectionComponent } from '../../shared/cta-section.component';
 
 @Component({
   selector: 'app-solutions',
-  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, QuoteFormComponent],
+  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, CtaSectionComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './solutions.component.html'
 })
@@ -27,7 +27,7 @@ export class SolutionsComponent {
 
   constructor() {
     usePageSeo(() => ({
-      title: `${this.i18n.translate('solutions.title')} — КРИЛАК`,
+      title: `${this.i18n.translate('solutions.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
       description: this.i18n.translate('solutions.subtitle'),
       path: '/solutions'
     }));

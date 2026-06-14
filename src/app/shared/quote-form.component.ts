@@ -4,6 +4,7 @@ import { TranslatePipe } from '../core/i18n/translate.pipe';
 import { TranslationService } from '../core/i18n/translation.service';
 import { TelegramService } from '../core/telegram/telegram.service';
 import { SubmitState } from '../core/telegram/telegram.types';
+import { controlInvalid, submitLead } from './lead-form';
 
 /**
  * Reusable lead form that delivers submissions to Telegram. Dumb-ish: owns its
@@ -43,45 +44,25 @@ export class QuoteFormComponent {
   }
 
   invalid(control: 'name' | 'phone' | 'email'): boolean {
-    const c = this.form.controls[control];
-    return c.invalid && (c.touched || c.dirty);
+    return controlInvalid(this.form, control);
   }
 
   submit(): void {
-    if (this.state() === 'sending') {
-      return;
-    }
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-    if (this.form.getRawValue().website) {
-      // Honeypot tripped — silently treat as success.
-      this.state.set('success');
-      return;
-    }
-
     const v = this.form.getRawValue();
-    this.state.set('sending');
-    this.telegram
-      .send({
-        title: this.leadTitle(),
-        source: this.source(),
-        fields: [
-          { label: this.t('cta.name'), value: v.name },
-          { label: this.t('cta.company'), value: v.company },
-          { label: this.t('cta.phone'), value: v.phone },
-          { label: this.t('cta.email'), value: v.email },
-          { label: this.t('cta.object'), value: v.message }
-        ]
-      })
-      .subscribe({
-        next: () => {
-          this.state.set('success');
-          this.form.reset();
-        },
-        error: () => this.state.set('error')
-      });
+    submitLead({
+      state: this.state,
+      form: this.form,
+      telegram: this.telegram,
+      title: this.leadTitle(),
+      source: this.source(),
+      fields: () => [
+        { label: this.t('cta.name'), value: v.name },
+        { label: this.t('cta.company'), value: v.company },
+        { label: this.t('cta.phone'), value: v.phone },
+        { label: this.t('cta.email'), value: v.email },
+        { label: this.t('cta.object'), value: v.message }
+      ]
+    });
   }
 
   private t(key: string): string {

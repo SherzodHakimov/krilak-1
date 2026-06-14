@@ -19,7 +19,7 @@ import { ProjectsService } from '../../core/data/projects.service';
 import { NewsService } from '../../core/data/news.service';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { CounterDirective } from '../../shared/counter.directive';
-import { QuoteFormComponent } from '../../shared/quote-form.component';
+import { CtaSectionComponent } from '../../shared/cta-section.component';
 import { DmyDatePipe } from '../../shared/dmy-date.pipe';
 import { GeoMapComponent } from './geo-map.component';
 import { ConfiguratorService } from '../configurator/configurator.service';
@@ -36,7 +36,7 @@ const unsplash = (id: string) =>
     LocalizePathPipe,
     RevealDirective,
     CounterDirective,
-    QuoteFormComponent,
+    CtaSectionComponent,
     DmyDatePipe,
     GeoMapComponent
   ],

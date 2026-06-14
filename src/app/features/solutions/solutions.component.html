@@ -34,15 +34,9 @@
   </div>
 </section>
 
-<section class="section bg-brand-graphite text-white relative overflow-hidden">
-  <div class="absolute inset-0 grid-lines opacity-[0.04] pointer-events-none"></div>
-  <div class="container-x relative grid lg:grid-cols-2 gap-12 items-center">
-    <div data-reveal>
-      <h2 class="text-display-lg text-white text-balance">{{ 'cta.title' | t }}</h2>
-      <p class="mt-5 text-lg text-white/70 max-w-lg">{{ 'cta.subtitle' | t }}</p>
-    </div>
-    <div data-reveal data-reveal-delay="120">
-      <app-quote-form variant="dark" [leadTitle]="'KRILAK — заявка (Решения)'" source="/solutions" />
-    </div>
-  </div>
-</section>
+<app-cta-section
+  leadTitle="KRILAK — заявка (Решения)"
+  source="/solutions"
+  [pill]="false"
+  [gradient]="false"
+/>

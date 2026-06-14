@@ -25,7 +25,7 @@ export class NotFoundComponent {
 
   constructor() {
     usePageSeo(() => ({
-      title: `${this.i18n.translate('notfound.title')} — КРИЛАК`,
+      title: `${this.i18n.translate('notfound.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
       description: this.i18n.translate('notfound.subtitle'),
       path: '/404'
     }));

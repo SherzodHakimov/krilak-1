@@ -31,7 +31,9 @@ export class NewsArticleComponent {
     usePageSeo(() => {
       const a = this.article();
       return {
-        title: a ? `${a.title} — КРИЛАК` : `${this.i18n.translate('news.title')} — КРИЛАК`,
+        title: a
+          ? `${a.title} — ${this.i18n.translate('meta.brand_suffix')}`
+          : `${this.i18n.translate('news.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
         description: a?.excerpt ?? this.i18n.translate('news.subtitle'),
         path: `/news/${this.slug()}`,
         type: 'article'

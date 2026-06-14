@@ -6,10 +6,12 @@ import { usePageSeo } from '../../core/seo/page-seo';
 import { TelegramService } from '../../core/telegram/telegram.service';
 import { SubmitState } from '../../core/telegram/telegram.types';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { PageHeroComponent } from '../../shared/page-hero.component';
+import { controlInvalid, submitLead } from '../../shared/lead-form';
 
 @Component({
   selector: 'app-dealers',
-  imports: [ReactiveFormsModule, TranslatePipe, RevealDirective],
+  imports: [ReactiveFormsModule, TranslatePipe, RevealDirective, PageHeroComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dealers.component.html'
 })
@@ -20,10 +22,22 @@ export class DealersComponent {
 
   readonly state = signal<SubmitState>('idle');
 
-  readonly regions = [
-    'Москва', 'Санкт-Петербург', 'Казань', 'Екатеринбург', 'Новосибирск',
-    'Нижний Новгород', 'Самара', 'Краснодар', 'Владивосток', 'Другой регион'
+  private readonly regionsSource = [
+    { ru: 'Москва', en: 'Moscow' },
+    { ru: 'Санкт-Петербург', en: 'Saint Petersburg' },
+    { ru: 'Казань', en: 'Kazan' },
+    { ru: 'Екатеринбург', en: 'Yekaterinburg' },
+    { ru: 'Новосибирск', en: 'Novosibirsk' },
+    { ru: 'Нижний Новгород', en: 'Nizhny Novgorod' },
+    { ru: 'Самара', en: 'Samara' },
+    { ru: 'Краснодар', en: 'Krasnodar' },
+    { ru: 'Владивосток', en: 'Vladivostok' },
+    { ru: 'Другой регион', en: 'Other region' }
   ];
+  readonly regions = computed(() => {
+    const lang = this.i18n.lang();
+    return this.regionsSource.map((r) => r[lang]);
+  });
 
   private readonly benefitsSource = [
     { ru: 'Дилерские цены и прозрачная маржа', en: 'Dealer pricing and transparent margins' },
@@ -41,22 +55,21 @@ export class DealersComponent {
     name: ['', Validators.required],
     company: [''],
     phone: ['', [Validators.required, Validators.pattern(/^[+()\d\s-]{6,}$/)]],
-    region: [this.regions[0]],
+    region: [this.regions()[0]],
     terms: ['sales'],
     website: ['']
   });
 
   constructor() {
     usePageSeo(() => ({
-      title: `${this.i18n.translate('dealers.title')} — КРИЛАК`,
+      title: `${this.i18n.translate('dealers.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
       description: this.i18n.translate('dealers.subtitle'),
       path: '/dealers'
     }));
   }
 
   invalid(control: 'name' | 'phone'): boolean {
-    const c = this.form.controls[control];
-    return c.invalid && (c.touched || c.dirty);
+    return controlInvalid(this.form, control);
   }
 
   private termsLabel(value: string): string {
@@ -66,37 +79,21 @@ export class DealersComponent {
   }
 
   submit(): void {
-    if (this.state() === 'sending') {
-      return;
-    }
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
     const v = this.form.getRawValue();
-    if (v.website) {
-      this.state.set('success');
-      return;
-    }
-    this.state.set('sending');
-    this.telegram
-      .send({
-        title: 'KRILAK — заявка на партнёрство',
-        source: '/dealers',
-        fields: [
-          { label: this.i18n.translate('cta.name'), value: v.name },
-          { label: this.i18n.translate('cta.company'), value: v.company },
-          { label: this.i18n.translate('cta.phone'), value: v.phone },
-          { label: this.i18n.translate('dealers.region'), value: v.region },
-          { label: this.i18n.translate('dealers.terms'), value: this.termsLabel(v.terms) }
-        ]
-      })
-      .subscribe({
-        next: () => {
-          this.state.set('success');
-          this.form.reset({ region: this.regions[0], terms: 'sales' });
-        },
-        error: () => this.state.set('error')
-      });
+    submitLead({
+      state: this.state,
+      form: this.form,
+      telegram: this.telegram,
+      title: 'KRILAK — заявка на партнёрство',
+      source: '/dealers',
+      fields: () => [
+        { label: this.i18n.translate('cta.name'), value: v.name },
+        { label: this.i18n.translate('cta.company'), value: v.company },
+        { label: this.i18n.translate('cta.phone'), value: v.phone },
+        { label: this.i18n.translate('dealers.region'), value: v.region },
+        { label: this.i18n.translate('dealers.terms'), value: this.termsLabel(v.terms) }
+      ],
+      resetValue: { region: this.regions()[0], terms: 'sales' }
+    });
   }
 }

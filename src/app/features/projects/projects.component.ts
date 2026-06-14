@@ -6,11 +6,11 @@ import { TranslationService } from '../../core/i18n/translation.service';
 import { usePageSeo } from '../../core/seo/page-seo';
 import { ProjectsService } from '../../core/data/projects.service';
 import { RevealDirective } from '../../shared/reveal.directive';
-import { QuoteFormComponent } from '../../shared/quote-form.component';
+import { CtaSectionComponent } from '../../shared/cta-section.component';
 
 @Component({
   selector: 'app-projects',
-  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, QuoteFormComponent],
+  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, CtaSectionComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './projects.component.html'
 })
@@ -34,7 +34,7 @@ export class ProjectsComponent {
 
   constructor() {
     usePageSeo(() => ({
-      title: `${this.i18n.translate('projects.title')} — КРИЛАК`,
+      title: `${this.i18n.translate('projects.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
       description: this.i18n.translate('projects.subtitle'),
       path: '/projects'
     }));

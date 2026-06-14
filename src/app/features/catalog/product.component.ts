@@ -43,7 +43,9 @@ export class ProductComponent {
     usePageSeo(() => {
       const p = this.product();
       return {
-        title: p ? `${p.name} — ${p.subtitle} — КРИЛАК` : `КРИЛАК`,
+        title: p
+          ? `${p.name} — ${p.subtitle} — ${this.i18n.translate('meta.brand_suffix')}`
+          : this.i18n.translate('meta.brand_suffix'),
         description: p?.description ?? this.i18n.translate('catalog.subtitle'),
         path: `/catalog/product/${this.sku()}`
       };

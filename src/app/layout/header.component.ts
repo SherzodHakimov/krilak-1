@@ -82,10 +82,6 @@ export class HeaderComponent {
 
   private lastY = 0;
 
-  get isEn(): boolean {
-    return this.i18n.lang() === 'en';
-  }
-
   langActive(lang: Lang): boolean {
     return this.i18n.lang() === lang;
   }

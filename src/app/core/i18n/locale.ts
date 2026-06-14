@@ -9,8 +9,3 @@ export const DEFAULT_LANG: Lang = 'ru';
 export function normalizeLang(value: string | null | undefined): Lang {
   return value === 'en' ? 'en' : 'ru';
 }
-
-/** True when the value is one of the supported locales. */
-export function isLang(value: string | null | undefined): value is Lang {
-  return value === 'ru' || value === 'en';
-}

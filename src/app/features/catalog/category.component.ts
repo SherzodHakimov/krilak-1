@@ -50,7 +50,9 @@ export class CategoryComponent {
     usePageSeo(() => {
       const cat = this.category();
       return {
-        title: cat ? `${cat.name} — КРИЛАК` : `${this.i18n.translate('catalog.title')} — КРИЛАК`,
+        title: cat
+          ? `${cat.name} — ${this.i18n.translate('meta.brand_suffix')}`
+          : `${this.i18n.translate('catalog.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
         description: cat?.description ?? this.i18n.translate('catalog.subtitle'),
         path: `/catalog/category/${this.slug()}`
       };

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
 import { usePageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { PageHeroComponent } from '../../shared/page-hero.component';
 
 interface Review {
   author: { ru: string; en: string };
@@ -12,7 +12,7 @@ interface Review {
 
 @Component({
   selector: 'app-reviews',
-  imports: [TranslatePipe, RevealDirective],
+  imports: [RevealDirective, PageHeroComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './reviews.component.html'
 })
@@ -61,7 +61,7 @@ export class ReviewsComponent {
 
   constructor() {
     usePageSeo(() => ({
-      title: `${this.i18n.translate('reviews.title')} — КРИЛАК`,
+      title: `${this.i18n.translate('reviews.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
       description: this.i18n.translate('reviews.subtitle'),
       path: '/reviews'
     }));

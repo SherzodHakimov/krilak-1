@@ -1,7 +1,7 @@
 <div class="relative w-full" (mouseleave)="active.set(null)">
   <div class="rounded-3xl bg-white overflow-hidden px-5 sm:px-7 py-10 sm:py-14">
    <div class="relative">
-    <svg [attr.viewBox]="viewBox" class="block w-full h-auto" role="img" aria-label="Карта федеральных округов России">
+    <svg [attr.viewBox]="viewBox" class="block w-full h-auto" role="img" [attr.aria-label]="'geo.map_aria' | t">
       <!-- базовый слой округов (хороплет) -->
       @for (d of districts(); track d.id) {
         <path

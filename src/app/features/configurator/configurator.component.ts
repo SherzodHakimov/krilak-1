@@ -63,7 +63,7 @@ export class ConfiguratorComponent {
 
   constructor() {
     usePageSeo(() => ({
-      title: `${this.i18n.translate('configurator_block.title')} — КРИЛАК`,
+      title: `${this.i18n.translate('configurator_block.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
       description: this.i18n.translate('configurator_block.subtitle'),
       path: '/configurator'
     }));

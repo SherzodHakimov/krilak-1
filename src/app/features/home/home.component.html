@@ -17,7 +17,7 @@
           </span>
           <span class="pill-on-dark px-[0.9rem] py-[0.3rem]">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>ГОСТ Р · ISO 9001 · ЕАЭС</span>
+            <span>{{ 'hero.certs' | t }}</span>
           </span>
         </div>
         <h1 class="text-display-lg text-white text-balance">
@@ -64,11 +64,11 @@
             <div class="mt-6 pt-6 border-t border-white/10">
               <div class="text-xs text-white/50 mb-3">{{ 'hero.protect' | t }}</div>
               <div class="flex items-center gap-3 text-white/80 text-xs flex-wrap">
-                <span class="pill-on-dark">АЭС</span>
-                <span class="pill-on-dark">Метро</span>
-                <span class="pill-on-dark">Дата-центры</span>
-                <span class="pill-on-dark">ТРЦ</span>
-                <span class="pill-on-dark">Стадионы</span>
+                <span class="pill-on-dark">{{ 'hero.sector_npp' | t }}</span>
+                <span class="pill-on-dark">{{ 'hero.sector_metro' | t }}</span>
+                <span class="pill-on-dark">{{ 'hero.sector_dc' | t }}</span>
+                <span class="pill-on-dark">{{ 'hero.sector_mall' | t }}</span>
+                <span class="pill-on-dark">{{ 'hero.sector_stadium' | t }}</span>
               </div>
             </div>
           </div>
@@ -105,7 +105,7 @@
     <div data-reveal data-reveal-delay="240">
       <div class="flex items-baseline gap-1">
         <span class="metric-number text-brand-graphite" data-counter="10000">10 000</span>
-        <span class="text-sm font-mono text-brand-ink/60">т/год</span>
+        <span class="text-sm font-mono text-brand-ink/60">{{ 'units.tpy' | t }}</span>
       </div>
       <div class="metric-label">{{ 'metrics.m4_label' | t }}</div>
     </div>
@@ -342,7 +342,7 @@
             <h3 class="font-display font-bold text-xl text-white">{{ p.name }}</h3>
             <p class="text-sm text-white/60 mt-2 line-clamp-3">{{ p.summary }}</p>
             <div class="flex items-center gap-4 mt-auto pt-5 border-t border-white/10 text-xs text-white/50">
-              <span>{{ 'projects.area' | t }}: {{ p.area }} м²</span>
+              <span>{{ 'projects.area' | t }}: {{ p.area }} {{ 'units.m2' | t }}</span>
               <span>{{ p.rating }}</span>
             </div>
           </div>
@@ -482,28 +482,12 @@
 </section>
 
 <!-- ========== CTA ========== -->
-<section id="cta" class="section bg-brand-graphite text-white relative overflow-hidden">
-  <div class="absolute inset-0 grid-lines opacity-[0.04] pointer-events-none"></div>
-  <div class="absolute -right-32 -top-32 w-[480px] h-[480px] bg-leaf-gradient rounded-full blur-3xl opacity-25 pointer-events-none"></div>
-  <div class="container-x relative grid lg:grid-cols-2 gap-12 items-center">
-    <div data-reveal>
-      <span class="pill-on-dark">{{ 'hero.eyebrow' | t }}</span>
-      <h2 class="mt-5 text-display-lg text-white text-balance">{{ 'cta.title' | t }}</h2>
-      <p class="mt-5 text-lg text-white/70 max-w-lg text-pretty">{{ 'cta.subtitle' | t }}</p>
-      <ul class="mt-8 space-y-3 text-sm text-white/80">
-        @for (b of ['benefit_1', 'benefit_2', 'benefit_3']; track b) {
-          <li class="flex items-start gap-3">
-            <span class="w-5 h-5 rounded-full bg-brand-leaf/20 text-brand-amber grid place-items-center text-xs mt-0.5">✓</span>
-            <span>{{ 'cta.' + b | t }}</span>
-          </li>
-        }
-      </ul>
-    </div>
-    <div data-reveal data-reveal-delay="120">
-      <app-quote-form variant="dark" [leadTitle]="'KRILAK — заявка с главной'" source="/" />
-    </div>
-  </div>
-</section>
+<app-cta-section
+  sectionId="cta"
+  leadTitle="KRILAK — заявка с главной"
+  source="/"
+  [benefitKeys]="['benefit_1', 'benefit_2', 'benefit_3']"
+/>
 
 <!-- ВРЕМЕННО: отладочная панель карточек блока «Решения по отраслям» -->
 @if (solutionsInView()) {
