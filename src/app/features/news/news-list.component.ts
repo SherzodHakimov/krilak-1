@@ -6,10 +6,11 @@ import { TranslationService } from '../../core/i18n/translation.service';
 import { usePageSeo } from '../../core/seo/page-seo';
 import { NewsService } from '../../core/data/news.service';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { DmyDatePipe } from '../../shared/dmy-date.pipe';
 
 @Component({
   selector: 'app-news-list',
-  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective],
+  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, DmyDatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './news-list.component.html'
 })

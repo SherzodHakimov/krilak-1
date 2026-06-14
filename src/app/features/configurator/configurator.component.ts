@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
@@ -21,6 +21,7 @@ export class ConfiguratorComponent {
   private readonly telegram = inject(TelegramService);
   private readonly i18n = inject(TranslationService);
   private readonly fb = inject(FormBuilder);
+  private readonly route = inject(ActivatedRoute);
 
   readonly objectTypes = this.configurator.objectTypes;
   readonly structures = this.configurator.structures;
@@ -66,6 +67,13 @@ export class ConfiguratorComponent {
       description: this.i18n.translate('configurator_block.subtitle'),
       path: '/configurator'
     }));
+
+    // Предвыбор типа объекта с главной (?object=…): пропускаем шаг 1.
+    const preset = this.route.snapshot.queryParamMap.get('object');
+    if (preset && this.configurator.objectTypes.some((o) => o.id === preset)) {
+      this.objectType.set(preset);
+      this.step.set(2);
+    }
   }
 
   canAdvance(): boolean {
@@ -144,9 +152,10 @@ export class ConfiguratorComponent {
           { label: this.i18n.translate('cta.name'), value: v.name },
           { label: this.i18n.translate('cta.phone'), value: v.phone },
           { label: this.i18n.translate('cta.email'), value: v.email },
+          { label: this.i18n.translate('configurator_block.step_1'), value: this.objectTypeName() },
           { label: this.i18n.translate('configurator_block.step_2'), value: this.structureName() },
-          { label: this.i18n.translate('configurator_block.step_4'), value: this.rating() },
-          { label: this.i18n.translate('configurator_block.step_3'), value: this.area() ?? '' },
+          { label: this.i18n.translate('configurator_block.step_3'), value: this.rating() },
+          { label: this.i18n.translate('configurator_block.step_4'), value: `${this.area() ?? ''} м² · ${this.conditionName()}` },
           { label: 'SKU', value: rec?.sku },
           { label: this.i18n.translate('configurator_block.step_5'), value: rec ? `${rec.name} · ≈ ${rec.estimate.toLocaleString('ru-RU')} ₽` : '' }
         ]
@@ -159,5 +168,25 @@ export class ConfiguratorComponent {
 
   structureName(): string {
     return this.configurator.structureById(this.structure())?.name ?? this.structure();
+  }
+
+  objectTypeName(): string {
+    return this.configurator.objectTypes.find((o) => o.id === this.objectType())?.name ?? this.objectType();
+  }
+
+  objectIcon(id: string): string {
+    return this.configurator.objectIcon(id);
+  }
+
+  structureIcon(id: string): string {
+    return this.configurator.structureIcon(id);
+  }
+
+  conditionIcon(id: string): string {
+    return this.configurator.conditionIcon(id);
+  }
+
+  conditionName(): string {
+    return this.configurator.conditions.find((c) => c.id === this.conditionId())?.name ?? this.conditionId();
   }
 }

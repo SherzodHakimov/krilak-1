@@ -81,7 +81,7 @@
   }
 
   .card-bordered {
-    @apply bg-white rounded-2xl border border-brand-fog transition-all duration-300 hover:border-brand-graphite hover:-translate-y-1;
+    @apply bg-white rounded-2xl border border-brand-fog transition-all duration-300 hover:border-brand-leaf/30 hover:shadow-card hover:-translate-y-1;
   }
 
   /* ---- Containers ---- */
@@ -99,7 +99,7 @@
 
   /* ---- Eyebrow ---- */
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-leaf;
+    @apply inline-flex items-center gap-2 text-[0.9rem] font-semibold uppercase tracking-[0.18em] text-brand-leaf;
   }
 
   .eyebrow::before {
@@ -160,6 +160,11 @@
   .mask-fade-r {
     -webkit-mask-image: linear-gradient(to right, black 80%, transparent);
             mask-image: linear-gradient(to right, black 80%, transparent);
+  }
+  /* Симметричное затухание по обоим краям: текст плавно появляется справа и исчезает слева. */
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
   }
   .scrollbar-none { scrollbar-width: none; }
   .scrollbar-none::-webkit-scrollbar { display: none; }

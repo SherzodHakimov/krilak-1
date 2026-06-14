@@ -55,9 +55,13 @@
             >{{ 'brand.prefix' | t }}</span
           >
           <span
-            class="font-display font-bold text-xl tracking-tight text-white [.is-scrolled_&]:text-brand-graphite transition-colors duration-200 mt-1"
-            >{{ 'brand.name' | t }}</span
+            class="font-display font-bold text-xl text-white [.is-scrolled_&]:text-brand-graphite transition-colors duration-200 mt-1 flex justify-between"
+            [attr.aria-label]="'brand.name' | t"
           >
+            @for (ch of brandNameChars(); track $index) {
+              <span aria-hidden="true">{{ ch }}</span>
+            }
+          </span>
         </span>
       </a>
 
@@ -108,9 +112,8 @@
       <div class="flex items-center gap-2">
         <a
           [routerLink]="'/configurator' | loc"
-          class="hidden md:inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold border text-white border-white/25 hover:bg-white/10 [.is-scrolled_&]:text-brand-graphite [.is-scrolled_&]:border-brand-fog [.is-scrolled_&]:hover:border-brand-graphite [.is-scrolled_&]:hover:bg-brand-cloud transition-colors"
+          class="hidden md:inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold border text-white border-white/25 hover:bg-white/10 [.is-scrolled_&]:text-brand-graphite [.is-scrolled_&]:border-2 [.is-scrolled_&]:border-brand-graphite/40 [.is-scrolled_&]:hover:bg-brand-graphite [.is-scrolled_&]:hover:text-white [.is-scrolled_&]:hover:border-brand-graphite transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
         >
-          <span class="w-1.5 h-1.5 rounded-full bg-brand-leaf animate-pulse"></span>
           <span>{{ 'nav.configurator' | t }}</span>
         </a>
         <a [routerLink]="'/contacts' | loc" class="btn-primary !py-2.5 !px-4 text-xs">{{ 'nav.quote' | t }}</a>

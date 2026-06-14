@@ -29,12 +29,22 @@
             <button
               type="button"
               (click)="selectObjectType(o.id)"
-              class="text-left p-5 rounded-2xl border transition-all"
-              [class]="objectType() === o.id ? 'border-brand-leaf bg-brand-leaf/5' : 'border-brand-fog hover:border-brand-graphite'"
+              class="relative text-left p-5 rounded-2xl border transition-all duration-200"
+              [class]="objectType() === o.id ? 'border-brand-leaf bg-brand-leaf/5' : 'border-brand-fog hover:border-brand-graphite/30 hover:-translate-y-0.5 hover:shadow-card'"
             >
-              <div class="text-3xl mb-3">{{ o.icon }}</div>
-              <div class="font-display font-semibold">{{ o.name }}</div>
-              <div class="text-xs text-brand-ink/60 mt-1">{{ o.description }}</div>
+              @if (objectType() === o.id) {
+                <span class="absolute top-3 right-3 w-5 h-5 rounded-full bg-brand-leaf grid place-items-center shadow">
+                  <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10" /></svg>
+                </span>
+              }
+              <span
+                class="w-12 h-12 rounded-xl grid place-items-center mb-3.5 transition-colors"
+                [class]="objectType() === o.id ? 'bg-brand-leaf text-white' : 'bg-brand-spring text-brand-leaf'"
+              >
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="objectIcon(o.id)" /></svg>
+              </span>
+              <span class="block font-display font-semibold">{{ o.name }}</span>
+              <span class="block text-xs text-brand-ink/60 mt-1 leading-snug">{{ o.description }}</span>
             </button>
           }
         </div>
@@ -48,11 +58,21 @@
             <button
               type="button"
               (click)="selectStructure(s.id)"
-              class="text-center p-5 rounded-2xl border transition-all"
-              [class]="structure() === s.id ? 'border-brand-leaf bg-brand-leaf/5' : 'border-brand-fog hover:border-brand-graphite'"
+              class="relative text-center p-5 rounded-2xl border transition-all duration-200"
+              [class]="structure() === s.id ? 'border-brand-leaf bg-brand-leaf/5' : 'border-brand-fog hover:border-brand-graphite/30 hover:-translate-y-0.5 hover:shadow-card'"
             >
-              <div class="text-3xl mb-2">{{ s.icon }}</div>
-              <div class="font-display font-semibold text-sm">{{ s.name }}</div>
+              @if (structure() === s.id) {
+                <span class="absolute top-3 right-3 w-5 h-5 rounded-full bg-brand-leaf grid place-items-center shadow">
+                  <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10" /></svg>
+                </span>
+              }
+              <span
+                class="w-12 h-12 rounded-xl grid place-items-center mx-auto mb-3 transition-colors"
+                [class]="structure() === s.id ? 'bg-brand-leaf text-white' : 'bg-brand-spring text-brand-leaf'"
+              >
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="structureIcon(s.id)" /></svg>
+              </span>
+              <span class="block font-display font-semibold text-sm">{{ s.name }}</span>
             </button>
           }
         </div>
@@ -60,13 +80,13 @@
 
       <!-- STEP 3: rating -->
       @if (step() === 3) {
-        <h2 class="font-display font-bold text-2xl mb-6">{{ 'configurator_block.step_4' | t }}</h2>
+        <h2 class="font-display font-bold text-2xl mb-6">{{ 'configurator_block.step_3' | t }}</h2>
         <div class="grid grid-cols-3 sm:grid-cols-4 gap-2">
           @for (r of availableRatings(); track r) {
             <button
               type="button"
               (click)="selectRating(r)"
-              class="px-3 py-3 rounded-xl text-sm font-semibold transition-all"
+              class="px-3 py-3 rounded-xl text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card"
               [class]="rating() === r ? 'bg-brand-leaf text-white' : 'border border-brand-fog hover:border-brand-leaf hover:bg-brand-leaf/5'"
             >
               {{ r }}
@@ -77,24 +97,35 @@
 
       <!-- STEP 4: area + conditions -->
       @if (step() === 4) {
-        <h2 class="font-display font-bold text-2xl mb-6">{{ 'configurator_block.step_3' | t }}</h2>
+        <h2 class="font-display font-bold text-2xl mb-6">{{ 'configurator_block.step_4' | t }}</h2>
         <div class="space-y-6">
           <div>
-            <label class="label">{{ 'configurator_block.step_3' | t }} ({{ 'projects.area' | t }})</label>
+            <label class="label">{{ 'configurator_block.area_label' | t }}</label>
             <input type="number" min="1" [value]="area() ?? ''" (input)="onArea($event)" class="input !py-4" placeholder="1000" />
           </div>
           <div>
-            <label class="label">{{ 'configurator_block.step_5' | t }}</label>
+            <label class="label">{{ 'configurator_block.conditions_label' | t }}</label>
             <div class="grid sm:grid-cols-3 gap-3">
               @for (c of conditions; track c.id) {
                 <button
                   type="button"
                   (click)="conditionId.set(c.id)"
-                  class="text-left p-4 rounded-2xl border transition-all"
-                  [class]="conditionId() === c.id ? 'border-brand-leaf bg-brand-leaf/5' : 'border-brand-fog hover:border-brand-graphite'"
+                  class="relative text-left p-4 rounded-2xl border transition-all duration-200"
+                  [class]="conditionId() === c.id ? 'border-brand-leaf bg-brand-leaf/5' : 'border-brand-fog hover:border-brand-graphite/30 hover:-translate-y-0.5 hover:shadow-card'"
                 >
-                  <div class="font-display font-semibold text-sm">{{ c.name }}</div>
-                  <div class="text-xs text-brand-ink/60 mt-1">{{ c.description }}</div>
+                  @if (conditionId() === c.id) {
+                    <span class="absolute top-3 right-3 w-5 h-5 rounded-full bg-brand-leaf grid place-items-center shadow">
+                      <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10" /></svg>
+                    </span>
+                  }
+                  <span
+                    class="w-10 h-10 rounded-lg grid place-items-center mb-3 transition-colors"
+                    [class]="conditionId() === c.id ? 'bg-brand-leaf text-white' : 'bg-brand-spring text-brand-leaf'"
+                  >
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="conditionIcon(c.id)" /></svg>
+                  </span>
+                  <span class="block font-display font-semibold text-sm">{{ c.name }}</span>
+                  <span class="block text-xs text-brand-ink/60 mt-1 leading-snug">{{ c.description }}</span>
                 </button>
               }
             </div>
@@ -109,25 +140,25 @@
             <div class="text-xs uppercase tracking-wider text-brand-amber">{{ 'configurator_block.step_5' | t }}</div>
             <h2 class="font-display font-bold text-2xl mt-2">{{ rec.name }}</h2>
             <div class="text-xs text-white/50 mt-1">SKU: {{ rec.sku }}</div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6">
-              <div>
-                <div class="text-2xl font-display font-bold text-brand-leaf">{{ rec.consumption }}</div>
-                <div class="text-xs text-white/60">{{ rec.consumptionUnit }}</div>
+            <div class="grid grid-cols-2 gap-4 mt-6">
+              <div class="flex items-baseline gap-2 flex-wrap">
+                <span class="text-2xl font-display font-bold text-brand-leaf">{{ rec.consumption }}</span>
+                <span class="text-xs text-white/60">{{ rec.consumptionUnit }}</span>
               </div>
-              <div>
-                <div class="text-2xl font-display font-bold text-brand-leaf">{{ rec.totalConsumption }}</div>
-                <div class="text-xs text-white/60">{{ rec.consumptionUnit }} · {{ area() }} м²</div>
+              <div class="flex items-baseline gap-2 flex-wrap">
+                <span class="text-2xl font-display font-bold text-brand-leaf">{{ rec.totalConsumption }}</span>
+                <span class="text-xs text-white/60">{{ rec.consumptionUnit }} · {{ area() }} м²</span>
               </div>
-              <div>
-                <div class="text-2xl font-display font-bold text-brand-amber">≈ {{ rec.estimate | number: '1.0-0' }} ₽</div>
-                <div class="text-xs text-white/60">{{ rating() }}</div>
-              </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-white/10">
+              <div class="text-xs text-white/60 mb-1">{{ 'configurator_block.estimate' | t }} · {{ rating() }}</div>
+              <div class="text-3xl sm:text-4xl font-display font-bold text-brand-amber">≈ {{ rec.estimate | number: '1.0-0' }} ₽</div>
             </div>
           </div>
 
           <form [formGroup]="leadForm" (ngSubmit)="submitLead()" novalidate class="mt-8 space-y-4">
             <p class="text-sm text-brand-ink/70">{{ 'cta.subtitle' | t }}</p>
-            <div class="grid sm:grid-cols-3 gap-4">
+            <div class="space-y-4">
               <div>
                 <label class="label">{{ 'cta.name' | t }}</label>
                 <input formControlName="name" type="text" class="input" />
@@ -147,7 +178,7 @@
             <div class="absolute -left-[9999px]" aria-hidden="true">
               <label>Website<input formControlName="website" type="text" tabindex="-1" autocomplete="off" /></label>
             </div>
-            <button type="submit" class="btn-primary w-full !py-4" [disabled]="state() === 'sending'">
+            <button type="submit" class="btn-primary w-full !py-4 hover:-translate-y-0.5 hover:shadow-card-hover" [disabled]="state() === 'sending'">
               {{ (state() === 'sending' ? 'cta.sending' : 'cta.submit') | t }}
             </button>
             @if (state() === 'success') { <p class="text-sm font-medium text-brand-moss">{{ 'cta.success' | t }}</p> }
@@ -160,11 +191,27 @@
 
       <!-- nav -->
       <div class="flex items-center justify-between mt-10 pt-6 border-t border-brand-fog">
-        <button type="button" (click)="prev()" class="btn-ghost !py-2.5 !px-4 text-sm" [disabled]="step() === 1">← {{ 'configurator_block.step_1' | t }}</button>
-        @if (step() < 5) {
-          <button type="button" (click)="next()" class="btn-primary !py-2.5 !px-5 text-sm" [disabled]="!canAdvance()">{{ 'configurator_block.cta' | t }} →</button>
+        @if (step() === 1) {
+          <a [routerLink]="'' | loc" class="group btn border-2 border-brand-graphite/40 text-brand-graphite hover:bg-brand-graphite hover:text-white hover:border-brand-graphite !py-2.5 !px-4 text-sm hover:-translate-y-0.5 hover:shadow-card-hover">
+            <span class="transition-transform duration-200 group-hover:-translate-x-1">←</span>
+            <span>{{ 'nav.home' | t }}</span>
+          </a>
         } @else {
-          <a [routerLink]="'/catalog' | loc" class="btn-ghost !py-2.5 !px-4 text-sm">{{ 'categories.view_all' | t }}</a>
+          <button type="button" (click)="prev()" class="group btn border-2 border-brand-graphite/40 text-brand-graphite hover:bg-brand-graphite hover:text-white hover:border-brand-graphite !py-2.5 !px-4 text-sm hover:-translate-y-0.5 hover:shadow-card-hover">
+            <span class="transition-transform duration-200 group-hover:-translate-x-1">←</span>
+            <span>{{ 'configurator_block.nav_back' | t }}</span>
+          </button>
+        }
+        @if (step() < 5) {
+          <button type="button" (click)="next()" class="group btn-primary !py-2.5 !px-5 text-sm hover:-translate-y-0.5 hover:shadow-card-hover" [disabled]="!canAdvance()">
+            <span>{{ 'configurator_block.nav_next' | t }}</span>
+            <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+          </button>
+        } @else {
+          <a [routerLink]="'/catalog' | loc" class="group btn border-2 border-brand-graphite/40 text-brand-graphite hover:bg-brand-graphite hover:text-white hover:border-brand-graphite !py-2.5 !px-4 text-sm hover:-translate-y-0.5 hover:shadow-card-hover">
+            <span>{{ 'categories.view_all' | t }}</span>
+            <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+          </a>
         }
       </div>
     </div>

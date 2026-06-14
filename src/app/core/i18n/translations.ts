@@ -18,7 +18,7 @@ const ru: Dictionary = {
       'Ассоциация «КРИЛАК» — российский производитель огнезащитных материалов, противопожарных конструкций и оборудования. 35 лет, 55+ наград, объекты в 80 регионах.',
     tagline: 'Огнезащита и пожарная безопасность'
   },
-  brand: { prefix: 'Ассоциация', name: 'КРИЛАК' },
+  brand: { prefix: 'Ассоциация', name: 'КрилаК' },
   nav: {
     home: 'Главная',
     products: 'Продукция',
@@ -53,7 +53,10 @@ const ru: Dictionary = {
   },
   hero: {
     eyebrow: 'С 1991 года · 55+ наград',
-    title: 'Защищаем людей и объекты от огня',
+    title: 'Защищаем людей и объекты от огня',
+    title_a: 'Защищаем',
+    title_b: 'людей и объекты',
+    title_c: 'от огня',
     subtitle:
       'Ассоциация «КРИЛАК» — производитель полного цикла: огнезащитные составы, противопожарные конструкции, системы обнаружения и пожаротушения. От лаборатории до объекта в любой точке России.',
     cta_primary: 'Подобрать решение за 60 секунд',
@@ -86,6 +89,7 @@ const ru: Dictionary = {
     subtitle:
       'Сертифицированные решения для металла, бетона, дерева, кабельных линий и инженерных систем',
     view_all: 'Смотреть весь каталог',
+    all: 'Весь каталог',
     look: 'Смотреть',
     items: {
       compounds: { title: 'Огнезащитные составы', description: 'Краски, лаки, штукатурки для R15–R240' },
@@ -103,6 +107,7 @@ const ru: Dictionary = {
     title: 'Сферы, для которых мы строим защиту',
     subtitle:
       'За 35 лет мы выработали отраслевые регламенты под уникальные требования критической инфраструктуры',
+    more: 'Подробнее',
     items: {
       energy: {
         title: 'ТЭК и энергетика',
@@ -137,14 +142,16 @@ const ru: Dictionary = {
       '5 шагов до точной рекомендации продукта, расчёта расхода и оценочной сметы. Все данные сохраняются в личном кабинете.',
     step_1: 'Тип объекта',
     step_2: 'Тип конструкции',
-    step_3: 'Площадь',
-    step_4: 'Класс огнестойкости',
+    step_3: 'Класс огнестойкости',
+    step_4: 'Площадь и условия',
     step_5: 'Получите расчёт и КП',
     cta: 'Открыть конфигуратор',
-    step_label: 'Шаг 4 из 5',
-    question: 'Какой предел огнестойкости требует проект?',
-    back: '← Назад',
-    next: 'Далее → расчёт'
+    nav_back: 'Назад',
+    nav_next: 'Далее',
+    area_label: 'Площадь объекта, м²',
+    conditions_label: 'Условия эксплуатации',
+    estimate: 'Оценочная смета',
+    start: 'С какого объекта начнём?'
   },
   projects: {
     eyebrow: 'Реализованные объекты',
@@ -167,8 +174,14 @@ const ru: Dictionary = {
     m1: 'регионов России',
     m2: 'реализованных объектов',
     m3: 'отраслей промышленности',
-    cta: 'Открыть интерактивную карту →',
-    badge: '120 объектов в Москве и МО'
+    cta: 'Смотреть все объекты',
+    badge: '120 объектов в Москве и МО',
+    districts_title: 'Объекты по федеральным округам',
+    districts_note: 'обновлено в 2026',
+    districts_footer: 'Покрытие: 8 / 8 округов · 80 регионов',
+    districts_all: 'Все объекты',
+    districts_hint: 'Наведите на округ, чтобы увидеть детали',
+    objects_unit: 'объектов'
   },
   clients: {
     title: 'Нам доверяют',
@@ -190,6 +203,7 @@ const ru: Dictionary = {
   },
   news: {
     title: 'Экспертный блог',
+    heading: 'Делимся экспертизой в огнезащите',
     subtitle: 'Аналитика рынка, разъяснения нормативов, разборы кейсов',
     view_all: 'Все статьи',
     read: 'Читать статью',
@@ -361,7 +375,7 @@ const en: Dictionary = {
       'Krilak Association — Russian manufacturer of fire-protection coatings, fire-rated structures and equipment. 35 years, 55+ awards, projects in 80 regions.',
     tagline: 'Fire protection & safety'
   },
-  brand: { prefix: 'Association', name: 'KRILAK' },
+  brand: { prefix: 'Association', name: 'KrilaK' },
   nav: {
     home: 'Home',
     products: 'Products',
@@ -397,6 +411,9 @@ const en: Dictionary = {
   hero: {
     eyebrow: 'Since 1991 · 55+ awards',
     title: 'We protect people and assets from fire',
+    title_a: 'We protect',
+    title_b: 'people and assets',
+    title_c: 'from fire',
     subtitle:
       'Krilak is a full-cycle producer: passive fire protection coatings, fire-rated structures, detection and suppression systems. From our lab to your site, anywhere in Russia.',
     cta_primary: 'Configure a solution in 60s',
@@ -428,6 +445,7 @@ const en: Dictionary = {
     title: 'A full spectrum of passive and active fire protection',
     subtitle: 'Certified solutions for steel, concrete, wood, cabling and HVAC',
     view_all: 'View full catalog',
+    all: 'Full catalog',
     look: 'View',
     items: {
       compounds: { title: 'Fire-protection coatings', description: 'Paints, varnishes, plasters for R15–R240' },
@@ -444,6 +462,7 @@ const en: Dictionary = {
     eyebrow: 'Industry solutions',
     title: 'Where we deliver protection',
     subtitle: 'Industry-specific playbooks built over 35 years of critical infrastructure work',
+    more: 'Learn more',
     items: {
       energy: {
         title: 'Energy & oil and gas',
@@ -478,14 +497,16 @@ const en: Dictionary = {
       'Five steps to a precise product recommendation, consumption estimate and budget figure. Everything is saved in your account.',
     step_1: 'Object type',
     step_2: 'Structure type',
-    step_3: 'Area',
-    step_4: 'Fire rating',
+    step_3: 'Fire rating',
+    step_4: 'Area & conditions',
     step_5: 'Get a calculation and quote',
     cta: 'Open the configurator',
-    step_label: 'Step 4 of 5',
-    question: 'What fire-resistance rating does the project require?',
-    back: '← Back',
-    next: 'Next → calculation'
+    nav_back: 'Back',
+    nav_next: 'Next',
+    area_label: 'Floor area, m²',
+    conditions_label: 'Operating conditions',
+    estimate: 'Estimated budget',
+    start: 'Which object are we starting with?'
   },
   projects: {
     eyebrow: 'Projects delivered',
@@ -508,8 +529,14 @@ const en: Dictionary = {
     m1: 'regions of Russia',
     m2: 'projects delivered',
     m3: 'industries',
-    cta: 'Open the interactive map →',
-    badge: '120 sites in Moscow and the region'
+    cta: 'Browse all projects',
+    badge: '120 sites in Moscow and the region',
+    districts_title: 'Projects by federal district',
+    districts_note: 'updated in 2026',
+    districts_footer: 'Coverage: 8 / 8 districts · 80 regions',
+    districts_all: 'All projects',
+    districts_hint: 'Hover a district to see details',
+    objects_unit: 'projects'
   },
   clients: {
     title: 'Trusted by',
@@ -531,6 +558,7 @@ const en: Dictionary = {
   },
   news: {
     title: 'Expert insights',
+    heading: 'Sharing our fire-protection expertise',
     subtitle: 'Market analysis, regulation breakdowns, case studies',
     view_all: 'All articles',
     read: 'Read article',

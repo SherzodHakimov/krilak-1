@@ -4,7 +4,7 @@
       <a [routerLink]="'/news' | loc" class="text-sm text-brand-leaf font-semibold hover:gap-2 inline-flex items-center gap-1" data-reveal>← {{ 'news.back' | t }}</a>
       <div class="mt-6 flex items-center gap-3" data-reveal>
         <span class="pill-{{ a.accent }}">{{ a.category }}</span>
-        <time class="text-sm text-brand-ink/50">{{ a.date }}</time>
+        <time class="text-sm text-brand-ink/50">{{ a.date | dmy }}</time>
       </div>
       <h1 class="mt-4 text-display-md text-balance" data-reveal>{{ a.title }}</h1>
       <p class="mt-5 text-lg text-brand-ink/70" data-reveal>{{ a.excerpt }}</p>

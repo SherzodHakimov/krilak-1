@@ -11,30 +11,33 @@
     <div class="grid lg:grid-cols-12 gap-12 items-center">
       <div class="lg:col-span-7 space-y-8" data-reveal>
         <div class="flex flex-wrap items-center gap-3">
-          <span class="pill-on-dark">
+          <span class="pill-on-dark px-[0.9rem] py-[0.3rem]">
             <span class="w-1.5 h-1.5 rounded-full bg-brand-leaf"></span>
             <span>{{ 'hero.eyebrow' | t }}</span>
           </span>
-          <span class="pill-on-dark">
+          <span class="pill-on-dark px-[0.9rem] py-[0.3rem]">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
             <span>ГОСТ Р · ISO 9001 · ЕАЭС</span>
           </span>
         </div>
-        <h1 class="text-display-xl text-white text-balance">{{ 'hero.title' | t }}</h1>
+        <h1 class="text-display-lg text-white text-balance">
+          <span class="block text-[1.08em]">{{ 'hero.title_a' | t }}</span>
+          <span class="block text-[0.98em]">{{ 'hero.title_b' | t }}</span>
+          <span class="block text-[1.08em]">{{ 'hero.title_c' | t }}</span>
+        </h1>
         <p class="text-lg lg:text-xl text-white/70 max-w-2xl text-pretty">{{ 'hero.subtitle' | t }}</p>
-        <div class="flex flex-wrap items-center gap-3 pt-2">
+        <div class="inline-grid grid-cols-1 gap-3 pt-2">
           <a [routerLink]="'/configurator' | loc" class="btn-primary !text-base !py-4 !px-7">
             <span>{{ 'hero.cta_primary' | t }}</span><span>→</span>
           </a>
-          <a href="#cta" class="btn-on-dark !text-base !py-4 !px-7">{{ 'hero.cta_secondary' | t }}</a>
+          <a href="#cta" class="btn-on-dark !text-base !py-4 !px-7 hover:-translate-y-0.5 hover:shadow-card-hover">{{ 'hero.cta_secondary' | t }}</a>
         </div>
       </div>
 
       <div class="lg:col-span-5" data-reveal data-reveal-delay="150">
         <div class="relative">
           <div class="bg-white/[0.04] backdrop-blur-xl border border-white/10 rounded-3xl p-7 shadow-card-hover">
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-xs text-white/50 uppercase tracking-wider">{{ 'hero.live' | t }}</span>
+            <div class="flex items-center justify-end mb-6">
               <span class="flex items-center gap-1.5 text-xs text-emerald-400">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span>{{ 'hero.status_live' | t }}</span>
@@ -112,25 +115,26 @@
 <!-- ========== ROLE STRIP ========== -->
 <section class="section-tight bg-brand-cloud">
   <div class="container-x">
-    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
-      <div data-reveal>
-        <span class="eyebrow">{{ 'roles.eyebrow' | t }}</span>
-        <h2 class="mt-3 text-display-md text-brand-graphite text-balance">{{ 'roles.title' | t }}</h2>
-      </div>
-      <p class="text-sm text-brand-ink/70 max-w-md" data-reveal>{{ 'roles.intro' | t }}</p>
+    <div class="mb-10" data-reveal>
+      <span class="eyebrow">{{ 'roles.eyebrow' | t }}</span>
+      <h2 class="mt-3 text-display-md text-brand-graphite text-balance">{{ 'roles.title' | t }}</h2>
     </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
       @for (role of roles; track role.key; let i = $index) {
-        <a [routerLink]="role.link | loc" class="card-bordered p-6 group" data-reveal [attr.data-reveal-delay]="i * 80">
-          <div class="w-12 h-12 rounded-xl bg-brand-graphite text-brand-amber grid place-items-center mb-5 group-hover:bg-brand-leaf transition-colors">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path [attr.d]="role.icon" /></svg>
-          </div>
-          <h3 class="font-display font-semibold text-lg">{{ 'roles.' + role.key | t }}</h3>
+        <a [routerLink]="role.link | loc" class="card-bordered p-7 group flex flex-col" data-reveal [attr.data-reveal-delay]="i * 80">
+          <span class="w-12 h-12 rounded-xl bg-brand-graphite/90 text-white group-hover:bg-brand-spring group-hover:text-brand-graphite/70 transition-colors grid place-items-center mb-5">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="role.icon" /></svg>
+          </span>
+          <h3 class="font-display font-bold text-xl group-hover:text-brand-leaf transition-colors">{{ 'roles.' + role.key | t }}</h3>
           <p class="text-sm text-brand-ink/60 mt-2">{{ 'roles.' + role.key + '_hint' | t }}</p>
-          <span class="link-arrow mt-5 text-sm">{{ 'roles.' + role.key + '_cta' | t }}</span>
+          <span class="mt-auto pt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-leaf">
+            {{ 'roles.' + role.key + '_cta' | t }}
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </span>
         </a>
       }
     </div>
+    <p class="mt-8 text-sm text-brand-ink/60 max-w-3xl" data-reveal>{{ 'roles.intro' | t }}</p>
   </div>
 </section>
 
@@ -143,40 +147,42 @@
         <h2 class="mt-3 text-display-lg text-balance max-w-2xl">{{ 'categories.title' | t }}</h2>
         <p class="mt-5 text-lg text-brand-ink/70 max-w-2xl">{{ 'categories.subtitle' | t }}</p>
       </div>
-      <a [routerLink]="'/catalog' | loc" class="btn-ghost shrink-0">{{ 'categories.view_all' | t }}</a>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
       @for (cat of categories(); track cat.slug; let i = $index) {
-        @if (i === 0) {
-          <a [routerLink]="'/catalog/category/' + cat.slug | loc" class="group relative bg-brand-graphite text-white rounded-2xl p-7 overflow-hidden hover-rise" data-reveal>
-            <div class="absolute inset-0 bg-leaf-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div class="relative">
-              <div class="text-5xl mb-6 text-brand-leaf group-hover:text-white transition-colors">{{ cat.icon }}</div>
-              <h3 class="font-display font-bold text-xl">{{ cat.name }}</h3>
-              <p class="text-sm text-white/60 group-hover:text-white/80 mt-2">{{ cat.description }}</p>
-              <div class="mt-8 flex items-center gap-2 text-xs uppercase tracking-wider text-white/40 group-hover:text-white">
-                <span>{{ 'categories.look' | t }}</span><span class="group-hover:translate-x-1 transition-transform">→</span>
-              </div>
-            </div>
-          </a>
-        } @else {
-          <a [routerLink]="'/catalog/category/' + cat.slug | loc" class="card-bordered p-7 group" data-reveal [attr.data-reveal-delay]="(i % 4) * 60">
-            <div class="text-5xl mb-6 text-brand-leaf">{{ cat.icon }}</div>
-            <h3 class="font-display font-bold text-xl">{{ cat.name }}</h3>
-            <p class="text-sm text-brand-ink/60 mt-2">{{ cat.description }}</p>
-            <div class="mt-8 flex items-center gap-2 text-xs uppercase tracking-wider text-brand-ink/40 group-hover:text-brand-leaf">
-              <span>{{ 'categories.look' | t }}</span><span class="group-hover:translate-x-1 transition-transform">→</span>
-            </div>
-          </a>
-        }
+        <a [routerLink]="'/catalog/category/' + cat.slug | loc" class="card-bordered p-7 group flex flex-col" data-reveal [attr.data-reveal-delay]="(i % 3) * 60">
+          <span class="w-12 h-12 rounded-xl bg-brand-spring text-brand-leaf grid place-items-center mb-5">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="categoryIcon(cat.slug)" /></svg>
+          </span>
+          <h3 class="font-display font-bold text-xl group-hover:text-brand-leaf transition-colors">{{ cat.name }}</h3>
+          <p class="text-sm text-brand-ink/60 mt-2">{{ cat.description }}</p>
+          <span class="mt-auto pt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-leaf">
+            {{ 'categories.look' | t }}
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </span>
+        </a>
       }
+      <!-- Карточка-CTA: весь каталог -->
+      <a [routerLink]="'/catalog' | loc" class="group relative bg-brand-graphite text-white rounded-2xl p-7 overflow-hidden hover-rise flex flex-col justify-between" data-reveal data-reveal-delay="180">
+        <div class="absolute inset-0 bg-leaf-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <span class="relative w-12 h-12 rounded-xl bg-white/10 grid place-items-center mb-5">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7v7H4zM13 4h7v7h-7M4 13h7v7H4zM13 13h7v7h-7" /></svg>
+        </span>
+        <div class="relative mt-auto">
+          <h3 class="font-display font-bold text-xl">{{ 'categories.all' | t }}</h3>
+          <span class="mt-3 inline-flex items-center gap-2 text-sm font-semibold">
+            {{ 'categories.look' | t }}
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
 
 <!-- ========== SOLUTIONS BY INDUSTRY ========== -->
-<section class="section bg-brand-cloud">
+<section class="section bg-brand-cloud" data-solutions-section>
   <div class="container-x">
     <div class="text-center max-w-3xl mx-auto mb-14" data-reveal>
       <span class="eyebrow">{{ 'solutions.eyebrow' | t }}</span>
@@ -186,14 +192,33 @@
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
       @for (sol of solutions; track sol.key; let i = $index) {
         <a [routerLink]="'/solutions' | loc" class="group bg-white rounded-2xl overflow-hidden hover-rise shadow-card" data-reveal [attr.data-reveal-delay]="(i % 3) * 80">
-          <div class="h-44 bg-gradient-to-br {{ sol.gradient }} relative">
+          <div class="h-44 relative overflow-hidden bg-white">
+            @if (showPhoto()) {
+              <img
+                [src]="sol.photo"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="352"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            }
+            @if (showGradient()) {
+              <div class="absolute inset-0 bg-gradient-to-br {{ sol.gradient }} opacity-80 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-60"></div>
+            }
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
             <div class="absolute inset-0 grid-lines opacity-20"></div>
             <div class="absolute top-5 left-5 text-white"><span class="pill-on-dark">{{ sol.badge }}</span></div>
-            <div class="absolute bottom-5 right-5 text-white/30 text-7xl font-display font-bold leading-none">{{ sol.n }}</div>
+            <div class="absolute bottom-5 right-5 text-white/40 text-7xl font-display font-bold leading-none">{{ sol.n }}</div>
           </div>
           <div class="p-7">
-            <h3 class="font-display font-bold text-xl">{{ 'solutions.items.' + sol.key + '.title' | t }}</h3>
+            <h3 class="font-display font-bold text-xl group-hover:text-brand-leaf transition-colors">{{ 'solutions.items.' + sol.key + '.title' | t }}</h3>
             <p class="text-sm text-brand-ink/60 mt-2">{{ 'solutions.items.' + sol.key + '.description' | t }}</p>
+            <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-leaf">
+              {{ 'solutions.more' | t }}
+              <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+            </span>
           </div>
         </a>
       }
@@ -212,32 +237,58 @@
         <ol class="mt-8 space-y-3 text-sm">
           @for (step of ['step_1', 'step_2', 'step_3', 'step_4', 'step_5']; track step; let i = $index) {
             <li class="flex items-center gap-3">
-              <span class="w-7 h-7 rounded-full grid place-items-center text-xs font-bold {{ i === 4 ? 'bg-brand-amber text-brand-graphite' : 'bg-brand-graphite text-white' }}">{{ i + 1 }}</span>
-              <span>{{ 'configurator_block.' + step | t }}</span>
+              <span class="w-7 h-7 rounded-full grid place-items-center text-xs font-bold {{ i === 0 ? 'bg-brand-leaf text-white' : i === 4 ? 'bg-brand-amber text-brand-graphite' : 'bg-brand-graphite text-white' }}">{{ i + 1 }}</span>
+              <span [class.font-semibold]="i === 0">{{ 'configurator_block.' + step | t }}</span>
             </li>
           }
         </ol>
-        <a [routerLink]="'/configurator' | loc" class="btn-primary mt-10 !text-base !py-4 !px-7">{{ 'configurator_block.cta' | t }}</a>
       </div>
       <div class="lg:col-span-7" data-reveal data-reveal-delay="120">
         <div class="relative">
           <div class="absolute -inset-2 bg-leaf-gradient blur-2xl opacity-15 rounded-3xl"></div>
           <div class="relative bg-white rounded-3xl border border-brand-fog shadow-card-hover p-8">
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-xs uppercase tracking-wider text-brand-ink/50">{{ 'configurator_block.step_label' | t }}</span>
-              <span class="text-xs text-brand-leaf font-semibold">80%</span>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs uppercase tracking-wider text-brand-ink/50">{{ 'configurator_block.step_1' | t }} · 1 / 5</span>
+              <span class="text-xs text-brand-leaf font-semibold">20%</span>
             </div>
-            <div class="h-1 rounded-full bg-brand-cloud mb-8"><div class="h-full w-4/5 bg-leaf-gradient rounded-full"></div></div>
-            <h3 class="font-display font-bold text-2xl mb-2">{{ 'configurator_block.step_4' | t }}</h3>
-            <p class="text-sm text-brand-ink/60 mb-7">{{ 'configurator_block.question' | t }}</p>
-            <div class="grid grid-cols-4 gap-2 mb-8">
-              @for (r of ['R15', 'R30', 'R45', 'R60', 'R90', 'R120', 'R180', 'R240']; track r) {
-                <button type="button" class="px-3 py-3 rounded-xl text-sm font-semibold {{ r === 'R60' ? 'bg-brand-leaf text-white' : 'border border-brand-fog hover:border-brand-leaf hover:bg-brand-leaf/5' }}">{{ r }}</button>
+            <div class="h-1 rounded-full bg-brand-cloud mb-7"><div class="h-full w-1/5 bg-leaf-gradient rounded-full"></div></div>
+            <h3 class="font-display font-bold text-2xl mb-5">{{ 'configurator_block.start' | t }}</h3>
+            <div class="grid sm:grid-cols-2 gap-3 mb-7">
+              @for (o of objectTypes; track o.id) {
+                <button
+                  type="button"
+                  (click)="selectedObject.set(o.id)"
+                  class="relative text-left p-5 rounded-2xl border transition-all duration-200"
+                  [class]="selectedObject() === o.id ? 'border-brand-leaf bg-brand-leaf/5' : 'border-brand-fog hover:border-brand-graphite/30 hover:-translate-y-0.5 hover:shadow-card'"
+                >
+                  @if (selectedObject() === o.id) {
+                    <span class="absolute top-3 right-3 w-5 h-5 rounded-full bg-brand-leaf grid place-items-center shadow">
+                      <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10" /></svg>
+                    </span>
+                  }
+                  <span
+                    class="w-11 h-11 rounded-xl grid place-items-center mb-3.5 transition-colors"
+                    [class]="selectedObject() === o.id ? 'bg-brand-leaf text-white' : 'bg-brand-spring text-brand-leaf'"
+                  >
+                    <svg class="w-[22px] h-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="objectIcon(o.id)" /></svg>
+                  </span>
+                  <span class="block font-display font-semibold text-sm">{{ o.name }}</span>
+                  <span class="block text-xs text-brand-ink/55 mt-1 leading-snug">{{ o.description }}</span>
+                </button>
               }
             </div>
-            <div class="flex items-center justify-between pt-6 border-t border-brand-fog">
-              <button type="button" class="btn-ghost !py-2.5 !px-4 text-xs">{{ 'configurator_block.back' | t }}</button>
-              <a [routerLink]="'/configurator' | loc" class="btn-primary !py-2.5 !px-5 text-xs">{{ 'configurator_block.next' | t }}</a>
+            <div class="flex justify-end pt-6 border-t border-brand-fog">
+              <a
+                [routerLink]="selectedObject() ? ('/configurator' | loc) : null"
+                [queryParams]="{ object: selectedObject() }"
+                class="btn-primary !py-2.5 !px-6 text-sm group transition-all duration-200"
+                [class.pointer-events-none]="!selectedObject()"
+                [class.opacity-40]="!selectedObject()"
+                [attr.aria-disabled]="!selectedObject()"
+              >
+                <span>{{ 'configurator_block.nav_next' | t }}</span>
+                <span class="group-hover:translate-x-1 transition-transform">→</span>
+              </a>
             </div>
           </div>
         </div>
@@ -247,7 +298,7 @@
 </section>
 
 <!-- ========== PROJECTS ========== -->
-<section class="section bg-brand-graphite text-white relative overflow-hidden">
+<section class="section bg-brand-graphite text-white relative overflow-hidden" data-projects-section>
   <div class="absolute inset-0 grid-lines opacity-[0.04] pointer-events-none"></div>
   <div class="container-x relative">
     <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
@@ -257,25 +308,40 @@
         <p class="mt-4 text-lg text-white/70 max-w-lg">{{ 'projects.subtitle' | t }}</p>
       </div>
       <div class="flex gap-3">
-        <a [routerLink]="'/projects' | loc" class="btn-on-dark">{{ 'projects.view_map' | t }}</a>
-        <a [routerLink]="'/projects' | loc" class="btn-amber">{{ 'projects.view_all' | t }}</a>
+        <a [routerLink]="'/projects' | loc" class="btn-on-dark hover:-translate-y-0.5 hover:shadow-card-hover">{{ 'projects.view_map' | t }}</a>
+        <a [routerLink]="'/projects' | loc" class="btn-amber hover:-translate-y-0.5 hover:shadow-card-hover">{{ 'projects.view_all' | t }}</a>
       </div>
     </div>
     <div class="grid md:grid-cols-3 gap-5">
       @for (p of projects(); track p.slug; let i = $index) {
-        <article class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover-rise" data-reveal [attr.data-reveal-delay]="i * 80">
-          <div class="h-56 bg-gradient-to-br {{ p.color }} relative">
+        <article class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover-rise flex flex-col" data-reveal [attr.data-reveal-delay]="i * 80">
+          <div class="h-56 relative overflow-hidden bg-white">
+            @if (projShowPhoto() && p.photo) {
+              <img
+                [src]="p.photo"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="448"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              />
+            }
+            @if (projShowGradient()) {
+              <div class="absolute inset-0 bg-gradient-to-br {{ p.color }} opacity-80 mix-blend-multiply"></div>
+            }
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
             <div class="absolute inset-0 grid-lines opacity-20"></div>
             <span class="absolute top-4 left-4 pill-on-dark">{{ p.year }}</span>
             <span class="absolute top-4 right-4 pill bg-brand-leaf text-white">{{ p.rating }}</span>
           </div>
-          <div class="p-6">
+          <div class="p-6 flex-1 flex flex-col">
             <div class="flex items-center gap-2 text-xs text-white/50 mb-3">
               <span>{{ p.industryLabel }}</span><span>·</span><span>{{ p.city }}</span>
             </div>
             <h3 class="font-display font-bold text-xl text-white">{{ p.name }}</h3>
             <p class="text-sm text-white/60 mt-2 line-clamp-3">{{ p.summary }}</p>
-            <div class="flex items-center gap-4 mt-5 pt-5 border-t border-white/10 text-xs text-white/50">
+            <div class="flex items-center gap-4 mt-auto pt-5 border-t border-white/10 text-xs text-white/50">
               <span>{{ 'projects.area' | t }}: {{ p.area }} м²</span>
               <span>{{ p.rating }}</span>
             </div>
@@ -299,46 +365,14 @@
           <div class="flex items-baseline gap-3"><span class="metric-number text-brand-leaf text-3xl">7K+</span><span class="text-sm text-brand-ink/60">{{ 'map.m2' | t }}</span></div>
           <div class="flex items-baseline gap-3"><span class="metric-number text-brand-leaf text-3xl">12</span><span class="text-sm text-brand-ink/60">{{ 'map.m3' | t }}</span></div>
         </div>
-        <a [routerLink]="'/projects' | loc" class="btn-secondary mt-10">{{ 'map.cta' | t }}</a>
+        <a [routerLink]="'/projects' | loc" class="btn-secondary mt-10 group hover:-translate-y-0.5 hover:shadow-card-hover">
+          <span>{{ 'map.cta' | t }}</span>
+          <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+        </a>
       </div>
       <div class="lg:col-span-8 order-1 lg:order-2" data-reveal data-reveal-delay="120">
-        <a [routerLink]="'/projects' | loc" class="block relative aspect-[4/3] lg:aspect-[16/10] rounded-3xl overflow-hidden bg-brand-cloud border border-brand-fog hover-rise">
-          <svg viewBox="0 0 800 500" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
-            <defs>
-              <radialGradient id="g1" cx="50%" cy="50%"><stop offset="0%" stop-color="#5DAA2F" stop-opacity="0.6" /><stop offset="100%" stop-color="#5DAA2F" stop-opacity="0" /></radialGradient>
-              <pattern id="dotmap" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
-                <circle cx="2" cy="2" r="1" fill="#0F1620" opacity="0.15" />
-              </pattern>
-            </defs>
-            <rect width="800" height="500" fill="url(#dotmap)" />
-            <path d="M70 280 L120 220 L180 230 L240 210 L300 220 L350 200 L420 215 L500 195 L580 210 L650 200 L720 220 L740 280 L720 320 L680 340 L620 330 L560 350 L500 330 L440 340 L380 320 L320 340 L260 320 L200 340 L140 320 L90 310 Z" fill="#1B2330" opacity="0.92" />
-            <g>
-              <circle cx="180" cy="270" r="6" fill="#5DAA2F" /><circle cx="180" cy="270" r="14" fill="url(#g1)" />
-              <circle cx="250" cy="290" r="4" fill="#F3A33A" />
-              <circle cx="320" cy="275" r="5" fill="#5DAA2F" /><circle cx="320" cy="275" r="12" fill="url(#g1)" />
-              <circle cx="400" cy="285" r="4" fill="#F3A33A" />
-              <circle cx="470" cy="260" r="6" fill="#5DAA2F" /><circle cx="470" cy="260" r="14" fill="url(#g1)" />
-              <circle cx="540" cy="280" r="4" fill="#F3A33A" />
-              <circle cx="600" cy="275" r="5" fill="#5DAA2F" />
-              <circle cx="670" cy="265" r="4" fill="#F3A33A" />
-              <circle cx="710" cy="285" r="5" fill="#5DAA2F" />
-              <circle cx="140" cy="295" r="3" fill="#F3A33A" />
-              <circle cx="280" cy="310" r="4" fill="#F3A33A" />
-              <circle cx="360" cy="305" r="3" fill="#F3A33A" />
-              <circle cx="500" cy="305" r="3" fill="#F3A33A" />
-            </g>
-            <g font-family="Inter" font-size="11" fill="#0F1620">
-              <text x="195" y="265">Москва</text>
-              <text x="335" y="270">Казань</text>
-              <text x="485" y="255">Екатеринбург</text>
-              <text x="720" y="285">Владивосток</text>
-            </g>
-          </svg>
-          <div class="absolute bottom-5 right-5 bg-white rounded-xl shadow-card-hover px-4 py-3 flex items-center gap-3">
-            <span class="flex w-2.5 h-2.5 rounded-full bg-brand-leaf animate-pulse"></span>
-            <span class="text-xs font-semibold">{{ 'map.badge' | t }}</span>
-          </div>
-        </a>
+        <!-- Интерактивная карта РФ по федеральным округам -->
+        <app-geo-map />
       </div>
     </div>
   </div>
@@ -350,7 +384,7 @@
     <div class="text-center mb-10" data-reveal>
       <h3 class="text-sm uppercase tracking-[0.2em] text-brand-ink/60 font-semibold">{{ 'clients.title' | t }}</h3>
     </div>
-    <div class="overflow-hidden mask-fade-r">
+    <div class="overflow-hidden mask-fade-x">
       <div class="flex items-center gap-12 animate-marquee whitespace-nowrap w-max">
         @for (c of clients; track $index) {
           <div class="text-2xl font-display font-bold text-brand-ink/40 hover:text-brand-graphite transition-colors">{{ c }}</div>
@@ -373,20 +407,27 @@
     </div>
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
       @for (a of awards; track a.key; let idx = $index) {
-        <div class="card-bordered aspect-[3/4] p-4 flex flex-col justify-between" data-reveal [attr.data-reveal-delay]="idx * 60">
-          <div class="text-xs uppercase tracking-wider text-brand-leaf font-semibold">{{ a.y }}</div>
-          <div>
-            <div class="text-3xl mb-2">{{ a.i }}</div>
-            <div class="text-sm font-semibold leading-tight">{{ 'awards.items.' + a.key + '.title' | t }}</div>
-            <div class="text-xs text-brand-ink/60 mt-1">{{ 'awards.items.' + a.key + '.sub' | t }}</div>
+        <!-- Карточка награды: крупная полупрозрачная цифра года + линейная иконка -->
+        <div class="card-bordered aspect-[3/4] p-5 relative overflow-hidden flex flex-col justify-between" data-reveal [attr.data-reveal-delay]="idx * 60">
+          <div class="flex items-start justify-between gap-2">
+            <svg class="w-7 h-7 text-brand-leaf shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="a.icon" /></svg>
+            <span class="text-[10px] uppercase tracking-wider text-brand-ink/45 font-semibold text-right">{{ 'awards.items.' + a.key + '.sub' | t }}</span>
+          </div>
+          <div class="mt-auto">
+            <div class="font-display font-bold text-4xl text-brand-graphite/15 leading-none">{{ a.y }}</div>
+            <div class="text-sm font-semibold leading-tight text-brand-graphite mt-2">{{ 'awards.items.' + a.key + '.title' | t }}</div>
           </div>
         </div>
       }
-      <a [routerLink]="'/awards' | loc" class="bg-brand-graphite text-white aspect-[3/4] p-4 flex flex-col justify-between rounded-2xl hover:bg-brand-ink transition-colors group" data-reveal data-reveal-delay="300">
-        <div class="text-xs uppercase tracking-wider text-brand-amber font-semibold">{{ 'awards.all' | t }}</div>
-        <div>
+      <a [routerLink]="'/awards' | loc" class="group relative bg-brand-graphite text-white aspect-[3/4] p-4 flex flex-col justify-between rounded-2xl overflow-hidden hover-rise" data-reveal data-reveal-delay="300">
+        <div class="absolute inset-0 bg-leaf-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative text-xs uppercase tracking-wider text-brand-amber group-hover:text-white font-semibold transition-colors">{{ 'awards.all' | t }}</div>
+        <div class="relative">
           <div class="text-4xl font-display font-bold">55+</div>
-          <div class="text-sm font-semibold mt-1 group-hover:translate-x-1 transition-transform">{{ 'awards.archive' | t }} →</div>
+          <span class="text-sm font-semibold mt-1 inline-flex items-center gap-1.5">
+            {{ 'awards.archive' | t }}
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </span>
         </div>
       </a>
     </div>
@@ -394,26 +435,45 @@
 </section>
 
 <!-- ========== NEWS ========== -->
-<section class="section bg-brand-cloud">
+<section class="section bg-brand-cloud" data-news-section>
   <div class="container-x">
     <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
       <div data-reveal>
         <span class="eyebrow">{{ 'news.title' | t }}</span>
-        <h2 class="mt-3 text-display-md text-balance">{{ 'news.title' | t }}</h2>
+        <h2 class="mt-3 text-display-md text-balance">{{ 'news.heading' | t }}</h2>
         <p class="mt-3 text-brand-ink/70 max-w-xl">{{ 'news.subtitle' | t }}</p>
       </div>
-      <a [routerLink]="'/news' | loc" class="btn-ghost shrink-0">{{ 'news.view_all' | t }}</a>
+      <a [routerLink]="'/news' | loc" class="btn-secondary shrink-0 group hover:-translate-y-0.5 hover:shadow-card-hover">
+        <span>{{ 'news.view_all' | t }}</span>
+        <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+      </a>
     </div>
     <div class="grid md:grid-cols-3 gap-6">
       @for (a of latestNews(); track a.slug; let i = $index) {
         <a [routerLink]="'/news/' + a.slug | loc" class="card-bordered overflow-hidden group block" data-reveal [attr.data-reveal-delay]="i * 80">
-          <div class="h-44 bg-gradient-to-br relative {{ a.accent === 'leaf' ? 'from-brand-leaf/20 to-brand-amber/20' : a.accent === 'steel' ? 'from-brand-steel/20 to-brand-graphite/20' : 'from-emerald-500/20 to-brand-graphite/20' }}">
-            <span class="absolute top-4 left-4 pill-{{ a.accent }}">{{ a.category }}</span>
+          <div class="h-44 relative overflow-hidden bg-white">
+            @if (newsShowPhoto() && a.photo) {
+              <img
+                [src]="a.photo"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="352"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            }
+            @if (newsShowGradient()) {
+              <div class="absolute inset-0 bg-gradient-to-br mix-blend-multiply {{ a.accent === 'leaf' ? 'from-brand-leaf/40 to-brand-amber/40' : a.accent === 'steel' ? 'from-brand-steel/40 to-brand-graphite/40' : 'from-emerald-500/40 to-brand-graphite/40' }}"></div>
+            }
+            <span class="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/35 to-transparent pointer-events-none"></span>
+            <span class="absolute top-4 left-4 pill opacity-90 shadow-md ring-1 ring-black/10 {{ a.accent === 'leaf' ? 'bg-brand-leaf text-white' : a.accent === 'steel' ? 'bg-brand-steel text-white' : 'bg-brand-amber text-brand-graphite' }}">{{ a.category }}</span>
           </div>
           <div class="p-6">
-            <time class="text-xs text-brand-ink/50 font-medium">{{ a.date }}</time>
+            <time class="text-xs text-brand-ink/50 font-medium">{{ a.date | dmy }}</time>
             <h3 class="font-display font-bold text-lg mt-2 group-hover:text-brand-leaf transition-colors">{{ a.title }}</h3>
             <p class="text-sm text-brand-ink/60 mt-3 line-clamp-2">{{ a.excerpt }}</p>
+            <span class="link-arrow mt-4 text-sm">{{ 'news.read' | t }}</span>
           </div>
         </a>
       }
@@ -444,3 +504,138 @@
     </div>
   </div>
 </section>
+
+<!-- ВРЕМЕННО: отладочная панель карточек блока «Решения по отраслям» -->
+@if (solutionsInView()) {
+  <div class="fixed bottom-5 left-5 z-[70] w-60 rounded-2xl border border-brand-fog bg-white/95 backdrop-blur p-4 shadow-card-hover text-brand-graphite">
+    <div class="mb-3 text-[11px] font-semibold uppercase tracking-wider text-brand-ink/60">
+      Карточки · debug
+    </div>
+    <button
+      type="button"
+      (click)="showGradient.set(!showGradient())"
+      class="flex w-full items-center justify-between py-2"
+      [attr.aria-pressed]="showGradient()"
+    >
+      <span class="text-sm font-medium">Градиент</span>
+      <span
+        class="relative h-6 w-10 rounded-full transition-colors duration-200"
+        [class.bg-brand-leaf]="showGradient()"
+        [class.bg-brand-fog]="!showGradient()"
+      >
+        <span
+          class="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200"
+          [class.translate-x-4]="showGradient()"
+        ></span>
+      </span>
+    </button>
+    <button
+      type="button"
+      (click)="showPhoto.set(!showPhoto())"
+      class="flex w-full items-center justify-between py-2"
+      [attr.aria-pressed]="showPhoto()"
+    >
+      <span class="text-sm font-medium">Фото</span>
+      <span
+        class="relative h-6 w-10 rounded-full transition-colors duration-200"
+        [class.bg-brand-leaf]="showPhoto()"
+        [class.bg-brand-fog]="!showPhoto()"
+      >
+        <span
+          class="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200"
+          [class.translate-x-4]="showPhoto()"
+        ></span>
+      </span>
+    </button>
+  </div>
+}
+
+<!-- ВРЕМЕННО: отладочная панель карточек блока «Реализованные объекты» -->
+@if (projInView()) {
+  <div class="fixed bottom-5 left-5 z-[70] w-60 rounded-2xl border border-brand-fog bg-white/95 backdrop-blur p-4 shadow-card-hover text-brand-graphite">
+    <div class="mb-3 text-[11px] font-semibold uppercase tracking-wider text-brand-ink/60">
+      Объекты · debug
+    </div>
+    <button
+      type="button"
+      (click)="projShowGradient.set(!projShowGradient())"
+      class="flex w-full items-center justify-between py-2"
+      [attr.aria-pressed]="projShowGradient()"
+    >
+      <span class="text-sm font-medium">Градиент</span>
+      <span
+        class="relative h-6 w-10 rounded-full transition-colors duration-200"
+        [class.bg-brand-leaf]="projShowGradient()"
+        [class.bg-brand-fog]="!projShowGradient()"
+      >
+        <span
+          class="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200"
+          [class.translate-x-4]="projShowGradient()"
+        ></span>
+      </span>
+    </button>
+    <button
+      type="button"
+      (click)="projShowPhoto.set(!projShowPhoto())"
+      class="flex w-full items-center justify-between py-2"
+      [attr.aria-pressed]="projShowPhoto()"
+    >
+      <span class="text-sm font-medium">Фото</span>
+      <span
+        class="relative h-6 w-10 rounded-full transition-colors duration-200"
+        [class.bg-brand-leaf]="projShowPhoto()"
+        [class.bg-brand-fog]="!projShowPhoto()"
+      >
+        <span
+          class="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200"
+          [class.translate-x-4]="projShowPhoto()"
+        ></span>
+      </span>
+    </button>
+  </div>
+}
+
+<!-- ВРЕМЕННО: отладочная панель карточек блока «Экспертный блог» -->
+@if (newsInView()) {
+  <div class="fixed bottom-5 left-5 z-[70] w-60 rounded-2xl border border-brand-fog bg-white/95 backdrop-blur p-4 shadow-card-hover text-brand-graphite">
+    <div class="mb-3 text-[11px] font-semibold uppercase tracking-wider text-brand-ink/60">
+      Блог · debug
+    </div>
+    <button
+      type="button"
+      (click)="newsShowGradient.set(!newsShowGradient())"
+      class="flex w-full items-center justify-between py-2"
+      [attr.aria-pressed]="newsShowGradient()"
+    >
+      <span class="text-sm font-medium">Градиент</span>
+      <span
+        class="relative h-6 w-10 rounded-full transition-colors duration-200"
+        [class.bg-brand-leaf]="newsShowGradient()"
+        [class.bg-brand-fog]="!newsShowGradient()"
+      >
+        <span
+          class="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200"
+          [class.translate-x-4]="newsShowGradient()"
+        ></span>
+      </span>
+    </button>
+    <button
+      type="button"
+      (click)="newsShowPhoto.set(!newsShowPhoto())"
+      class="flex w-full items-center justify-between py-2"
+      [attr.aria-pressed]="newsShowPhoto()"
+    >
+      <span class="text-sm font-medium">Фото</span>
+      <span
+        class="relative h-6 w-10 rounded-full transition-colors duration-200"
+        [class.bg-brand-leaf]="newsShowPhoto()"
+        [class.bg-brand-fog]="!newsShowPhoto()"
+      >
+        <span
+          class="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200"
+          [class.translate-x-4]="newsShowPhoto()"
+        ></span>
+      </span>
+    </button>
+  </div>
+}

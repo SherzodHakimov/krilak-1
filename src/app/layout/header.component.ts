@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, afterNextRender, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  afterNextRender,
+  computed,
+  inject,
+  signal
+} from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs/operators';
@@ -23,6 +30,8 @@ export class HeaderComponent {
   private readonly i18n = inject(TranslationService);
 
   readonly locales = LOCALES;
+  /** Буквы названия бренда — раскладываются по ширине (flex), чтобы тянуться под префикс на любом языке. */
+  readonly brandNameChars = computed(() => [...this.i18n.translate('brand.name')]);
   readonly scrolled = signal(false);
   readonly hidden = signal(false);
   readonly progress = signal(0);
@@ -42,7 +51,7 @@ export class HeaderComponent {
     { path: '/catalog/category/compounds', icon: '▣', key: 'categories.items.compounds' },
     { path: '/catalog/category/doors', icon: '▥', key: 'categories.items.doors' },
     { path: '/catalog/category/panels', icon: '▤', key: 'categories.items.panels' },
-    { path: '/catalog/category/alarms', icon: '◉', key: 'categories.items.alarms' }
+    { path: '/catalog/category/couplings', icon: '◎', key: 'categories.items.couplings' }
   ];
 
   constructor() {
