@@ -55,6 +55,7 @@
     {
       "sku": "KR-S-01",
       "slug": "krilak-super",
+      "images": ["/images/products/sostav-super.jpg"],
       "category": "compounds",
       "name": "КрилаК-СУПЕР",
       "subtitle": "Огнезащитная краска для металлоконструкций",
@@ -82,6 +83,7 @@
     {
       "sku": "KR-S-02",
       "slug": "krilak-mono",
+      "images": ["/images/products/sostav-mono.jpg"],
       "category": "compounds",
       "name": "КрилаК-МОНО",
       "subtitle": "Огнезащитная штукатурка для бетона",
@@ -105,6 +107,7 @@
     {
       "sku": "KR-S-03",
       "slug": "krilak-kabel",
+      "images": ["/images/products/sostav-kabel.jpg"],
       "category": "compounds",
       "name": "КрилаК-КАБЕЛЬ",
       "subtitle": "Огнезащитный состав для кабельных линий",
@@ -173,6 +176,7 @@
     {
       "sku": "KR-C-01",
       "slug": "krilak-coupling-ei180",
+      "images": ["/images/products/mufta.jpg"],
       "category": "couplings",
       "name": "Муфта КрилаК EI180",
       "subtitle": "Терморасширяющаяся муфта для пластиковых труб",

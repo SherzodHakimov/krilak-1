@@ -26,4 +26,5 @@ export interface Product {
   description: string;
   specs: Record<string, string>;
   documents: ProductDocument[];
+  images: string[];
 }

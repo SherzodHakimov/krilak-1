@@ -28,6 +28,7 @@ interface RawProduct {
   description: string;
   specs?: Record<string, string>;
   documents?: ProductDocument[];
+  images?: string[];
 }
 
 interface RawCatalog {
@@ -103,7 +104,8 @@ export class CatalogService {
       featured: p.featured ?? false,
       description: p.description,
       specs: p.specs ?? {},
-      documents: p.documents ?? []
+      documents: p.documents ?? [],
+      images: p.images ?? []
     };
   }
 }

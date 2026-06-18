@@ -8,7 +8,7 @@
         <div class="hidden sm:block text-6xl text-brand-leaf">{{ cat.icon }}</div>
         <div class="flex-1">
           <h1 class="text-display-lg text-white text-balance">{{ cat.name }}</h1>
-          <p class="text-lg text-white/70 mt-3 max-w-2xl">{{ cat.description }}</p>
+          <p class="text-lg text-white/70 mt-3 lg:whitespace-nowrap">{{ cat.description }}</p>
           <div class="mt-5 flex flex-wrap items-center gap-3 text-sm text-white/60">
             <span>{{ products().length }} {{ 'catalog.products_count' | t }}</span>
             <span class="w-1 h-1 rounded-full bg-white/30"></span>
@@ -43,18 +43,29 @@
       @if (filteredProducts().length) {
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           @for (p of filteredProducts(); track p.sku; let i = $index) {
-            <a [routerLink]="'/catalog/product/' + p.sku | loc" class="card p-6 group block" data-reveal [attr.data-reveal-delay]="(i % 3) * 60">
-              <div class="aspect-square bg-brand-cloud rounded-xl mb-5 flex items-center justify-center text-6xl text-brand-ink/40 group-hover:bg-brand-leaf/5 transition-colors">{{ cat.icon }}</div>
-              <div class="flex flex-wrap gap-1.5 mb-3">
-                @for (r of p.rating.slice(0, 3); track r) {
-                  <span class="pill-leaf">{{ r }}</span>
+            <a [routerLink]="'/catalog/product/' + p.sku | loc" class="card group block overflow-hidden flex flex-col cursor-pointer ring-1 ring-transparent transition-all duration-300 hover:-translate-y-1 hover:ring-brand-leaf/40" data-reveal [attr.data-reveal-delay]="(i % 3) * 60">
+              <div class="relative aspect-[4/3] grid place-items-center overflow-hidden {{ p.images.length ? 'bg-white' : tileTone().bg }}">
+                @if (p.images.length) {
+                  <img [src]="p.images[0]" [attr.alt]="p.name" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-contain p-3 transition-transform duration-500 group-hover:scale-105" />
+                } @else {
+                  <div class="absolute inset-0 grid-lines opacity-50 pointer-events-none"></div>
+                  <svg class="w-16 h-16 {{ tileTone().icon }} transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="catIcon()" /></svg>
+                }
+                @if (p.rating.length) {
+                  <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                    @for (r of p.rating.slice(0, 3); track r) {
+                      <span class="pill bg-white/80 backdrop-blur text-brand-graphite shadow-sm ring-1 ring-black/5">{{ r }}</span>
+                    }
+                  </div>
                 }
               </div>
-              <h3 class="font-display font-bold text-lg">{{ p.name }}</h3>
-              <p class="text-sm text-brand-ink/60 mt-1">{{ p.subtitle }}</p>
-              <div class="mt-5 pt-5 border-t border-brand-fog flex items-center justify-between">
-                <span class="text-xs font-mono text-brand-ink/50">{{ p.sku }}</span>
-                <span class="text-xs font-semibold text-brand-leaf group-hover:translate-x-1 transition-transform">{{ 'catalog.details' | t }}</span>
+              <div class="p-6 flex-1 flex flex-col">
+                <h3 class="font-display font-bold text-lg group-hover:text-brand-leaf transition-colors min-h-[3.5rem]">{{ p.name }}</h3>
+                <p class="text-sm text-brand-ink/60 mt-1 flex-1">{{ p.subtitle }}</p>
+                <div class="mt-5 pt-5 border-t border-brand-fog flex items-center justify-between">
+                  <span class="text-sm font-mono text-brand-ink/50">{{ p.sku }}</span>
+                  <span class="text-sm font-semibold text-brand-leaf inline-flex items-center group-hover:translate-x-1 transition-transform">{{ 'catalog.details' | t }}</span>
+                </div>
               </div>
             </a>
           }

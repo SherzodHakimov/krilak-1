@@ -30,7 +30,7 @@
           <a [routerLink]="'/configurator' | loc" class="btn-primary !text-base !py-4 !px-7">
             <span>{{ 'hero.cta_primary' | t }}</span><span>→</span>
           </a>
-          <a href="#cta" class="btn-on-dark !text-base !py-4 !px-7 hover:-translate-y-0.5 hover:shadow-card-hover">{{ 'hero.cta_secondary' | t }}</a>
+          <a href="#cta" class="btn-on-dark !text-base !py-4 !px-7">{{ 'hero.cta_secondary' | t }}</a>
         </div>
       </div>
 
@@ -364,7 +364,7 @@
           <div class="flex items-baseline gap-3"><span class="metric-number text-brand-leaf text-3xl">7K+</span><span class="text-sm text-brand-ink/60">{{ 'map.m2' | t }}</span></div>
           <div class="flex items-baseline gap-3"><span class="metric-number text-brand-leaf text-3xl">12</span><span class="text-sm text-brand-ink/60">{{ 'map.m3' | t }}</span></div>
         </div>
-        <a [routerLink]="'/projects' | loc" class="btn-secondary mt-10 group hover:-translate-y-0.5 hover:shadow-card-hover">
+        <a [routerLink]="'/projects' | loc" class="btn-secondary mt-10 group">
           <span>{{ 'map.cta' | t }}</span>
           <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
         </a>
@@ -442,7 +442,7 @@
         <h2 class="mt-3 text-display-md text-balance">{{ 'news.heading' | t }}</h2>
         <p class="mt-3 text-brand-ink/70 max-w-xl">{{ 'news.subtitle' | t }}</p>
       </div>
-      <a [routerLink]="'/news' | loc" class="btn-secondary shrink-0 group hover:-translate-y-0.5 hover:shadow-card-hover">
+      <a [routerLink]="'/news' | loc" class="btn-secondary shrink-0 group">
         <span>{{ 'news.view_all' | t }}</span>
         <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
       </a>
