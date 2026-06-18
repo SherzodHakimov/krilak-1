@@ -3,13 +3,7 @@
     <div class="absolute inset-0 grid-lines opacity-[0.06] pointer-events-none"></div>
     <div class="absolute -top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-brand-leaf/20 blur-3xl pointer-events-none"></div>
     <div class="container-x relative py-14">
-      <nav class="text-xs text-white/50 mb-6 flex items-center gap-2" data-reveal>
-        <a [routerLink]="'' | loc" class="hover:text-white">{{ 'nav.home' | t }}</a>
-        <span>/</span>
-        <a [routerLink]="'/catalog' | loc" class="hover:text-white">{{ 'catalog.title' | t }}</a>
-        <span>/</span>
-        <span class="text-white">{{ cat.name }}</span>
-      </nav>
+      <app-breadcrumbs [items]="crumbs()" />
       <div class="flex items-start gap-6" data-reveal>
         <div class="hidden sm:block text-6xl text-brand-leaf">{{ cat.icon }}</div>
         <div class="flex-1">

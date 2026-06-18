@@ -1,4 +1,9 @@
-<app-page-hero eyebrow="about.eyebrow" title="about.title" subtitle="about.subtitle" />
+<app-page-hero
+  eyebrow="about.eyebrow"
+  title="about.title"
+  subtitle="about.subtitle"
+  [crumbs]="[{ label: 'nav.home', link: '' }, { label: 'nav.about' }]"
+/>
 
 <!-- MISSION + STATS -->
 <section class="section">
@@ -59,8 +64,16 @@
       }
     </ol>
     <div class="mt-12 flex flex-wrap gap-3" data-reveal>
-      <a [routerLink]="'/awards' | loc" class="btn-ghost">{{ 'awards.title' | t }}</a>
-      <a [routerLink]="'/reviews' | loc" class="btn-ghost">{{ 'reviews.title' | t }}</a>
+      <a
+        [routerLink]="'/awards' | loc"
+        class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold border-2 text-brand-graphite border-brand-graphite/40 shadow-card hover:bg-brand-graphite hover:text-white hover:border-brand-graphite transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
+        >{{ 'awards.title' | t }}</a
+      >
+      <a
+        [routerLink]="'/reviews' | loc"
+        class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold border-2 text-brand-graphite border-brand-graphite/40 shadow-card hover:bg-brand-graphite hover:text-white hover:border-brand-graphite transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
+        >{{ 'reviews.title' | t }}</a
+      >
       <a [routerLink]="'/contacts' | loc" class="btn-primary">{{ 'nav.contacts' | t }}</a>
     </div>
   </div>

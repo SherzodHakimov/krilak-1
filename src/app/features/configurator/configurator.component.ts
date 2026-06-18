@@ -9,10 +9,11 @@ import { usePageSeo } from '../../core/seo/page-seo';
 import { TelegramService } from '../../core/telegram/telegram.service';
 import { SubmitState } from '../../core/telegram/telegram.types';
 import { ConfiguratorService } from './configurator.service';
+import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
 
 @Component({
   selector: 'app-configurator',
-  imports: [ReactiveFormsModule, RouterLink, DecimalPipe, TranslatePipe, LocalizePathPipe],
+  imports: [ReactiveFormsModule, RouterLink, DecimalPipe, TranslatePipe, LocalizePathPipe, BreadcrumbsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './configurator.component.html'
 })
@@ -22,6 +23,8 @@ export class ConfiguratorComponent {
   private readonly i18n = inject(TranslationService);
   private readonly fb = inject(FormBuilder);
   private readonly route = inject(ActivatedRoute);
+
+  readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'nav.configurator' }];
 
   readonly objectTypes = this.configurator.objectTypes;
   readonly structures = this.configurator.structures;

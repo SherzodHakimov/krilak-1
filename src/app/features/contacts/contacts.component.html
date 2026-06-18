@@ -1,11 +1,9 @@
 <section class="bg-brand-graphite text-white relative overflow-hidden -mt-[7.25rem] pt-[7.25rem]">
   <div class="absolute inset-0 grid-lines opacity-[0.06] pointer-events-none"></div>
   <div class="container-x relative py-16">
-    <nav class="text-xs text-white/50 flex items-center gap-2 mb-6" data-reveal>
-      <a [routerLink]="'' | loc" class="hover:text-white">{{ 'nav.home' | t }}</a><span>/</span>
-      <span class="text-white">{{ 'nav.contacts' | t }}</span>
-    </nav>
-    <h1 class="text-display-lg text-white text-balance" data-reveal>{{ 'contacts.title' | t }}</h1>
+    <app-breadcrumbs [items]="crumbs" />
+    <span class="eyebrow !text-brand-amber" data-reveal>{{ 'nav.contacts' | t }}</span>
+    <h1 class="text-display-lg text-white text-balance mt-3" data-reveal>{{ 'contacts.title' | t }}</h1>
     <p class="text-lg text-white/70 mt-5 max-w-2xl" data-reveal>{{ 'contacts.subtitle' | t }}</p>
   </div>
 </section>

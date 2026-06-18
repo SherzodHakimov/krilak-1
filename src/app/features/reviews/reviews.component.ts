@@ -54,10 +54,34 @@ export class ReviewsComponent {
     }
   ];
 
+  // Акценты чередуются по карточкам для визуального ритма (как в карточках новостей).
+  private readonly accents = ['leaf', 'steel', 'amber'] as const;
+  readonly stars = Array.from({ length: 5 });
+
   readonly reviews = computed(() => {
     const lang = this.i18n.lang();
-    return this.source.map((r) => ({ author: r.author[lang], role: r.role[lang], text: r.text[lang] }));
+    return this.source.map((r, i) => {
+      const author = r.author[lang];
+      return {
+        author,
+        role: r.role[lang],
+        text: r.text[lang],
+        initials: this.initials(author),
+        accent: this.accents[i % this.accents.length]
+      };
+    });
   });
+
+  /** Монограмма из первых букв до двух слов: «Главный инженер проекта» → «ГИ». */
+  private initials(name: string): string {
+    return name
+      .trim()
+      .split(/\s+/)
+      .slice(0, 2)
+      .map((w) => w.charAt(0))
+      .join('')
+      .toUpperCase();
+  }
 
   constructor() {
     usePageSeo(() => ({

@@ -1,4 +1,9 @@
-<app-page-hero eyebrow="dealers.eyebrow" title="dealers.title" subtitle="dealers.subtitle" />
+<app-page-hero
+  eyebrow="dealers.eyebrow"
+  title="dealers.title"
+  subtitle="dealers.subtitle"
+  [crumbs]="[{ label: 'nav.home', link: '' }, { label: 'footer.dealers' }]"
+/>
 
 <section class="section">
   <div class="container-x grid lg:grid-cols-2 gap-12 items-start">

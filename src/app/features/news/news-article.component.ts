@@ -9,10 +9,11 @@ import { usePageSeo } from '../../core/seo/page-seo';
 import { NewsService } from '../../core/data/news.service';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { DmyDatePipe } from '../../shared/dmy-date.pipe';
+import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
 
 @Component({
   selector: 'app-news-article',
-  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, DmyDatePipe],
+  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, DmyDatePipe, BreadcrumbsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './news-article.component.html'
 })
@@ -26,6 +27,15 @@ export class NewsArticleComponent {
   });
 
   readonly article = computed(() => this.newsSvc.bySlug(this.slug()));
+
+  readonly crumbs = computed<Crumb[]>(() => {
+    const a = this.article();
+    return [
+      { label: 'nav.home', link: '' },
+      { label: 'footer.news', link: '/news' },
+      ...(a ? [{ label: a.title, raw: true } as Crumb] : [])
+    ];
+  });
 
   constructor() {
     usePageSeo(() => {

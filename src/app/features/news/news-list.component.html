@@ -1,18 +1,36 @@
-<app-page-hero eyebrow="news.title" title="news.title" subtitle="news.subtitle" />
+<app-page-hero
+  eyebrow="news.title"
+  title="news.heading"
+  subtitle="news.subtitle"
+  [crumbs]="[{ label: 'nav.home', link: '' }, { label: 'footer.news' }]"
+/>
 
 <section class="section">
   <div class="container-x">
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       @for (a of articles(); track a.slug; let i = $index) {
         <a [routerLink]="'/news/' + a.slug | loc" class="card-bordered overflow-hidden group block" data-reveal [attr.data-reveal-delay]="(i % 3) * 80">
-          <div class="h-44 bg-gradient-to-br relative {{ a.accent === 'leaf' ? 'from-brand-leaf/20 to-brand-amber/20' : a.accent === 'steel' ? 'from-brand-steel/20 to-brand-graphite/20' : 'from-emerald-500/20 to-brand-graphite/20' }}">
-            <span class="absolute top-4 left-4 pill-{{ a.accent }}">{{ a.category }}</span>
+          <div class="h-44 relative overflow-hidden bg-white">
+            @if (a.photo) {
+              <img
+                [src]="a.photo"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="352"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            }
+            <div class="absolute inset-0 bg-gradient-to-br mix-blend-multiply {{ a.accent === 'leaf' ? 'from-brand-leaf/40 to-brand-amber/40' : a.accent === 'steel' ? 'from-brand-steel/40 to-brand-graphite/40' : 'from-emerald-500/40 to-brand-graphite/40' }}"></div>
+            <span class="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/35 to-transparent pointer-events-none"></span>
+            <span class="absolute top-4 left-4 pill opacity-90 shadow-md ring-1 ring-black/10 {{ a.accent === 'leaf' ? 'bg-brand-leaf text-white' : a.accent === 'steel' ? 'bg-brand-steel text-white' : 'bg-brand-amber text-brand-graphite' }}">{{ a.category }}</span>
           </div>
           <div class="p-6">
             <time class="text-xs text-brand-ink/50 font-medium">{{ a.date | dmy }}</time>
             <h2 class="font-display font-bold text-lg mt-2 group-hover:text-brand-leaf transition-colors">{{ a.title }}</h2>
-            <p class="text-sm text-brand-ink/60 mt-3 line-clamp-3">{{ a.excerpt }}</p>
-            <span class="link-arrow mt-5 text-sm">{{ 'news.read' | t }}</span>
+            <p class="text-sm text-brand-ink/60 mt-3 line-clamp-2">{{ a.excerpt }}</p>
+            <span class="link-arrow mt-4 text-sm">{{ 'news.read' | t }}</span>
           </div>
         </a>
       }

@@ -8,10 +8,11 @@ import { TranslationService } from '../../core/i18n/translation.service';
 import { usePageSeo } from '../../core/seo/page-seo';
 import { CatalogService } from '../../core/data/catalog.service';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
 
 @Component({
   selector: 'app-category',
-  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective],
+  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, BreadcrumbsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './category.component.html'
 })
@@ -26,6 +27,15 @@ export class CategoryComponent {
 
   readonly category = computed(() => this.catalog.categoryBySlug(this.slug()));
   readonly products = computed(() => this.catalog.productsByCategory(this.slug()));
+
+  readonly crumbs = computed<Crumb[]>(() => {
+    const cat = this.category();
+    return [
+      { label: 'nav.home', link: '' },
+      { label: 'catalog.title', link: '/catalog' },
+      ...(cat ? [{ label: cat.name, raw: true } as Crumb] : [])
+    ];
+  });
 
   readonly ratings = computed(() =>
     Array.from(new Set(this.products().flatMap((p) => p.rating))).sort()

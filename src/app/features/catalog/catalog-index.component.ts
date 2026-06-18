@@ -6,16 +6,19 @@ import { TranslationService } from '../../core/i18n/translation.service';
 import { usePageSeo } from '../../core/seo/page-seo';
 import { CatalogService } from '../../core/data/catalog.service';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
 
 @Component({
   selector: 'app-catalog-index',
-  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective],
+  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, BreadcrumbsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './catalog-index.component.html'
 })
 export class CatalogIndexComponent {
   private readonly catalog = inject(CatalogService);
   private readonly i18n = inject(TranslationService);
+
+  readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'catalog.title' }];
 
   readonly query = signal('');
   readonly categories = computed(() => this.catalog.categories());

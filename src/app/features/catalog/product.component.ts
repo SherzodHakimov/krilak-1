@@ -10,6 +10,7 @@ import { usePageSeo } from '../../core/seo/page-seo';
 import { CatalogService } from '../../core/data/catalog.service';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { QuoteFormComponent } from '../../shared/quote-form.component';
+import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
 
 @Component({
   selector: 'app-product',
@@ -19,7 +20,8 @@ import { QuoteFormComponent } from '../../shared/quote-form.component';
     TranslatePipe,
     LocalizePathPipe,
     RevealDirective,
-    QuoteFormComponent
+    QuoteFormComponent,
+    BreadcrumbsComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './product.component.html'
@@ -37,6 +39,16 @@ export class ProductComponent {
   readonly category = computed(() => {
     const p = this.product();
     return p ? this.catalog.categoryBySlug(p.category) : undefined;
+  });
+
+  readonly crumbs = computed<Crumb[]>(() => {
+    const p = this.product();
+    const cat = this.category();
+    return [
+      { label: 'catalog.title', link: '/catalog' },
+      ...(cat ? [{ label: cat.name, raw: true, link: '/catalog/category/' + cat.slug } as Crumb] : []),
+      ...(p ? [{ label: p.name, raw: true } as Crumb] : [])
+    ];
   });
 
   constructor() {

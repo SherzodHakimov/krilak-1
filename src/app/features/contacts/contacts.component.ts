@@ -1,18 +1,17 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
-import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
 import { usePageSeo } from '../../core/seo/page-seo';
 import { TelegramService } from '../../core/telegram/telegram.service';
 import { SubmitState } from '../../core/telegram/telegram.types';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
 import { controlInvalid, submitLead } from '../../shared/lead-form';
 
 @Component({
   selector: 'app-contacts',
-  imports: [ReactiveFormsModule, RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective],
+  imports: [ReactiveFormsModule, TranslatePipe, RevealDirective, BreadcrumbsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './contacts.component.html'
 })
@@ -20,6 +19,8 @@ export class ContactsComponent {
   private readonly fb = inject(FormBuilder);
   private readonly telegram = inject(TelegramService);
   private readonly i18n = inject(TranslationService);
+
+  readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'nav.contacts' }];
 
   readonly state = signal<SubmitState>('idle');
   readonly topics = ['quote', 'tech', 'dealer', 'other'];

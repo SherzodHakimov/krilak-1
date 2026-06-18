@@ -1,17 +1,23 @@
-<app-page-hero eyebrow="awards.all" title="awards.title" subtitle="awards.subtitle" />
+<app-page-hero
+  eyebrow="awards.all"
+  title="awards.title"
+  subtitle="awards.subtitle"
+  [crumbs]="[{ label: 'nav.home', link: '' }, { label: 'awards.title' }]"
+/>
 
 <section class="section">
   <div class="container-x">
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
       @for (a of awards(); track a.year + a.title; let i = $index) {
-        <div class="card-bordered p-5 flex flex-col gap-3" data-reveal [attr.data-reveal-delay]="(i % 4) * 60">
-          <div class="flex items-center justify-between">
-            <span class="text-3xl">{{ a.icon }}</span>
-            <span class="text-xs font-mono font-semibold text-brand-leaf">{{ a.year }}</span>
+        <!-- Карточка награды: крупная полупрозрачная цифра года + линейная иконка (стиль блока «Признание») -->
+        <div class="card-bordered aspect-[3/4] p-5 relative overflow-hidden flex flex-col justify-between" data-reveal [attr.data-reveal-delay]="(i % 6) * 60">
+          <div class="flex items-start justify-between gap-2">
+            <svg class="w-7 h-7 text-brand-leaf shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="a.icon" /></svg>
+            <span class="text-[10px] uppercase tracking-wider text-brand-ink/45 font-semibold text-right">{{ a.org }}</span>
           </div>
-          <div>
-            <div class="text-sm font-semibold leading-tight">{{ a.title }}</div>
-            <div class="text-xs text-brand-ink/60 mt-1">{{ a.org }}</div>
+          <div class="mt-auto">
+            <div class="font-display font-bold text-4xl text-brand-graphite/15 leading-none">{{ a.year }}</div>
+            <div class="text-sm font-semibold leading-tight text-brand-graphite mt-2">{{ a.title }}</div>
           </div>
         </div>
       }

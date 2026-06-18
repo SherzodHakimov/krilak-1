@@ -1,12 +1,10 @@
 <section class="bg-brand-graphite text-white relative overflow-hidden -mt-[7.25rem] pt-[7.25rem]">
   <div class="absolute inset-0 grid-lines opacity-[0.06] pointer-events-none"></div>
   <div class="container-x relative py-16 lg:py-20">
-    <nav class="text-xs text-white/50 flex items-center gap-2 mb-6" data-reveal>
-      <a [routerLink]="'' | loc" class="hover:text-white">{{ 'nav.home' | t }}</a><span>/</span>
-      <span class="text-white">{{ 'nav.solutions' | t }}</span>
-    </nav>
+    <app-breadcrumbs [items]="crumbs" />
     <div class="max-w-3xl" data-reveal>
-      <h1 class="text-display-lg text-white text-balance">{{ 'solutions.title' | t }}</h1>
+      <span class="eyebrow !text-brand-amber">{{ 'nav.solutions' | t }}</span>
+      <h1 class="text-display-lg text-white text-balance mt-3">{{ 'solutions.title' | t }}</h1>
       <p class="mt-5 text-lg text-white/70">{{ 'solutions.subtitle' | t }}</p>
     </div>
   </div>
@@ -16,10 +14,14 @@
   <div class="container-x">
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       @for (item of items; track item.key; let i = $index) {
-        <a [routerLink]="'/configurator' | loc" class="card-bordered p-8 group block" data-reveal [attr.data-reveal-delay]="(i % 3) * 60">
-          <div class="text-4xl mb-5">{{ item.icon }}</div>
-          <span class="pill-leaf">{{ item.badge }}</span>
-          <h2 class="font-display font-bold text-2xl mt-4">{{ 'solutions.items.' + item.key + '.title' | t }}</h2>
+        <a [routerLink]="'/configurator' | loc" class="card-bordered p-8 group flex flex-col" data-reveal [attr.data-reveal-delay]="(i % 3) * 60">
+          <div class="flex items-start justify-between gap-4 mb-5">
+            <span class="w-12 h-12 rounded-xl bg-brand-spring text-brand-leaf grid place-items-center shrink-0">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="item.icon" /></svg>
+            </span>
+            <span class="pill-leaf">{{ item.badge }}</span>
+          </div>
+          <h2 class="font-display font-bold text-2xl group-hover:text-brand-leaf transition-colors">{{ 'solutions.items.' + item.key + '.title' | t }}</h2>
           <p class="text-brand-ink/70 mt-3">{{ 'solutions.items.' + item.key + '.description' | t }}</p>
           @if (item.bullets.length) {
             <ul class="text-sm text-brand-ink/60 mt-5 space-y-1">
@@ -28,6 +30,10 @@
               }
             </ul>
           }
+          <span class="mt-auto pt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-leaf">
+            {{ 'nav.configurator' | t }}
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </span>
         </a>
       }
     </div>

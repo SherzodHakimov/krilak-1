@@ -13,6 +13,7 @@ import { TranslatePipe } from '../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../core/i18n/localize-path.pipe';
 import { LOCALES, Lang } from '../core/i18n/locale';
 import { TranslationService } from '../core/i18n/translation.service';
+import { CatalogService } from '../core/data/catalog.service';
 
 interface NavLink {
   path: string;
@@ -28,6 +29,10 @@ interface NavLink {
 export class HeaderComponent {
   private readonly router = inject(Router);
   private readonly i18n = inject(TranslationService);
+  private readonly catalog = inject(CatalogService);
+
+  /** Категории каталога для выпадающего списка «Продукция». */
+  readonly categories = computed(() => this.catalog.categories());
 
   readonly locales = LOCALES;
   /** Буквы названия бренда — раскладываются по ширине (flex), чтобы тянуться под префикс на любом языке. */
@@ -45,13 +50,6 @@ export class HeaderComponent {
     { path: '/projects', key: 'nav.projects' },
     { path: '/about', key: 'nav.about' },
     { path: '/contacts', key: 'nav.contacts' }
-  ];
-
-  readonly productLinks = [
-    { path: '/catalog/category/compounds', icon: '▣', key: 'categories.items.compounds' },
-    { path: '/catalog/category/doors', icon: '▥', key: 'categories.items.doors' },
-    { path: '/catalog/category/panels', icon: '▤', key: 'categories.items.panels' },
-    { path: '/catalog/category/couplings', icon: '◎', key: 'categories.items.couplings' }
   ];
 
   constructor() {

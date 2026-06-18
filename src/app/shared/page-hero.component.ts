@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { TranslatePipe } from '../core/i18n/translate.pipe';
 import { RevealDirective } from './reveal.directive';
+import { BreadcrumbsComponent, Crumb } from './breadcrumbs.component';
 
 /**
  * Тёмная hero-шапка простых страниц: eyebrow (янтарный) + заголовок + подзаголовок.
@@ -8,7 +9,7 @@ import { RevealDirective } from './reveal.directive';
  */
 @Component({
   selector: 'app-page-hero',
-  imports: [TranslatePipe, RevealDirective],
+  imports: [TranslatePipe, RevealDirective, BreadcrumbsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   // Хост-обёртка не должна создавать собственный бокс — секция ведёт себя
   // так же, как если бы лежала в шаблоне страницы напрямую. Инлайновый стиль
@@ -18,6 +19,9 @@ import { RevealDirective } from './reveal.directive';
     <section class="bg-brand-graphite text-white relative overflow-hidden -mt-[7.25rem] pt-[7.25rem]">
       <div class="absolute inset-0 grid-lines opacity-[0.05] pointer-events-none"></div>
       <div class="container-x relative py-16 lg:py-24">
+        @if (crumbs(); as c) {
+          <app-breadcrumbs [items]="c" />
+        }
         <div class="max-w-3xl" data-reveal>
           <span class="eyebrow !text-brand-amber">{{ eyebrow() | t }}</span>
           <h1 class="mt-3 text-display-lg text-white text-balance">{{ title() | t }}</h1>
@@ -34,4 +38,6 @@ export class PageHeroComponent {
   readonly title = input.required<string>();
   /** Ключ перевода для подзаголовка. */
   readonly subtitle = input.required<string>();
+  /** Необязательные хлебные крошки над eyebrow. Не задавать — крошек не будет. */
+  readonly crumbs = input<Crumb[]>();
 }

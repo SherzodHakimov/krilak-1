@@ -2,15 +2,7 @@
   <section class="bg-brand-graphite text-white relative overflow-hidden -mt-[7.25rem] pt-[7.25rem]">
     <div class="absolute inset-0 grid-lines opacity-[0.06] pointer-events-none"></div>
     <div class="container-x relative py-14">
-      <nav class="text-xs text-white/50 mb-8 flex items-center gap-2 flex-wrap" data-reveal>
-        <a [routerLink]="'/catalog' | loc" class="hover:text-white">{{ 'catalog.title' | t }}</a>
-        <span>/</span>
-        @if (category(); as cat) {
-          <a [routerLink]="'/catalog/category/' + cat.slug | loc" class="hover:text-white">{{ cat.name }}</a>
-          <span>/</span>
-        }
-        <span class="text-white/80">{{ p.name }}</span>
-      </nav>
+      <app-breadcrumbs [items]="crumbs()" />
 
       <div class="grid lg:grid-cols-2 gap-12 items-start">
         <!-- visual + gallery -->

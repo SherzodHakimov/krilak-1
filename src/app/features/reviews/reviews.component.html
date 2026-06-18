@@ -1,15 +1,49 @@
-<app-page-hero eyebrow="reviews.eyebrow" title="reviews.title" subtitle="reviews.subtitle" />
+<app-page-hero
+  eyebrow="reviews.eyebrow"
+  title="reviews.title"
+  subtitle="reviews.subtitle"
+  [crumbs]="[{ label: 'nav.home', link: '' }, { label: 'reviews.eyebrow' }]"
+/>
 
 <section class="section">
   <div class="container-x">
-    <div class="grid md:grid-cols-2 gap-5">
+    <div class="grid md:grid-cols-2 gap-6">
       @for (r of reviews(); track r.author + r.role; let i = $index) {
-        <figure class="card-bordered p-8" data-reveal [attr.data-reveal-delay]="(i % 2) * 80">
-          <div class="text-5xl text-brand-leaf/30 font-display leading-none">“</div>
-          <blockquote class="text-lg text-brand-graphite -mt-4">{{ r.text }}</blockquote>
-          <figcaption class="mt-6 pt-6 border-t border-brand-fog">
-            <div class="font-display font-semibold">{{ r.author }}</div>
-            <div class="text-sm text-brand-ink/60">{{ r.role }}</div>
+        <figure
+          class="card-bordered p-8 flex flex-col h-full relative overflow-hidden"
+          data-reveal
+          [attr.data-reveal-delay]="(i % 2) * 80"
+        >
+          <!-- Декоративная кавычка акцентного оттенка -->
+          <span
+            class="pointer-events-none select-none absolute top-4 right-4 font-display font-bold leading-none text-[7rem] {{ r.accent === 'steel' ? 'text-brand-steel/10' : r.accent === 'amber' ? 'text-brand-amber/15' : 'text-brand-leaf/10' }}"
+            aria-hidden="true"
+            >”</span
+          >
+
+          <!-- Рейтинг -->
+          <div class="relative flex gap-1 text-brand-amber" aria-label="Оценка 5 из 5">
+            @for (s of stars; track $index) {
+              <svg viewBox="0 0 20 20" class="w-4 h-4 fill-current" aria-hidden="true">
+                <path d="M10 1.6l2.47 5.01 5.53.8-4 3.9.94 5.5L10 14.2l-4.94 2.6.94-5.5-4-3.9 5.53-.8L10 1.6z" />
+              </svg>
+            }
+          </div>
+
+          <!-- Текст отзыва -->
+          <blockquote class="relative mt-5 flex-1 text-lg leading-relaxed text-brand-graphite">{{ r.text }}</blockquote>
+
+          <!-- Автор -->
+          <figcaption class="mt-7 pt-6 border-t border-brand-fog flex items-center gap-4">
+            <span
+              class="shrink-0 grid place-items-center w-12 h-12 rounded-full font-display font-semibold {{ r.accent === 'steel' ? 'bg-brand-steel/10 text-brand-steel' : r.accent === 'amber' ? 'bg-brand-amber/15 text-amber-700' : 'bg-brand-spring text-brand-moss' }}"
+              aria-hidden="true"
+              >{{ r.initials }}</span
+            >
+            <span class="min-w-0">
+              <span class="block font-display font-semibold leading-snug text-brand-graphite">{{ r.author }}</span>
+              <span class="block text-sm text-brand-ink/60">{{ r.role }}</span>
+            </span>
           </figcaption>
         </figure>
       }

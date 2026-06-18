@@ -165,7 +165,7 @@ const ru: Dictionary = {
   projects: {
     eyebrow: 'Реализованные объекты',
     title: 'Где работает «КрилаК»',
-    subtitle: 'Стратегические объекты, на которых наша огнезащита служит десятилетиями',
+    subtitle: 'От АЭС и метро до дата-центров: 7 000+ объектов в 80 регионах, где огнезащита КрилаК надёжно служит десятилетиями.',
     view_map: 'Открыть карту объектов',
     view_all: 'Все проекты',
     area: 'Площадь',
@@ -529,7 +529,7 @@ const en: Dictionary = {
   projects: {
     eyebrow: 'Projects delivered',
     title: 'Where Krilak works',
-    subtitle: 'Strategic sites where our protection has served for decades',
+    subtitle: 'From nuclear plants and metros to data centres: 7,000+ sites across 80 regions where Krilak fire protection reliably serves for decades.',
     view_map: 'Open project map',
     view_all: 'All projects',
     area: 'Area',
@@ -543,7 +543,7 @@ const en: Dictionary = {
     eyebrow: 'Geography',
     title: 'Krilak project map',
     subtitle:
-      'Over 7,000 projects across 80 regions of Russia and the CIS — from Kaliningrad to Kamchatka. Find a site near you.',
+      'Over 7,000 projects across 80 regions of Russia and the CIS — from Kaliningrad to Kamchatka. Find a site near you.',
     m1: 'regions of Russia',
     m2: 'projects delivered',
     m3: 'industries',
