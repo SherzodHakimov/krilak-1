@@ -4,6 +4,7 @@ import { TranslationService } from '../../core/i18n/translation.service';
 import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { PageHeroComponent } from '../../shared/page-hero.component';
+import { pageCrumbs } from '../../shared/breadcrumbs.component';
 import { LeadFormComponent } from '../../shared/lead-form.component';
 import { DEALER_FIELDS } from '../../shared/lead-fields';
 
@@ -16,6 +17,7 @@ import { DEALER_FIELDS } from '../../shared/lead-fields';
 export class DealersComponent {
   private readonly i18n = inject(TranslationService);
 
+  readonly crumbs = pageCrumbs('footer.dealers');
   readonly dealerFields = DEALER_FIELDS;
 
   private readonly benefitsSource = [

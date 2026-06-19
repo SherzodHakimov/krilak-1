@@ -1,14 +1,16 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { TranslationService } from '../../core/i18n/translation.service';
+import { LangText } from '../../core/i18n/locale';
 import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { PageHeroComponent } from '../../shared/page-hero.component';
+import { pageCrumbs } from '../../shared/breadcrumbs.component';
 
 interface Award {
   year: string;
   icon: string;
-  title: { ru: string; en: string };
-  org: { ru: string; en: string };
+  title: LangText;
+  org: LangText;
 }
 
 // Линейные SVG-иконки (stroke, currentColor) — единый стиль с блоком «Признание» на главной.
@@ -28,6 +30,8 @@ const ICON = {
 })
 export class AwardsComponent {
   private readonly i18n = inject(TranslationService);
+
+  readonly crumbs = pageCrumbs('awards.title');
 
   private readonly source: Award[] = [
     { year: '2019', icon: ICON.trophy, title: { ru: 'Лучшая фирма России', en: 'Best company in Russia' }, org: { ru: 'Всероссийский конкурс', en: 'National award' } },

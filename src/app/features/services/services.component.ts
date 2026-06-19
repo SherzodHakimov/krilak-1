@@ -3,7 +3,7 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { CtaSectionComponent } from '../../shared/cta-section.component';
-import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
+import { BreadcrumbsComponent, pageCrumbs } from '../../shared/breadcrumbs.component';
 
 @Component({
   selector: 'app-services',
@@ -12,7 +12,7 @@ import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component'
   templateUrl: './services.component.html'
 })
 export class ServicesComponent {
-  readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'nav.services' }];
+  readonly crumbs = pageCrumbs('nav.services');
 
   // Линейные SVG-иконки (stroke, currentColor) вместо эмодзи — единый стиль карточек.
   readonly items = [

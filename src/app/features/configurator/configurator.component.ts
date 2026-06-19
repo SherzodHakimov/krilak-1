@@ -7,7 +7,7 @@ import { TranslationService } from '../../core/i18n/translation.service';
 import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { LeadField } from '../../core/telegram/telegram.types';
 import { ConfiguratorService } from './configurator.service';
-import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
+import { BreadcrumbsComponent, pageCrumbs } from '../../shared/breadcrumbs.component';
 import { LeadFormComponent } from '../../shared/lead-form.component';
 import { CONFIGURATOR_FIELDS } from '../../shared/lead-fields';
 
@@ -22,7 +22,7 @@ export class ConfiguratorComponent {
   private readonly i18n = inject(TranslationService);
   private readonly route = inject(ActivatedRoute);
 
-  readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'nav.configurator' }];
+  readonly crumbs = pageCrumbs('nav.configurator');
 
   readonly objectTypes = this.configurator.objectTypes;
   readonly structures = this.configurator.structures;

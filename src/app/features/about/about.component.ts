@@ -3,14 +3,16 @@ import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
+import { LangText } from '../../core/i18n/locale';
 import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { CounterDirective } from '../../shared/counter.directive';
 import { PageHeroComponent } from '../../shared/page-hero.component';
+import { pageCrumbs } from '../../shared/breadcrumbs.component';
 
 interface Milestone {
   year: string;
-  text: { ru: string; en: string };
+  text: LangText;
 }
 
 @Component({
@@ -29,6 +31,7 @@ interface Milestone {
 export class AboutComponent {
   private readonly i18n = inject(TranslationService);
 
+  readonly crumbs = pageCrumbs('nav.about');
   readonly values = ['quality', 'science', 'scale', 'responsibility'];
 
   private readonly milestones: Milestone[] = [

@@ -20,6 +20,7 @@ import { CatalogService } from '../../core/data/catalog.service';
 import { ProjectsService } from '../../core/data/projects.service';
 import { NewsService } from '../../core/data/news.service';
 import { PROJECT_PHOTOS, NEWS_PHOTOS } from '../../core/data/photos';
+import { newsGradientClass, newsPillClass } from '../../core/data/news-accent';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { CounterDirective } from '../../shared/counter.directive';
 import { CtaSectionComponent } from '../../shared/cta-section.component';
@@ -99,6 +100,8 @@ export class HomeComponent {
       .slice(0, 3)
       .map((a) => ({ ...a, photo: NEWS_PHOTOS[a.slug] ?? '' }))
   );
+  readonly newsGradient = newsGradientClass;
+  readonly newsPill = newsPillClass;
 
   readonly roles = [
     { key: 'designer', icon: 'M3 12 12 3l9 9M5 10v11h14V10', link: '/solutions' },

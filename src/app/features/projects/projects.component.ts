@@ -6,7 +6,7 @@ import { ProjectsService } from '../../core/data/projects.service';
 import { PROJECT_PHOTOS } from '../../core/data/photos';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { CtaSectionComponent } from '../../shared/cta-section.component';
-import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
+import { BreadcrumbsComponent, pageCrumbs } from '../../shared/breadcrumbs.component';
 
 @Component({
   selector: 'app-projects',
@@ -17,7 +17,7 @@ import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component'
 export class ProjectsComponent {
   private readonly projectsSvc = inject(ProjectsService);
 
-  readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'nav.projects' }];
+  readonly crumbs = pageCrumbs('nav.projects');
 
   readonly industries = this.projectsSvc.industries();
   readonly activeIndustry = signal<string>('all');

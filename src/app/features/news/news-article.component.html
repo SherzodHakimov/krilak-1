@@ -6,7 +6,7 @@
         <app-breadcrumbs [items]="crumbs()" />
         <a [routerLink]="'/news' | loc" class="text-sm text-brand-amber font-semibold hover:gap-2 inline-flex items-center gap-1" data-reveal>← {{ 'news.back' | t }}</a>
         <div class="mt-6 flex items-center gap-3" data-reveal>
-          <span class="pill opacity-90 ring-1 ring-white/15 {{ a.accent === 'leaf' ? 'bg-brand-leaf text-white' : a.accent === 'steel' ? 'bg-brand-steel text-white' : 'bg-brand-amber text-brand-graphite' }}">{{ a.category }}</span>
+          <span class="pill opacity-90 ring-1 ring-white/15 {{ newsPill(a.accent) }}">{{ a.category }}</span>
           <time class="text-sm text-white/50">{{ a.date | dmy }}</time>
         </div>
         <h1 class="mt-4 text-display-lg text-white text-balance" data-reveal>{{ a.title }}</h1>

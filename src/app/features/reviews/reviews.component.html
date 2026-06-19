@@ -2,7 +2,7 @@
   eyebrow="reviews.eyebrow"
   title="reviews.title"
   subtitle="reviews.subtitle"
-  [crumbs]="[{ label: 'nav.home', link: '' }, { label: 'reviews.eyebrow' }]"
+  [crumbs]="crumbs"
 />
 
 <section class="section">
@@ -16,7 +16,7 @@
         >
           <!-- Декоративная кавычка акцентного оттенка -->
           <span
-            class="pointer-events-none select-none absolute top-4 right-4 font-display font-bold leading-none text-[7rem] {{ r.accent === 'steel' ? 'text-brand-steel/10' : r.accent === 'amber' ? 'text-brand-amber/15' : 'text-brand-leaf/10' }}"
+            class="pointer-events-none select-none absolute top-4 right-4 font-display font-bold leading-none text-[7rem] {{ numberTone(r.accent) }}"
             aria-hidden="true"
             >”</span
           >
@@ -36,7 +36,7 @@
           <!-- Автор -->
           <figcaption class="mt-7 pt-6 border-t border-brand-fog flex items-center gap-4">
             <span
-              class="shrink-0 grid place-items-center w-12 h-12 rounded-full font-display font-semibold {{ r.accent === 'steel' ? 'bg-brand-steel/10 text-brand-steel' : r.accent === 'amber' ? 'bg-brand-amber/15 text-amber-700' : 'bg-brand-spring text-brand-moss' }}"
+              class="shrink-0 grid place-items-center w-12 h-12 rounded-full font-display font-semibold {{ avatarTone(r.accent) }}"
               aria-hidden="true"
               >{{ r.initials }}</span
             >

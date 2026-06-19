@@ -3,7 +3,7 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
 import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
-import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
+import { BreadcrumbsComponent, pageCrumbs } from '../../shared/breadcrumbs.component';
 import { LeadFormComponent } from '../../shared/lead-form.component';
 import { CONTACT_FIELDS } from '../../shared/lead-fields';
 
@@ -16,7 +16,7 @@ import { CONTACT_FIELDS } from '../../shared/lead-fields';
 export class ContactsComponent {
   private readonly i18n = inject(TranslationService);
 
-  readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'nav.contacts' }];
+  readonly crumbs = pageCrumbs('nav.contacts');
 
   readonly contactFields = CONTACT_FIELDS;
 

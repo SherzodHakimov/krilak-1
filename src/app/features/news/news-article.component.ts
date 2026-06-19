@@ -7,6 +7,7 @@ import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
 import { usePageSeo } from '../../core/seo/page-seo';
 import { NewsService } from '../../core/data/news.service';
+import { newsPillClass } from '../../core/data/news-accent';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { DmyDatePipe } from '../../shared/dmy-date.pipe';
 import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
@@ -27,6 +28,7 @@ export class NewsArticleComponent {
   });
 
   readonly article = computed(() => this.newsSvc.bySlug(this.slug()));
+  readonly newsPill = newsPillClass;
 
   readonly crumbs = computed<Crumb[]>(() => {
     const a = this.article();

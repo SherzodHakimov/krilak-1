@@ -1,14 +1,17 @@
 import { Injectable, inject } from '@angular/core';
-import { Lang } from '../i18n/locale';
+import { Lang, LangText } from '../i18n/locale';
 import { TranslationService } from '../i18n/translation.service';
+
+/** Цветовой акцент карточки статьи. */
+export type NewsAccent = 'leaf' | 'steel' | 'amber';
 
 export interface Article {
   slug: string;
   date: string;
-  category: { ru: string; en: string };
-  accent: 'leaf' | 'steel' | 'amber';
-  title: { ru: string; en: string };
-  excerpt: { ru: string; en: string };
+  category: LangText;
+  accent: NewsAccent;
+  title: LangText;
+  excerpt: LangText;
   body: { ru: string[]; en: string[] };
 }
 
@@ -16,7 +19,7 @@ export interface LocalizedArticle {
   slug: string;
   date: string;
   category: string;
-  accent: 'leaf' | 'steel' | 'amber';
+  accent: NewsAccent;
   title: string;
   excerpt: string;
   body: string[];

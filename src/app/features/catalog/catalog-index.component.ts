@@ -7,7 +7,7 @@ import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { CatalogService } from '../../core/data/catalog.service';
 import { categoryIconPath, categoryTone } from '../../core/data/category-icons';
 import { RevealDirective } from '../../shared/reveal.directive';
-import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
+import { BreadcrumbsComponent, pageCrumbs } from '../../shared/breadcrumbs.component';
 
 @Component({
   selector: 'app-catalog-index',
@@ -18,7 +18,7 @@ import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component'
 export class CatalogIndexComponent {
   private readonly catalog = inject(CatalogService);
 
-  readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'catalog.title' }];
+  readonly crumbs = pageCrumbs('catalog.title');
 
   readonly query = signal('');
   readonly categories = computed(() => this.catalog.categories());

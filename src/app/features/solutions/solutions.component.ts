@@ -5,7 +5,7 @@ import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
 import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { CtaSectionComponent } from '../../shared/cta-section.component';
-import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
+import { BreadcrumbsComponent, pageCrumbs } from '../../shared/breadcrumbs.component';
 
 @Component({
   selector: 'app-solutions',
@@ -14,7 +14,7 @@ import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component'
   templateUrl: './solutions.component.html'
 })
 export class SolutionsComponent {
-  readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'nav.solutions' }];
+  readonly crumbs = pageCrumbs('nav.solutions');
 
   // Линейные SVG-иконки (stroke, currentColor) вместо эмодзи — единый стиль карточек.
   readonly items = [

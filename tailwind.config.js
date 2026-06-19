@@ -4,8 +4,8 @@ import typography from '@tailwindcss/typography';
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{html,ts}'],
-  // Classes applied via dynamic data bindings (project gradients, news accents)
-  // are not visible to the content scanner, so keep them explicitly.
+  // Classes composed at runtime from data (project gradients, news/review
+  // accents) are not statically visible to the content scanner, so keep them.
   safelist: [
     'pill-leaf',
     'pill-steel',

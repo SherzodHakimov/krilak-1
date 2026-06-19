@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { TranslationService } from '../../core/i18n/translation.service';
+import { LangText } from '../../core/i18n/locale';
 import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { PageHeroComponent } from '../../shared/page-hero.component';
+import { pageCrumbs } from '../../shared/breadcrumbs.component';
 
 interface Review {
-  author: { ru: string; en: string };
-  role: { ru: string; en: string };
-  text: { ru: string; en: string };
+  author: LangText;
+  role: LangText;
+  text: LangText;
 }
 
 @Component({
@@ -18,6 +20,8 @@ interface Review {
 })
 export class ReviewsComponent {
   private readonly i18n = inject(TranslationService);
+
+  readonly crumbs = pageCrumbs('reviews.eyebrow');
 
   private readonly source: Review[] = [
     {
@@ -57,6 +61,26 @@ export class ReviewsComponent {
   // Акценты чередуются по карточкам для визуального ритма (как в карточках новостей).
   private readonly accents = ['leaf', 'steel', 'amber'] as const;
   readonly stars = Array.from({ length: 5 });
+
+  // Tailwind-классы акцента карточки отзыва (фоновая цифра и аватар-монограмма).
+  private readonly numberToneMap: Record<string, string> = {
+    leaf: 'text-brand-leaf/10',
+    steel: 'text-brand-steel/10',
+    amber: 'text-brand-amber/15'
+  };
+  private readonly avatarToneMap: Record<string, string> = {
+    leaf: 'bg-brand-spring text-brand-moss',
+    steel: 'bg-brand-steel/10 text-brand-steel',
+    amber: 'bg-brand-amber/15 text-amber-700'
+  };
+
+  numberTone(accent: string): string {
+    return this.numberToneMap[accent] ?? this.numberToneMap['leaf'];
+  }
+
+  avatarTone(accent: string): string {
+    return this.avatarToneMap[accent] ?? this.avatarToneMap['leaf'];
+  }
 
   readonly reviews = computed(() => {
     const lang = this.i18n.lang();
