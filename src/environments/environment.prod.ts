@@ -9,9 +9,9 @@ export const environment = {
   /** Absolute site origin, used by SeoService for canonical / og / hreflang URLs. */
   siteUrl: 'https://krilak.ru',
   telegram: {
-    /** TODO: paste your Telegram Bot API token here (from @BotFather). */
-    botToken: 'PASTE_YOUR_TELEGRAM_BOT_TOKEN_HERE',
-    /** TODO: paste the destination chat id here (user, group or channel). */
-    chatId: 'PASTE_YOUR_TELEGRAM_CHAT_ID_HERE'
+    /** Bot API token (@krilak_leads_bot, from @BotFather). */
+    botToken: '8955401061:AAEbdtryosl7TZjs0mqcY7_LYjb3adUoq18',
+    /** Destination chat id — group "Krilak leads group". */
+    chatId: '-5571786546'
   }
 };
