@@ -296,7 +296,7 @@ const ru: Dictionary = {
     filter_all: 'Все',
     filter_nothing: 'Под выбранный фильтр продуктов нет',
     details: 'Подробнее →',
-    calc_cta: 'Рассчитать в конфигураторе →',
+    calc_cta: 'Перейти в конфигуратор →',
     analog: 'Подобрать аналог',
     hero_pill: '129+ SKU · 8 категорий'
   },

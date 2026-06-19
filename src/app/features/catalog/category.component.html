@@ -5,13 +5,11 @@
     <div class="container-x relative py-14">
       <app-breadcrumbs [items]="crumbs()" />
       <div class="flex items-start gap-6" data-reveal>
-        <div class="hidden sm:block text-6xl text-brand-leaf">{{ cat.icon }}</div>
+        <svg class="hidden sm:block w-16 h-16 text-brand-amber shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="catIcon()" /></svg>
         <div class="flex-1">
           <h1 class="text-display-lg text-white text-balance">{{ cat.name }}</h1>
           <p class="text-lg text-white/70 mt-3 lg:whitespace-nowrap">{{ cat.description }}</p>
           <div class="mt-5 flex flex-wrap items-center gap-3 text-sm text-white/60">
-            <span>{{ products().length }} {{ 'catalog.products_count' | t }}</span>
-            <span class="w-1 h-1 rounded-full bg-white/30"></span>
             <span>{{ 'catalog.certified' | t }}</span>
             <span class="w-1 h-1 rounded-full bg-white/30"></span>
             <span>{{ 'catalog.warranty' | t }}</span>
@@ -48,13 +46,12 @@
                 @if (p.images.length) {
                   <img [src]="p.images[0]" [attr.alt]="p.name" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-contain p-3 transition-transform duration-500 group-hover:scale-105" />
                 } @else {
-                  <div class="absolute inset-0 grid-lines opacity-50 pointer-events-none"></div>
                   <svg class="w-16 h-16 {{ tileTone().icon }} transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="catIcon()" /></svg>
                 }
                 @if (p.rating.length) {
                   <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
                     @for (r of p.rating.slice(0, 3); track r) {
-                      <span class="pill bg-white/80 backdrop-blur text-brand-graphite shadow-sm ring-1 ring-black/5">{{ r }}</span>
+                      <span class="pill bg-brand-cloud text-brand-ink/70 shadow-sm ring-1 ring-brand-mist/50">{{ r }}</span>
                     }
                   </div>
                 }

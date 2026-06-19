@@ -23,11 +23,11 @@ const CATEGORY_ICONS: Record<string, string> = {
 
 /** Тон плитки и иконки по ключу цвета категории. */
 const TILE_TONE: Record<string, { bg: string; icon: string }> = {
-  flame: { bg: 'bg-gradient-to-br from-brand-amber/15 to-brand-leaf/10', icon: 'text-brand-amber' },
-  steel: { bg: 'bg-gradient-to-br from-brand-steel/15 to-brand-graphite/5', icon: 'text-brand-steel' },
-  amber: { bg: 'bg-gradient-to-br from-brand-amber/20 to-brand-amber/5', icon: 'text-amber-600' },
-  graphite: { bg: 'bg-gradient-to-br from-brand-graphite/10 to-brand-graphite/[0.04]', icon: 'text-brand-graphite' },
-  _default: { bg: 'bg-brand-cloud', icon: 'text-brand-ink/40' }
+  flame: { bg: 'bg-gradient-to-br from-brand-amber/40 to-brand-leaf/25', icon: 'text-brand-amber' },
+  steel: { bg: 'bg-gradient-to-br from-brand-steel/40 to-brand-graphite/15', icon: 'text-brand-steel' },
+  amber: { bg: 'bg-gradient-to-br from-brand-amber/45 to-brand-amber/15', icon: 'text-amber-600' },
+  graphite: { bg: 'bg-gradient-to-br from-brand-graphite/30 to-brand-graphite/10', icon: 'text-brand-graphite' },
+  _default: { bg: 'bg-gradient-to-br from-brand-cloud to-brand-fog', icon: 'text-brand-ink/40' }
 };
 
 @Component({
@@ -45,6 +45,15 @@ export class CatalogIndexComponent {
   readonly query = signal('');
   readonly categories = computed(() => this.catalog.categories());
   readonly featured = computed(() => this.catalog.featured());
+
+  /** Реальное число товаров по слагу категории (по факту, а не из products_count). */
+  readonly productCounts = computed(() => {
+    const counts: Record<string, number> = {};
+    for (const p of this.catalog.products()) {
+      counts[p.category] = (counts[p.category] ?? 0) + 1;
+    }
+    return counts;
+  });
 
   readonly filteredCategories = computed(() => {
     const q = this.query().trim().toLowerCase();

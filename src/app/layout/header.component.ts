@@ -34,6 +34,15 @@ export class HeaderComponent {
   /** Категории каталога для выпадающего списка «Продукция». */
   readonly categories = computed(() => this.catalog.categories());
 
+  /** Реальное число товаров по слагу категории (по факту, а не из products_count). */
+  readonly productCounts = computed(() => {
+    const counts: Record<string, number> = {};
+    for (const p of this.catalog.products()) {
+      counts[p.category] = (counts[p.category] ?? 0) + 1;
+    }
+    return counts;
+  });
+
   readonly locales = LOCALES;
   /** Буквы названия бренда — раскладываются по ширине (flex), чтобы тянуться под префикс на любом языке. */
   readonly brandNameChars = computed(() => [...this.i18n.translate('brand.name')]);

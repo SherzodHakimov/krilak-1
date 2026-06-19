@@ -46,14 +46,14 @@
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         @for (cat of filteredCategories(); track cat.slug; let i = $index) {
           <a [routerLink]="'/catalog/category/' + cat.slug | loc" class="card-bordered p-7 group cursor-pointer flex flex-col" data-reveal [attr.data-reveal-delay]="(i % 4) * 60">
-            <span class="w-14 h-14 rounded-2xl bg-brand-spring text-brand-leaf grid place-items-center mb-6 group-hover:bg-brand-leaf group-hover:text-white transition-colors">
+            <span class="w-14 h-14 rounded-2xl bg-brand-spring text-brand-leaf grid place-items-center mb-6 group-hover:bg-brand-ink/90 group-hover:text-white group-hover:shadow-card-hover transition-all duration-300">
               <svg class="w-7 h-7 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="iconPath(cat.slug)" /></svg>
             </span>
             <h3 class="font-display font-bold text-xl group-hover:text-brand-leaf transition-colors min-h-[3.5rem]">{{ cat.name }}</h3>
             <p class="text-sm text-brand-ink/60 mt-2 flex-1">{{ cat.description }}</p>
             <div class="mt-6 pt-6 border-t border-brand-fog flex items-center justify-between text-sm">
-              <span class="text-brand-ink/50">{{ cat.productsCount }}+ SKU</span>
-              <span class="font-semibold text-brand-leaf inline-flex items-center group-hover:translate-x-1 transition-transform">{{ 'catalog.details' | t }}</span>
+              <span class="text-brand-ink/50">{{ productCounts()[cat.slug] ?? 0 }}+ SKU</span>
+              <span class="font-semibold text-brand-leaf inline-flex items-center group-hover:translate-x-1 group-hover:text-brand-ink transition-all">{{ 'catalog.details' | t }}</span>
             </div>
           </a>
         }
@@ -67,8 +67,7 @@
   <div class="container-x">
     <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10" data-reveal>
       <div>
-        <span class="eyebrow">{{ 'catalog.featured_eyebrow' | t }}</span>
-        <h2 class="text-display-md mt-3 text-balance">{{ 'catalog.featured_title' | t }}</h2>
+        <h2 class="text-display-md text-balance">{{ 'catalog.featured_title' | t }}</h2>
       </div>
       <a [routerLink]="'/configurator' | loc" class="btn-secondary group shrink-0">
         <span>{{ 'catalog.analog_cta' | t }}</span>
@@ -82,13 +81,12 @@
             @if (p.images.length) {
               <img [src]="p.images[0]" [attr.alt]="p.name" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-contain p-3 transition-transform duration-500 group-hover:scale-105" />
             } @else {
-              <div class="absolute inset-0 grid-lines opacity-50 pointer-events-none"></div>
               <svg class="w-16 h-16 {{ tone(p.category).icon }} transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="iconPath(p.category)" /></svg>
             }
             @if (p.rating.length) {
               <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
                 @for (r of p.rating.slice(0, 3); track r) {
-                  <span class="pill bg-white/80 backdrop-blur text-brand-graphite shadow-sm ring-1 ring-black/5">{{ r }}</span>
+                  <span class="pill bg-brand-cloud text-brand-ink/70 shadow-sm ring-1 ring-brand-mist/50">{{ r }}</span>
                 }
               </div>
             }
