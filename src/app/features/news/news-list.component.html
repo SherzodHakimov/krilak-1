@@ -14,7 +14,7 @@
             @if (a.photo) {
               <img
                 [ngSrc]="a.photo"
-                alt=""
+                [alt]="a.title"
                 fill
                 sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                 class="object-cover transition-transform duration-700 group-hover:scale-105"
