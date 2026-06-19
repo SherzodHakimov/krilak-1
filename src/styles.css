@@ -1,4 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+/* Self-hosted static fonts — identical files to Google Fonts (no render-blocking
+   external request). Same weights as before; Cyrillic subsets included for ru/en. */
+@import '@fontsource/onest/400.css';
+@import '@fontsource/onest/500.css';
+@import '@fontsource/onest/600.css';
+@import '@fontsource/onest/700.css';
+@import '@fontsource/onest/800.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/jetbrains-mono/500.css';
+@import '@fontsource/jetbrains-mono/600.css';
 
 @tailwind base;
 @tailwind components;
