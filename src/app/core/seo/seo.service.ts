@@ -63,6 +63,16 @@ export class SeoService {
     this.setAlternates(path);
   }
 
+  /** Absolute canonical URL for the active locale, e.g. for breadcrumb links. */
+  canonicalFor(path: string): string {
+    return `${this.origin}/${this.i18n.lang()}${this.normalizePath(path)}`;
+  }
+
+  /** Absolute URL for a static asset (no locale prefix), e.g. a product image. */
+  absoluteUrl(path: string): string {
+    return this.absolute(path);
+  }
+
   /** Inject a JSON-LD structured-data block into <head>. */
   setJsonLd(id: string, data: Record<string, unknown>): void {
     const head = this.doc.head;

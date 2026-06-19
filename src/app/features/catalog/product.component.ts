@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { KeyValuePipe } from '@angular/common';
@@ -7,6 +7,8 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
 import { usePageSeo } from '../../core/seo/page-seo';
+import { SeoService } from '../../core/seo/seo.service';
+import { productSchema } from '../../core/seo/structured-data';
 import { CatalogService } from '../../core/data/catalog.service';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { QuoteFormComponent } from '../../shared/quote-form.component';
@@ -30,6 +32,7 @@ export class ProductComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly catalog = inject(CatalogService);
   private readonly i18n = inject(TranslationService);
+  private readonly seo = inject(SeoService);
 
   readonly sku = toSignal(this.route.paramMap.pipe(map((p) => p.get('sku') ?? '')), {
     initialValue: this.route.snapshot.paramMap.get('sku') ?? ''
@@ -61,6 +64,24 @@ export class ProductComponent {
         description: p?.description ?? this.i18n.translate('catalog.subtitle'),
         path: `/catalog/product/${this.sku()}`
       };
+    });
+
+    effect(() => {
+      const p = this.product();
+      if (!p) {
+        return;
+      }
+      this.seo.setJsonLd(
+        'product',
+        productSchema({
+          name: p.name,
+          description: p.description,
+          sku: p.sku,
+          url: this.seo.canonicalFor(`/catalog/product/${this.sku()}`),
+          image: p.images[0] ? this.seo.absoluteUrl(p.images[0]) : undefined,
+          category: this.category()?.name
+        })
+      );
     });
   }
 }

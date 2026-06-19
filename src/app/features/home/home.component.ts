@@ -15,6 +15,7 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
 import { SeoService } from '../../core/seo/seo.service';
+import { organizationSchema, websiteSchema } from '../../core/seo/structured-data';
 import { CatalogService } from '../../core/data/catalog.service';
 import { ProjectsService } from '../../core/data/projects.service';
 import { NewsService } from '../../core/data/news.service';
@@ -138,15 +139,9 @@ export class HomeComponent {
         description: this.i18n.translate('meta.description'),
         path: ''
       });
-      this.seo.setJsonLd('organization', {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: 'KRILAK',
-        url: this.seoUrl(),
-        description: this.i18n.translate('meta.description'),
-        foundingDate: '1991',
-        areaServed: 'RU'
-      });
+      const url = this.seoUrl();
+      this.seo.setJsonLd('organization', organizationSchema(url, this.i18n.translate('meta.description')));
+      this.seo.setJsonLd('website', websiteSchema(url));
     });
 
     // Показываем отладочные панели только когда соответствующий блок в зоне видимости.
