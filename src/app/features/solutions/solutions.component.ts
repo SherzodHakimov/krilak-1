@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
-import { TranslationService } from '../../core/i18n/translation.service';
-import { usePageSeo } from '../../core/seo/page-seo';
+import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { CtaSectionComponent } from '../../shared/cta-section.component';
 import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
@@ -15,8 +14,6 @@ import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component'
   templateUrl: './solutions.component.html'
 })
 export class SolutionsComponent {
-  private readonly i18n = inject(TranslationService);
-
   readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'nav.solutions' }];
 
   // Линейные SVG-иконки (stroke, currentColor) вместо эмодзи — единый стиль карточек.
@@ -30,10 +27,6 @@ export class SolutionsComponent {
   ];
 
   constructor() {
-    usePageSeo(() => ({
-      title: `${this.i18n.translate('solutions.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
-      description: this.i18n.translate('solutions.subtitle'),
-      path: '/solutions'
-    }));
+    useStaticPageSeo('solutions.title', 'solutions.subtitle', '/solutions');
   }
 }

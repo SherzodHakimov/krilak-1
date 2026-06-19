@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
-import { TranslationService } from '../../core/i18n/translation.service';
-import { usePageSeo } from '../../core/seo/page-seo';
+import { useStaticPageSeo } from '../../core/seo/page-seo';
 
 @Component({
   selector: 'app-not-found',
@@ -21,13 +20,7 @@ import { usePageSeo } from '../../core/seo/page-seo';
   `
 })
 export class NotFoundComponent {
-  private readonly i18n = inject(TranslationService);
-
   constructor() {
-    usePageSeo(() => ({
-      title: `${this.i18n.translate('notfound.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
-      description: this.i18n.translate('notfound.subtitle'),
-      path: '/404'
-    }));
+    useStaticPageSeo('notfound.title', 'notfound.subtitle', '/404');
   }
 }

@@ -4,7 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
-import { usePageSeo } from '../../core/seo/page-seo';
+import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { LeadField } from '../../core/telegram/telegram.types';
 import { ConfiguratorService } from './configurator.service';
 import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
@@ -57,11 +57,7 @@ export class ConfiguratorComponent {
   });
 
   constructor() {
-    usePageSeo(() => ({
-      title: `${this.i18n.translate('configurator_block.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
-      description: this.i18n.translate('configurator_block.subtitle'),
-      path: '/configurator'
-    }));
+    useStaticPageSeo('configurator_block.title', 'configurator_block.subtitle', '/configurator');
 
     // Предвыбор типа объекта с главной (?object=…): пропускаем шаг 1.
     const preset = this.route.snapshot.queryParamMap.get('object');

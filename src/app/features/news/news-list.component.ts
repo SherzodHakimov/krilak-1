@@ -3,8 +3,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
-import { TranslationService } from '../../core/i18n/translation.service';
-import { usePageSeo } from '../../core/seo/page-seo';
+import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { NewsService } from '../../core/data/news.service';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { DmyDatePipe } from '../../shared/dmy-date.pipe';
@@ -26,17 +25,12 @@ const NEWS_PHOTOS: Record<string, string> = {
 })
 export class NewsListComponent {
   private readonly newsSvc = inject(NewsService);
-  private readonly i18n = inject(TranslationService);
 
   readonly articles = computed(() =>
     this.newsSvc.all().map((a) => ({ ...a, photo: NEWS_PHOTOS[a.slug] ?? '' }))
   );
 
   constructor() {
-    usePageSeo(() => ({
-      title: `${this.i18n.translate('news.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
-      description: this.i18n.translate('news.subtitle'),
-      path: '/news'
-    }));
+    useStaticPageSeo('news.title', 'news.subtitle', '/news');
   }
 }

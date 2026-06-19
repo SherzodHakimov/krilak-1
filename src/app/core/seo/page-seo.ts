@@ -16,3 +16,18 @@ export function usePageSeo(factory: () => SeoConfig): void {
     seo.update(factory());
   });
 }
+
+/**
+ * SEO for a static page whose title and description come straight from i18n
+ * keys. The title is suffixed with the brand name (`meta.brand_suffix`); the
+ * path is the canonical route. Covers the common page pattern so components
+ * don't repeat the title/description/path boilerplate.
+ */
+export function useStaticPageSeo(titleKey: string, descriptionKey: string, path: string): void {
+  const i18n = inject(TranslationService);
+  usePageSeo(() => ({
+    title: `${i18n.translate(titleKey)} — ${i18n.translate('meta.brand_suffix')}`,
+    description: i18n.translate(descriptionKey),
+    path
+  }));
+}

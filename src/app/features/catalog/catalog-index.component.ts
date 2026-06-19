@@ -3,8 +3,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
-import { TranslationService } from '../../core/i18n/translation.service';
-import { usePageSeo } from '../../core/seo/page-seo';
+import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { CatalogService } from '../../core/data/catalog.service';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
@@ -39,7 +38,6 @@ const TILE_TONE: Record<string, { bg: string; icon: string }> = {
 })
 export class CatalogIndexComponent {
   private readonly catalog = inject(CatalogService);
-  private readonly i18n = inject(TranslationService);
 
   readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'catalog.title' }];
 
@@ -61,11 +59,7 @@ export class CatalogIndexComponent {
   });
 
   constructor() {
-    usePageSeo(() => ({
-      title: `${this.i18n.translate('catalog.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
-      description: this.i18n.translate('catalog.subtitle'),
-      path: '/catalog'
-    }));
+    useStaticPageSeo('catalog.title', 'catalog.subtitle', '/catalog');
   }
 
   onSearch(event: Event): void {

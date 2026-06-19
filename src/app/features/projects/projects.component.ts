@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
-import { TranslationService } from '../../core/i18n/translation.service';
-import { usePageSeo } from '../../core/seo/page-seo';
+import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { ProjectsService } from '../../core/data/projects.service';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { CtaSectionComponent } from '../../shared/cta-section.component';
@@ -33,7 +32,6 @@ const PROJECT_PHOTOS: Record<string, string> = {
 })
 export class ProjectsComponent {
   private readonly projectsSvc = inject(ProjectsService);
-  private readonly i18n = inject(TranslationService);
 
   readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'nav.projects' }];
 
@@ -52,11 +50,7 @@ export class ProjectsComponent {
   });
 
   constructor() {
-    usePageSeo(() => ({
-      title: `${this.i18n.translate('projects.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
-      description: this.i18n.translate('projects.subtitle'),
-      path: '/projects'
-    }));
+    useStaticPageSeo('projects.title', 'projects.subtitle', '/projects');
   }
 
   setFilter(id: string): void {

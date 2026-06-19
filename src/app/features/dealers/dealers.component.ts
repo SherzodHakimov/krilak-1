@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
-import { usePageSeo } from '../../core/seo/page-seo';
+import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { PageHeroComponent } from '../../shared/page-hero.component';
 import { LeadFormComponent } from '../../shared/lead-form.component';
@@ -31,10 +31,6 @@ export class DealersComponent {
   });
 
   constructor() {
-    usePageSeo(() => ({
-      title: `${this.i18n.translate('dealers.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
-      description: this.i18n.translate('dealers.subtitle'),
-      path: '/dealers'
-    }));
+    useStaticPageSeo('dealers.title', 'dealers.subtitle', '/dealers');
   }
 }

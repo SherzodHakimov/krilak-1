@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
-import { usePageSeo } from '../../core/seo/page-seo';
+import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { CounterDirective } from '../../shared/counter.directive';
 import { PageHeroComponent } from '../../shared/page-hero.component';
@@ -45,10 +45,6 @@ export class AboutComponent {
   });
 
   constructor() {
-    usePageSeo(() => ({
-      title: `${this.i18n.translate('about.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
-      description: this.i18n.translate('about.subtitle'),
-      path: '/about'
-    }));
+    useStaticPageSeo('about.title', 'about.subtitle', '/about');
   }
 }

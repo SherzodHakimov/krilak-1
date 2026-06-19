@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
-import { TranslationService } from '../../core/i18n/translation.service';
-import { usePageSeo } from '../../core/seo/page-seo';
+import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { CtaSectionComponent } from '../../shared/cta-section.component';
 import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
@@ -13,8 +12,6 @@ import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component'
   templateUrl: './services.component.html'
 })
 export class ServicesComponent {
-  private readonly i18n = inject(TranslationService);
-
   readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'nav.services' }];
 
   // Линейные SVG-иконки (stroke, currentColor) вместо эмодзи — единый стиль карточек.
@@ -28,10 +25,6 @@ export class ServicesComponent {
   ];
 
   constructor() {
-    usePageSeo(() => ({
-      title: `${this.i18n.translate('services.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
-      description: this.i18n.translate('services.subtitle'),
-      path: '/services'
-    }));
+    useStaticPageSeo('services.title', 'services.subtitle', '/services');
   }
 }

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { TranslationService } from '../../core/i18n/translation.service';
-import { usePageSeo } from '../../core/seo/page-seo';
+import { useStaticPageSeo } from '../../core/seo/page-seo';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { PageHeroComponent } from '../../shared/page-hero.component';
 
@@ -50,10 +50,6 @@ export class AwardsComponent {
   });
 
   constructor() {
-    usePageSeo(() => ({
-      title: `${this.i18n.translate('awards.title')} — ${this.i18n.translate('meta.brand_suffix')}`,
-      description: this.i18n.translate('awards.subtitle'),
-      path: '/awards'
-    }));
+    useStaticPageSeo('awards.title', 'awards.subtitle', '/awards');
   }
 }
