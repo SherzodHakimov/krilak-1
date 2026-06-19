@@ -18,6 +18,7 @@ import { SeoService } from '../../core/seo/seo.service';
 import { CatalogService } from '../../core/data/catalog.service';
 import { ProjectsService } from '../../core/data/projects.service';
 import { NewsService } from '../../core/data/news.service';
+import { PROJECT_PHOTOS, NEWS_PHOTOS } from '../../core/data/photos';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { CounterDirective } from '../../shared/counter.directive';
 import { CtaSectionComponent } from '../../shared/cta-section.component';
@@ -73,20 +74,6 @@ export class HomeComponent {
   readonly newsShowPhoto = signal(true);
   readonly newsInView = signal(false);
 
-  // Unsplash photo ids для карточек объектов (по slug проекта). URL строит appImageLoader.
-  private readonly projectPhotos: Record<string, string> = {
-    'leningrad-npp-7': 'photo-1630142895963-6996ae6b3a5b',
-    'bkl-9-stations': 'photo-1610605941775-ffbeb8c589ba',
-    'kalininsky-dc': 'photo-1695668548342-c0c1ad479aee'
-  };
-
-  // Unsplash photo ids для карточек блога (по slug статьи). URL строит appImageLoader.
-  private readonly newsPhotos: Record<string, string> = {
-    'sp-2-13130-2026': 'photo-1503387762-592deb58ef4e',
-    'reactor-hall-12-weeks': 'photo-1527335988388-b40ee248d80c',
-    'vesda-gas-suppression-data-centres': 'photo-1573164713988-8665fc963095'
-  };
-
   readonly categories = computed(() => this.catalog.categories());
   // Линейные SVG-иконки категорий каталога (единый стиль с конфигуратором/наградами).
   private readonly categoryIcons: Record<string, string> = {
@@ -103,13 +90,13 @@ export class HomeComponent {
     this.projectsSvc
       .all()
       .slice(0, 3)
-      .map((p) => ({ ...p, photo: this.projectPhotos[p.slug] ?? '' }))
+      .map((p) => ({ ...p, photo: PROJECT_PHOTOS[p.slug] ?? '' }))
   );
   readonly latestNews = computed(() =>
     this.newsSvc
       .all()
       .slice(0, 3)
-      .map((a) => ({ ...a, photo: this.newsPhotos[a.slug] ?? '' }))
+      .map((a) => ({ ...a, photo: NEWS_PHOTOS[a.slug] ?? '' }))
   );
 
   readonly roles = [
