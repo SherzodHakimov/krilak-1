@@ -90,6 +90,15 @@ export class CatalogService {
     return this.products().filter((p) => p.category === slug);
   }
 
+  /** Реальное число товаров по слагу категории (по факту, а не из products_count). */
+  productCounts(): Record<string, number | undefined> {
+    const counts: Record<string, number | undefined> = {};
+    for (const p of this.raw.products) {
+      counts[p.category] = (counts[p.category] ?? 0) + 1;
+    }
+    return counts;
+  }
+
   private mapProduct(p: RawProduct): Product {
     return {
       sku: p.sku,
