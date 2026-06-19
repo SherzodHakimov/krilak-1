@@ -9,6 +9,7 @@ import {
   inject,
   signal
 } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
@@ -24,10 +25,6 @@ import { DmyDatePipe } from '../../shared/dmy-date.pipe';
 import { GeoMapComponent } from './geo-map.component';
 import { ConfiguratorService } from '../configurator/configurator.service';
 
-/** Строит URL изображения Unsplash из идентификатора фото. */
-const unsplash = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=70`;
-
 @Component({
   selector: 'app-home',
   imports: [
@@ -38,7 +35,8 @@ const unsplash = (id: string) =>
     CounterDirective,
     CtaSectionComponent,
     DmyDatePipe,
-    GeoMapComponent
+    GeoMapComponent,
+    NgOptimizedImage
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './home.component.html'
@@ -75,18 +73,18 @@ export class HomeComponent {
   readonly newsShowPhoto = signal(true);
   readonly newsInView = signal(false);
 
-  // Фото для карточек реализованных объектов на главной (по slug проекта).
+  // Unsplash photo ids для карточек объектов (по slug проекта). URL строит appImageLoader.
   private readonly projectPhotos: Record<string, string> = {
-    'leningrad-npp-7': unsplash('photo-1630142895963-6996ae6b3a5b'),
-    'bkl-9-stations': unsplash('photo-1610605941775-ffbeb8c589ba'),
-    'kalininsky-dc': unsplash('photo-1695668548342-c0c1ad479aee')
+    'leningrad-npp-7': 'photo-1630142895963-6996ae6b3a5b',
+    'bkl-9-stations': 'photo-1610605941775-ffbeb8c589ba',
+    'kalininsky-dc': 'photo-1695668548342-c0c1ad479aee'
   };
 
-  // Фото для карточек экспертного блога на главной (по slug статьи).
+  // Unsplash photo ids для карточек блога (по slug статьи). URL строит appImageLoader.
   private readonly newsPhotos: Record<string, string> = {
-    'sp-2-13130-2026': unsplash('photo-1503387762-592deb58ef4e'),
-    'reactor-hall-12-weeks': unsplash('photo-1527335988388-b40ee248d80c'),
-    'vesda-gas-suppression-data-centres': unsplash('photo-1573164713988-8665fc963095')
+    'sp-2-13130-2026': 'photo-1503387762-592deb58ef4e',
+    'reactor-hall-12-weeks': 'photo-1527335988388-b40ee248d80c',
+    'vesda-gas-suppression-data-centres': 'photo-1573164713988-8665fc963095'
   };
 
   readonly categories = computed(() => this.catalog.categories());
@@ -130,13 +128,14 @@ export class HomeComponent {
     { y: '2015', key: 'a2015', icon: 'M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7zM14 3v4h4M9 12h6M9 16h4' }
   ];
 
+  // photo — Unsplash photo id; адаптивный URL строит appImageLoader.
   readonly solutions = [
-    { key: 'energy', badge: 'R240 · EI180', gradient: 'from-brand-graphite to-brand-steel/40', n: '01', photo: unsplash('photo-1610028290816-5d937a395a49') },
-    { key: 'transport', badge: 'EI120 · СОУЭ', gradient: 'from-brand-leaf to-brand-moss', n: '02', photo: unsplash('photo-1532105956626-9569c03602f6') },
-    { key: 'retail', badge: 'МР · ППБ', gradient: 'from-brand-amber to-brand-leaf', n: '03', photo: unsplash('photo-1519567241046-7f570eee3ce6') },
-    { key: 'industry', badge: 'R90 · ЛВЖ', gradient: 'from-brand-steel to-brand-graphite', n: '04', photo: unsplash('photo-1553413077-190dd305871c') },
-    { key: 'data', badge: 'Газовое · VESDA', gradient: 'from-emerald-700 to-brand-graphite', n: '05', photo: unsplash('photo-1584169417032-d34e8d805e8b') },
-    { key: 'housing', badge: 'К0 · СНиП', gradient: 'from-brand-ink to-brand-leaf/60', n: '06', photo: unsplash('photo-1460317442991-0ec209397118') }
+    { key: 'energy', badge: 'R240 · EI180', gradient: 'from-brand-graphite to-brand-steel/40', n: '01', photo: 'photo-1610028290816-5d937a395a49' },
+    { key: 'transport', badge: 'EI120 · СОУЭ', gradient: 'from-brand-leaf to-brand-moss', n: '02', photo: 'photo-1532105956626-9569c03602f6' },
+    { key: 'retail', badge: 'МР · ППБ', gradient: 'from-brand-amber to-brand-leaf', n: '03', photo: 'photo-1519567241046-7f570eee3ce6' },
+    { key: 'industry', badge: 'R90 · ЛВЖ', gradient: 'from-brand-steel to-brand-graphite', n: '04', photo: 'photo-1553413077-190dd305871c' },
+    { key: 'data', badge: 'Газовое · VESDA', gradient: 'from-emerald-700 to-brand-graphite', n: '05', photo: 'photo-1584169417032-d34e8d805e8b' },
+    { key: 'housing', badge: 'К0 · СНиП', gradient: 'from-brand-ink to-brand-leaf/60', n: '06', photo: 'photo-1460317442991-0ec209397118' }
   ];
 
   readonly clients = [

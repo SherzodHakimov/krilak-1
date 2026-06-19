@@ -44,7 +44,7 @@
             <a [routerLink]="'/catalog/product/' + p.sku | loc" class="card group block overflow-hidden flex flex-col cursor-pointer ring-1 ring-transparent transition-all duration-300 hover:-translate-y-1 hover:ring-brand-leaf/40" data-reveal [attr.data-reveal-delay]="(i % 3) * 60">
               <div class="relative aspect-[4/3] grid place-items-center overflow-hidden {{ p.images.length ? 'bg-white' : tileTone().bg }}">
                 @if (p.images.length) {
-                  <img [src]="p.images[0]" [attr.alt]="p.name" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-contain p-3 transition-transform duration-500 group-hover:scale-105" />
+                  <img [ngSrc]="p.images[0]" [alt]="p.name" fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" class="object-contain p-3 transition-transform duration-500 group-hover:scale-105" />
                 } @else {
                   <svg class="w-16 h-16 {{ tileTone().icon }} transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="catIcon()" /></svg>
                 }

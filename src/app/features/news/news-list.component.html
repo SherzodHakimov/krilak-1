@@ -13,13 +13,11 @@
           <div class="h-44 relative overflow-hidden bg-white">
             @if (a.photo) {
               <img
-                [src]="a.photo"
+                [ngSrc]="a.photo"
                 alt=""
-                loading="lazy"
-                decoding="async"
-                width="800"
-                height="352"
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                class="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             }
             <div class="absolute inset-0 bg-gradient-to-br mix-blend-multiply {{ a.accent === 'leaf' ? 'from-brand-leaf/40 to-brand-amber/40' : a.accent === 'steel' ? 'from-brand-steel/40 to-brand-graphite/40' : 'from-emerald-500/40 to-brand-graphite/40' }}"></div>

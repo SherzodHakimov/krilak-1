@@ -195,13 +195,11 @@
           <div class="h-44 relative overflow-hidden bg-white">
             @if (showPhoto()) {
               <img
-                [src]="sol.photo"
+                [ngSrc]="sol.photo"
                 alt=""
-                loading="lazy"
-                decoding="async"
-                width="800"
-                height="352"
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                class="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             }
             @if (showGradient()) {
@@ -317,13 +315,11 @@
           <div class="h-56 relative overflow-hidden bg-white">
             @if (projShowPhoto() && p.photo) {
               <img
-                [src]="p.photo"
+                [ngSrc]="p.photo"
                 alt=""
-                loading="lazy"
-                decoding="async"
-                width="800"
-                height="448"
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                fill
+                sizes="(min-width: 768px) 33vw, 100vw"
+                class="object-cover transition-transform duration-700 hover:scale-105"
               />
             }
             @if (projShowGradient()) {
@@ -453,13 +449,11 @@
           <div class="h-44 relative overflow-hidden bg-white">
             @if (newsShowPhoto() && a.photo) {
               <img
-                [src]="a.photo"
+                [ngSrc]="a.photo"
                 alt=""
-                loading="lazy"
-                decoding="async"
-                width="800"
-                height="352"
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                fill
+                sizes="(min-width: 768px) 33vw, 100vw"
+                class="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             }
             @if (newsShowGradient()) {
