@@ -348,6 +348,18 @@ const ru: Dictionary = {
     terms_sales: 'Продажи',
     terms_service: 'Монтаж и сервис',
     terms_both: 'Продажи и сервис',
+    regions: {
+      moscow: 'Москва',
+      spb: 'Санкт-Петербург',
+      kazan: 'Казань',
+      ekb: 'Екатеринбург',
+      nsk: 'Новосибирск',
+      nnov: 'Нижний Новгород',
+      samara: 'Самара',
+      krasnodar: 'Краснодар',
+      vladivostok: 'Владивосток',
+      other: 'Другой регион'
+    },
     submit: 'Отправить заявку'
   },
   contacts: {
@@ -712,6 +724,18 @@ const en: Dictionary = {
     terms_sales: 'Sales',
     terms_service: 'Installation & service',
     terms_both: 'Sales & service',
+    regions: {
+      moscow: 'Moscow',
+      spb: 'Saint Petersburg',
+      kazan: 'Kazan',
+      ekb: 'Yekaterinburg',
+      nsk: 'Novosibirsk',
+      nnov: 'Nizhny Novgorod',
+      samara: 'Samara',
+      krasnodar: 'Krasnodar',
+      vladivostok: 'Vladivostok',
+      other: 'Other region'
+    },
     submit: 'Send request'
   },
   contacts: {

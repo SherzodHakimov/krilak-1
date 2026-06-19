@@ -1,27 +1,25 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
 import { TranslationService } from '../../core/i18n/translation.service';
 import { usePageSeo } from '../../core/seo/page-seo';
-import { TelegramService } from '../../core/telegram/telegram.service';
-import { SubmitState } from '../../core/telegram/telegram.types';
+import { LeadField } from '../../core/telegram/telegram.types';
 import { ConfiguratorService } from './configurator.service';
 import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
+import { LeadFormComponent } from '../../shared/lead-form.component';
+import { CONFIGURATOR_FIELDS } from '../../shared/lead-fields';
 
 @Component({
   selector: 'app-configurator',
-  imports: [ReactiveFormsModule, RouterLink, DecimalPipe, TranslatePipe, LocalizePathPipe, BreadcrumbsComponent],
+  imports: [RouterLink, DecimalPipe, TranslatePipe, LocalizePathPipe, BreadcrumbsComponent, LeadFormComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './configurator.component.html'
 })
 export class ConfiguratorComponent {
   private readonly configurator = inject(ConfiguratorService);
-  private readonly telegram = inject(TelegramService);
   private readonly i18n = inject(TranslationService);
-  private readonly fb = inject(FormBuilder);
   private readonly route = inject(ActivatedRoute);
 
   readonly crumbs: Crumb[] = [{ label: 'nav.home', link: '' }, { label: 'nav.configurator' }];
@@ -36,7 +34,8 @@ export class ConfiguratorComponent {
   readonly rating = signal('');
   readonly conditionId = signal('indoor');
   readonly area = signal<number | null>(null);
-  readonly state = signal<SubmitState>('idle');
+
+  readonly configuratorFields = CONFIGURATOR_FIELDS;
 
   readonly progress = computed(() => (this.step() / 5) * 100);
 
@@ -55,13 +54,6 @@ export class ConfiguratorComponent {
       conditions: this.conditionId(),
       area: this.area() ?? 0
     });
-  });
-
-  readonly leadForm = this.fb.nonNullable.group({
-    name: ['', Validators.required],
-    phone: ['', [Validators.required, Validators.pattern(/^[+()\d\s-]{6,}$/)]],
-    email: ['', [Validators.required, Validators.email]],
-    website: ['']
   });
 
   constructor() {
@@ -127,47 +119,18 @@ export class ConfiguratorComponent {
     this.area.set(Number.isFinite(value) ? value : null);
   }
 
-  invalid(control: 'name' | 'phone' | 'email'): boolean {
-    const c = this.leadForm.controls[control];
-    return c.invalid && (c.touched || c.dirty);
-  }
-
-  submitLead(): void {
-    if (this.state() === 'sending') {
-      return;
-    }
-    if (this.leadForm.invalid) {
-      this.leadForm.markAllAsTouched();
-      return;
-    }
-    const v = this.leadForm.getRawValue();
-    if (v.website) {
-      this.state.set('success');
-      return;
-    }
+  /** Вычисляемые поля заявки (расчёт из мастера) — добавляются к контактным. */
+  readonly buildLeadExtras = (): LeadField[] => {
     const rec = this.recommendation();
-    this.state.set('sending');
-    this.telegram
-      .send({
-        title: 'KRILAK — заявка из конфигуратора',
-        source: '/configurator',
-        fields: [
-          { label: this.i18n.translate('cta.name'), value: v.name },
-          { label: this.i18n.translate('cta.phone'), value: v.phone },
-          { label: this.i18n.translate('cta.email'), value: v.email },
-          { label: this.i18n.translate('configurator_block.step_1'), value: this.objectTypeName() },
-          { label: this.i18n.translate('configurator_block.step_2'), value: this.structureName() },
-          { label: this.i18n.translate('configurator_block.step_3'), value: this.rating() },
-          { label: this.i18n.translate('configurator_block.step_4'), value: `${this.area() ?? ''} м² · ${this.conditionName()}` },
-          { label: 'SKU', value: rec?.sku },
-          { label: this.i18n.translate('configurator_block.step_5'), value: rec ? `${rec.name} · ≈ ${rec.estimate.toLocaleString('ru-RU')} ₽` : '' }
-        ]
-      })
-      .subscribe({
-        next: () => this.state.set('success'),
-        error: () => this.state.set('error')
-      });
-  }
+    return [
+      { label: this.i18n.translate('configurator_block.step_1'), value: this.objectTypeName() },
+      { label: this.i18n.translate('configurator_block.step_2'), value: this.structureName() },
+      { label: this.i18n.translate('configurator_block.step_3'), value: this.rating() },
+      { label: this.i18n.translate('configurator_block.step_4'), value: `${this.area() ?? ''} м² · ${this.conditionName()}` },
+      { label: 'SKU', value: rec?.sku },
+      { label: this.i18n.translate('configurator_block.step_5'), value: rec ? `${rec.name} · ≈ ${rec.estimate.toLocaleString('ru-RU')} ₽` : '' }
+    ];
+  };
 
   structureName(): string {
     return this.configurator.structureById(this.structure())?.name ?? this.structure();

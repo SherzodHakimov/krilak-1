@@ -53,53 +53,13 @@
 
     <!-- Form -->
     <div class="lg:col-span-7" data-reveal data-reveal-delay="120">
-      <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="card border border-brand-fog p-8 lg:p-10 space-y-4">
+      <app-lead-form
+        [fields]="contactFields"
+        leadTitle="KRILAK — обращение с сайта"
+        source="/contacts"
+      >
         <h2 class="font-display font-bold text-xl">{{ 'contacts.form_title' | t }}</h2>
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label class="label">{{ 'cta.name' | t }}</label>
-            <input formControlName="name" type="text" class="input" />
-            @if (invalid('name')) { <p class="text-xs text-red-500 mt-1">{{ 'form.required' | t }}</p> }
-          </div>
-          <div>
-            <label class="label">{{ 'cta.company' | t }}</label>
-            <input formControlName="company" type="text" class="input" />
-          </div>
-        </div>
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label class="label">{{ 'cta.phone' | t }}</label>
-            <input formControlName="phone" type="tel" class="input" />
-            @if (invalid('phone')) { <p class="text-xs text-red-500 mt-1">{{ 'form.phone_invalid' | t }}</p> }
-          </div>
-          <div>
-            <label class="label">{{ 'cta.email' | t }}</label>
-            <input formControlName="email" type="email" class="input" />
-            @if (invalid('email')) { <p class="text-xs text-red-500 mt-1">{{ 'form.email_invalid' | t }}</p> }
-          </div>
-        </div>
-        <div>
-          <label class="label">{{ 'contacts.topic' | t }}</label>
-          <select formControlName="topic" class="input">
-            @for (topic of topics; track topic) {
-              <option [value]="topic">{{ 'contacts.topics.' + topic | t }}</option>
-            }
-          </select>
-        </div>
-        <div>
-          <label class="label">{{ 'cta.object' | t }}</label>
-          <textarea formControlName="message" rows="4" class="input" [attr.placeholder]="'cta.object_ph' | t"></textarea>
-        </div>
-        <div class="absolute -left-[9999px]" aria-hidden="true">
-          <label>Website<input formControlName="website" type="text" tabindex="-1" autocomplete="off" /></label>
-        </div>
-        <button type="submit" class="btn-primary w-full !py-4" [disabled]="state() === 'sending'">
-          {{ (state() === 'sending' ? 'cta.sending' : 'cta.submit') | t }}
-        </button>
-        <p class="text-xs text-brand-ink/50">{{ 'cta.consent' | t }}</p>
-        @if (state() === 'success') { <p class="text-sm font-medium text-brand-moss">{{ 'cta.success' | t }}</p> }
-        @if (state() === 'error') { <p class="text-sm font-medium text-red-500">{{ 'cta.error' | t }}</p> }
-      </form>
+      </app-lead-form>
     </div>
   </div>
 </section>

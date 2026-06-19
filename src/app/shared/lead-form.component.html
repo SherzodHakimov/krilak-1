@@ -1,0 +1,53 @@
+<form [formGroup]="form()" (ngSubmit)="submit()" novalidate [class]="formClass()">
+  <ng-content />
+
+  <div class="grid sm:grid-cols-2 gap-4">
+    @for (f of fields(); track f.name) {
+      <div [class.sm:col-span-2]="f.colSpan === 2">
+        <label class="label" [class.!text-white/70]="isDark()">{{ f.labelKey | t }}</label>
+        @switch (f.kind) {
+          @case ('textarea') {
+            <textarea
+              [formControlName]="f.name"
+              [rows]="f.rows ?? 3"
+              [class]="inputClass()"
+              [attr.placeholder]="f.placeholderKey ? (f.placeholderKey | t) : null"
+            ></textarea>
+          }
+          @case ('select') {
+            <select [formControlName]="f.name" [class]="inputClass()">
+              @for (o of f.options; track o.value) {
+                <option [value]="o.value">{{ o.labelKey | t }}</option>
+              }
+            </select>
+          }
+          @default {
+            <input [formControlName]="f.name" [type]="f.kind" [class]="inputClass()" />
+          }
+        }
+        @if (f.errorKey && invalid(f.name)) {
+          <p [class]="errorClass()">{{ f.errorKey | t }}</p>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Honeypot: visually hidden, off-screen, not announced. -->
+  <div class="absolute -left-[9999px]" aria-hidden="true">
+    <label>Website<input formControlName="website" type="text" tabindex="-1" autocomplete="off" /></label>
+  </div>
+
+  <button type="submit" class="btn-primary w-full !py-4" [disabled]="state() === 'sending'">
+    {{ (state() === 'sending' ? 'cta.sending' : submitLabelKey()) | t }}
+  </button>
+
+  @if (showConsent()) {
+    <p class="text-xs" [class]="isDark() ? 'text-white/40' : 'text-brand-ink/50'">{{ consentKey() | t }}</p>
+  }
+  @if (state() === 'success') {
+    <p class="text-sm font-medium" [class]="isDark() ? 'text-emerald-400' : 'text-brand-moss'">{{ 'cta.success' | t }}</p>
+  }
+  @if (state() === 'error') {
+    <p class="text-sm font-medium" [class]="isDark() ? 'text-red-400' : 'text-red-500'">{{ 'cta.error' | t }}</p>
+  }
+</form>
