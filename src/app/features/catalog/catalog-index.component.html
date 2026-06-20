@@ -41,7 +41,7 @@
       </a>
     </div>
     @if (filteredCategories().length === 0) {
-      <p class="text-brand-ink/60">{{ 'catalog.nothing' | t }}</p>
+      <p class="text-brand-ink/70">{{ 'catalog.nothing' | t }}</p>
     } @else {
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         @for (cat of filteredCategories(); track cat.slug; let i = $index) {
@@ -50,7 +50,7 @@
               <svg class="w-7 h-7 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="iconPath(cat.slug)" /></svg>
             </span>
             <h3 class="font-display font-bold text-xl group-hover:text-brand-leaf transition-colors min-h-[3.5rem]">{{ cat.name }}</h3>
-            <p class="text-sm text-brand-ink/60 mt-2 flex-1">{{ cat.description }}</p>
+            <p class="text-sm text-brand-ink/70 mt-2 flex-1">{{ cat.description }}</p>
             <div class="mt-6 pt-6 border-t border-brand-fog flex items-center justify-between text-sm">
               <span class="text-brand-ink/50">{{ productCounts()[cat.slug] ?? 0 }}+ SKU</span>
               <span class="font-semibold text-brand-leaf inline-flex items-center group-hover:translate-x-1 group-hover:text-brand-ink transition-all">{{ 'catalog.details' | t }}</span>
@@ -93,7 +93,7 @@
           </div>
           <div class="p-6 flex-1 flex flex-col">
             <h3 class="font-display font-bold text-lg group-hover:text-brand-leaf transition-colors min-h-[3.5rem]">{{ p.name }}</h3>
-            <p class="text-sm text-brand-ink/60 mt-1 flex-1">{{ p.subtitle }}</p>
+            <p class="text-sm text-brand-ink/70 mt-1 flex-1">{{ p.subtitle }}</p>
             <div class="mt-5 pt-5 border-t border-brand-fog flex items-center justify-between">
               <span class="text-sm font-mono text-brand-ink/50">{{ p.sku }}</span>
               <span class="text-sm font-semibold text-brand-leaf inline-flex items-center group-hover:translate-x-1 transition-transform">{{ 'catalog.details' | t }}</span>

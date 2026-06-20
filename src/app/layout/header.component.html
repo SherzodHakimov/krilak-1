@@ -51,7 +51,7 @@
         />
         <span class="flex flex-col leading-none">
           <span
-            class="text-[10px] tracking-[0.22em] uppercase text-white/70 [.is-scrolled_&]:text-brand-ink/60 transition-colors duration-200"
+            class="text-[10px] tracking-[0.22em] uppercase text-white/70 [.is-scrolled_&]:text-brand-ink/70 transition-colors duration-200"
             >{{ 'brand.prefix' | t }}</span
           >
           <span
@@ -88,7 +88,7 @@
             @for (cat of categories(); track cat.slug) {
               <a [routerLink]="'/catalog/category/' + cat.slug | loc" class="flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl hover:bg-brand-cloud transition-colors">
                 <span class="font-semibold text-sm text-brand-graphite">{{ cat.name }}</span>
-                <span class="text-xs text-brand-ink/40">{{ productCounts()[cat.slug] ?? 0 }}</span>
+                <span class="text-xs text-brand-ink/70">{{ productCounts()[cat.slug] ?? 0 }}</span>
               </a>
             }
             <a [routerLink]="'/catalog' | loc" class="mt-1 px-3 py-2.5 border-t border-brand-fog flex items-center justify-between text-brand-leaf font-semibold text-sm group/all">

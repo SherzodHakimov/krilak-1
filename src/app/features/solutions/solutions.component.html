@@ -24,7 +24,7 @@
           <h2 class="font-display font-bold text-2xl group-hover:text-brand-leaf transition-colors">{{ 'solutions.items.' + item.key + '.title' | t }}</h2>
           <p class="text-brand-ink/70 mt-3">{{ 'solutions.items.' + item.key + '.description' | t }}</p>
           @if (item.bullets.length) {
-            <ul class="text-sm text-brand-ink/60 mt-5 space-y-1">
+            <ul class="text-sm text-brand-ink/70 mt-5 space-y-1">
               @for (b of item.bullets; track b) {
                 <li>· {{ 'solutions.items.' + item.key + '.' + b | t }}</li>
               }

@@ -30,7 +30,7 @@ import { TranslatePipe } from '../core/i18n/translate.pipe';
               <span class="w-9 h-9 rounded-full bg-emerald-500 text-white grid place-items-center text-sm font-bold">W</span>
               <span class="flex-1">
                 <span class="block text-sm font-semibold">{{ 'chat.whatsapp' | t }}</span>
-                <span class="block text-xs text-brand-ink/60">{{ 'footer.phone' | t }}</span>
+                <span class="block text-xs text-brand-ink/70">{{ 'footer.phone' | t }}</span>
               </span>
               <span class="text-brand-ink/40">→</span>
             </a>
@@ -38,7 +38,7 @@ import { TranslatePipe } from '../core/i18n/translate.pipe';
               <span class="w-9 h-9 rounded-full bg-sky-500 text-white grid place-items-center text-sm font-bold">T</span>
               <span class="flex-1">
                 <span class="block text-sm font-semibold">{{ 'chat.telegram' | t }}</span>
-                <span class="block text-xs text-brand-ink/60">&#64;krilak</span>
+                <span class="block text-xs text-brand-ink/70">&#64;krilak</span>
               </span>
               <span class="text-brand-ink/40">→</span>
             </a>
@@ -46,7 +46,7 @@ import { TranslatePipe } from '../core/i18n/translate.pipe';
               <span class="w-9 h-9 rounded-full bg-brand-graphite text-white grid place-items-center text-sm font-bold">☎</span>
               <span class="flex-1">
                 <span class="block text-sm font-semibold">{{ 'chat.call' | t }}</span>
-                <span class="block text-xs text-brand-ink/60">{{ 'footer.phone' | t }}</span>
+                <span class="block text-xs text-brand-ink/70">{{ 'footer.phone' | t }}</span>
               </span>
               <span class="text-brand-ink/40">→</span>
             </a>

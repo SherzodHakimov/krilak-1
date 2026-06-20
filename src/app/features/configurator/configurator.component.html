@@ -45,7 +45,7 @@
                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="objectIcon(o.id)" /></svg>
               </span>
               <span class="block font-display font-semibold">{{ o.name }}</span>
-              <span class="block text-xs text-brand-ink/60 mt-1 leading-snug">{{ o.description }}</span>
+              <span class="block text-xs text-brand-ink/70 mt-1 leading-snug">{{ o.description }}</span>
             </button>
           }
         </div>
@@ -126,7 +126,7 @@
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="conditionIcon(c.id)" /></svg>
                   </span>
                   <span class="block font-display font-semibold text-sm">{{ c.name }}</span>
-                  <span class="block text-xs text-brand-ink/60 mt-1 leading-snug">{{ c.description }}</span>
+                  <span class="block text-xs text-brand-ink/70 mt-1 leading-snug">{{ c.description }}</span>
                 </button>
               }
             </div>
@@ -170,7 +170,7 @@
             </app-lead-form>
           </div>
         } @else {
-          <p class="text-brand-ink/60">{{ 'catalog.nothing' | t }}</p>
+          <p class="text-brand-ink/70">{{ 'catalog.nothing' | t }}</p>
         }
       }
 
