@@ -262,7 +262,7 @@ const ru: Dictionary = {
     cookies: 'Использование cookies'
   },
   chat: {
-    title: 'Связаться с инженером',
+    title: 'Связаться с менеджером',
     whatsapp: 'WhatsApp',
     telegram: 'Telegram',
     call: 'Заказать звонок',
@@ -637,7 +637,7 @@ const en: Dictionary = {
     cookies: 'Cookies'
   },
   chat: {
-    title: 'Talk to an engineer',
+    title: 'Talk to a manager',
     whatsapp: 'WhatsApp',
     telegram: 'Telegram',
     call: 'Request a call',
