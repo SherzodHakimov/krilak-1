@@ -41,7 +41,7 @@
     class="bg-white/0 [.is-scrolled_&]:bg-white transition-colors duration-300 border-b border-transparent [.is-scrolled_&]:border-brand-fog"
   >
     <div class="container-x flex items-center justify-between h-20">
-      <a [routerLink]="'' | loc" class="flex items-center gap-3 group" aria-label="Krilak">
+      <a [routerLink]="'' | loc" class="flex items-center gap-3 group">
         <img
           src="/images/logo-mark.webp"
           alt=""
@@ -56,10 +56,9 @@
           >
           <span
             class="font-display font-bold text-xl text-white [.is-scrolled_&]:text-brand-graphite transition-colors duration-200 mt-1 flex justify-between"
-            [attr.aria-label]="'brand.name' | t"
           >
             @for (ch of brandNameChars(); track $index) {
-              <span aria-hidden="true">{{ ch }}</span>
+              <span>{{ ch }}</span>
             }
           </span>
         </span>
