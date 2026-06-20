@@ -32,20 +32,7 @@ export function pageCrumbs(label: string): Crumb[] {
   imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { style: 'display: contents' },
-  template: `
-    <nav class="text-xs text-white/50 flex items-center gap-2 mb-6 flex-wrap" data-reveal aria-label="breadcrumb">
-      @for (c of items(); track $index; let first = $first; let last = $last) {
-        @if (!first) {
-          <span aria-hidden="true">/</span>
-        }
-        @if (c.link != null && !last) {
-          <a [routerLink]="c.link | loc" class="hover:text-white">{{ c.raw ? c.label : (c.label | t) }}</a>
-        } @else {
-          <span class="text-white" aria-current="page">{{ c.raw ? c.label : (c.label | t) }}</span>
-        }
-      }
-    </nav>
-  `
+  templateUrl: './breadcrumbs.component.html'
 })
 export class BreadcrumbsComponent {
   /** Сегменты от корня к текущей странице. Последний — текущая (без ссылки). */

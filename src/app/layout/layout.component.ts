@@ -15,14 +15,7 @@ import { ChatWidgetComponent } from './chat-widget.component';
   selector: 'app-layout',
   imports: [RouterOutlet, HeaderComponent, FooterComponent, ChatWidgetComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <app-header />
-    <main>
-      <router-outlet />
-    </main>
-    <app-footer />
-    <app-chat-widget />
-  `
+  templateUrl: './layout.component.html'
 })
 export class LayoutComponent {
   private readonly route = inject(ActivatedRoute);

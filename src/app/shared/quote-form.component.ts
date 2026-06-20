@@ -11,14 +11,7 @@ import { QUOTE_FIELDS } from './lead-fields';
   selector: 'app-quote-form',
   imports: [LeadFormComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <app-lead-form
-      [fields]="quoteFields"
-      [variant]="variant()"
-      [leadTitle]="leadTitle()"
-      [source]="source()"
-    />
-  `
+  templateUrl: './quote-form.component.html'
 })
 export class QuoteFormComponent {
   /** Visual variant: `dark` for dark sections, `light` for white backgrounds. */

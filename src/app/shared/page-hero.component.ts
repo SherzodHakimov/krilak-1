@@ -15,21 +15,7 @@ import { BreadcrumbsComponent, Crumb } from './breadcrumbs.component';
   // так же, как если бы лежала в шаблоне страницы напрямую. Инлайновый стиль
   // (а не styles[]) не включает emulated-инкапсуляцию и не добавляет атрибутов.
   host: { style: 'display: contents' },
-  template: `
-    <section class="bg-brand-graphite text-white relative overflow-hidden -mt-[7.25rem] pt-[7.25rem]">
-      <div class="absolute inset-0 grid-lines opacity-[0.05] pointer-events-none"></div>
-      <div class="container-x relative py-16 lg:py-24">
-        @if (crumbs(); as c) {
-          <app-breadcrumbs [items]="c" />
-        }
-        <div class="max-w-3xl" data-reveal>
-          <span class="eyebrow !text-brand-amber">{{ eyebrow() | t }}</span>
-          <h1 class="mt-3 text-display-lg text-white text-balance">{{ title() | t }}</h1>
-          <p class="mt-5 text-lg text-white/70">{{ subtitle() | t }}</p>
-        </div>
-      </div>
-    </section>
-  `
+  templateUrl: './page-hero.component.html'
 })
 export class PageHeroComponent {
   /** Ключ перевода для надписи-eyebrow. */

@@ -8,16 +8,7 @@ import { useStaticPageSeo } from '../../core/seo/page-seo';
   selector: 'app-not-found',
   imports: [RouterLink, TranslatePipe, LocalizePathPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <section class="section min-h-[60vh] grid place-items-center">
-      <div class="container-x text-center">
-        <div class="text-display-xl font-display font-bold text-brand-leaf/20">404</div>
-        <h1 class="text-display-md mt-2 text-balance">{{ 'notfound.title' | t }}</h1>
-        <p class="mt-4 text-lg text-brand-ink/70">{{ 'notfound.subtitle' | t }}</p>
-        <a [routerLink]="'' | loc" class="btn-primary mt-8">{{ 'notfound.home' | t }}</a>
-      </div>
-    </section>
-  `
+  templateUrl: './not-found.component.html'
 })
 export class NotFoundComponent {
   constructor() {
