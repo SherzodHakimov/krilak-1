@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { LocalizePathPipe } from '../../core/i18n/localize-path.pipe';
@@ -8,10 +7,11 @@ import { CatalogService } from '../../core/data/catalog.service';
 import { categoryIconPath, categoryTone } from '../../core/data/category-icons';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { BreadcrumbsComponent, pageCrumbs } from '../../shared/breadcrumbs.component';
+import { ProductCardComponent } from '../../shared/product-card.component';
 
 @Component({
   selector: 'app-catalog-index',
-  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, BreadcrumbsComponent, NgOptimizedImage],
+  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, BreadcrumbsComponent, ProductCardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './catalog-index.component.html'
 })

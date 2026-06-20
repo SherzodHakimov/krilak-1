@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
@@ -11,10 +10,11 @@ import { CatalogService } from '../../core/data/catalog.service';
 import { categoryIconPath, categoryTone } from '../../core/data/category-icons';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { BreadcrumbsComponent, Crumb } from '../../shared/breadcrumbs.component';
+import { ProductCardComponent } from '../../shared/product-card.component';
 
 @Component({
   selector: 'app-category',
-  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, BreadcrumbsComponent, NgOptimizedImage],
+  imports: [RouterLink, TranslatePipe, LocalizePathPipe, RevealDirective, BreadcrumbsComponent, ProductCardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './category.component.html'
 })
