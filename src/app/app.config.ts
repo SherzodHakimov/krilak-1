@@ -6,11 +6,9 @@ import {
 import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { IMAGE_LOADER } from '@angular/common';
 
 import { routes } from './app.routes';
 import { httpErrorInterceptor } from './core/interceptors/http-error.interceptor';
-import { appImageLoader } from './core/image-loader';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,7 +20,6 @@ export const appConfig: ApplicationConfig = {
       withRouterConfig({ paramsInheritanceStrategy: 'always' })
     ),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptors([httpErrorInterceptor])),
-    { provide: IMAGE_LOADER, useValue: appImageLoader }
+    provideHttpClient(withFetch(), withInterceptors([httpErrorInterceptor]))
   ]
 };

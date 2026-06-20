@@ -119,14 +119,14 @@ export class HomeComponent {
     { y: '2015', key: 'a2015', icon: 'M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7zM14 3v4h4M9 12h6M9 16h4' }
   ];
 
-  // photo — Unsplash photo id; адаптивный URL строит appImageLoader.
+  // photo — self-hosted webp в public/images/solutions/.
   readonly solutions = [
-    { key: 'energy', badge: 'R240 · EI180', gradient: 'from-brand-graphite to-brand-steel/40', n: '01', photo: 'photo-1610028290816-5d937a395a49' },
-    { key: 'transport', badge: 'EI120 · СОУЭ', gradient: 'from-brand-leaf to-brand-moss', n: '02', photo: 'photo-1532105956626-9569c03602f6' },
-    { key: 'retail', badge: 'МР · ППБ', gradient: 'from-brand-amber to-brand-leaf', n: '03', photo: 'photo-1519567241046-7f570eee3ce6' },
-    { key: 'industry', badge: 'R90 · ЛВЖ', gradient: 'from-brand-steel to-brand-graphite', n: '04', photo: 'photo-1553413077-190dd305871c' },
-    { key: 'data', badge: 'Газовое · VESDA', gradient: 'from-emerald-700 to-brand-graphite', n: '05', photo: 'photo-1584169417032-d34e8d805e8b' },
-    { key: 'housing', badge: 'К0 · СНиП', gradient: 'from-brand-ink to-brand-leaf/60', n: '06', photo: 'photo-1460317442991-0ec209397118' }
+    { key: 'energy', badge: 'R240 · EI180', gradient: 'from-brand-graphite to-brand-steel/40', n: '01', photo: '/images/solutions/energy.webp' },
+    { key: 'transport', badge: 'EI120 · СОУЭ', gradient: 'from-brand-leaf to-brand-moss', n: '02', photo: '/images/solutions/transport.webp' },
+    { key: 'retail', badge: 'МР · ППБ', gradient: 'from-brand-amber to-brand-leaf', n: '03', photo: '/images/solutions/retail.webp' },
+    { key: 'industry', badge: 'R90 · ЛВЖ', gradient: 'from-brand-steel to-brand-graphite', n: '04', photo: '/images/solutions/industry.webp' },
+    { key: 'data', badge: 'Газовое · VESDA', gradient: 'from-emerald-700 to-brand-graphite', n: '05', photo: '/images/solutions/data.webp' },
+    { key: 'housing', badge: 'К0 · СНиП', gradient: 'from-brand-ink to-brand-leaf/60', n: '06', photo: '/images/solutions/housing.webp' }
   ];
 
   readonly clients = [
