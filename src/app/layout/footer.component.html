@@ -34,7 +34,7 @@
 
     <div class="md:col-span-8 flex flex-col sm:flex-row sm:justify-end gap-12">
       <div>
-        <h4 class="text-xs font-semibold uppercase tracking-wider text-white mb-4">{{ 'footer.company_title' | t }}</h4>
+        <p class="text-xs font-semibold uppercase tracking-wider text-white mb-4">{{ 'footer.company_title' | t }}</p>
         <ul class="space-y-2.5 text-sm">
           @for (link of companyLinks; track link.key) {
             <li><a [routerLink]="link.path | loc" class="hover:text-white">{{ link.key | t }}</a></li>
@@ -43,7 +43,7 @@
       </div>
 
       <div>
-        <h4 class="text-xs font-semibold uppercase tracking-wider text-white mb-4">{{ 'footer.for_partners' | t }}</h4>
+        <p class="text-xs font-semibold uppercase tracking-wider text-white mb-4">{{ 'footer.for_partners' | t }}</p>
         <ul class="space-y-2.5 text-sm">
           @for (link of partnerLinks; track link.key) {
             <li><a [routerLink]="link.path | loc" class="hover:text-white">{{ link.key | t }}</a></li>
@@ -52,7 +52,7 @@
       </div>
 
       <div>
-        <h4 class="text-xs font-semibold uppercase tracking-wider text-white mb-4">{{ 'footer.contacts_title' | t }}</h4>
+        <p class="text-xs font-semibold uppercase tracking-wider text-white mb-4">{{ 'footer.contacts_title' | t }}</p>
         <ul class="space-y-2.5 text-sm">
           <li><a href="tel:+74957440052" class="hover:text-white font-semibold text-white">{{ 'footer.phone' | t }}</a></li>
           <li><a href="mailto:info@krilak.ru" class="hover:text-white">{{ 'footer.email' | t }}</a></li>
