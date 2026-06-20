@@ -263,7 +263,6 @@ const ru: Dictionary = {
   },
   chat: {
     title: 'Связаться с инженером',
-    subtitle: 'Ответим в рабочие часы менее чем за 5 минут',
     whatsapp: 'WhatsApp',
     telegram: 'Telegram',
     call: 'Заказать звонок',
@@ -639,7 +638,6 @@ const en: Dictionary = {
   },
   chat: {
     title: 'Talk to an engineer',
-    subtitle: 'We reply in under 5 minutes during business hours',
     whatsapp: 'WhatsApp',
     telegram: 'Telegram',
     call: 'Request a call',
