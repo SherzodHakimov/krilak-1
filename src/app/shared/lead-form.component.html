@@ -4,10 +4,11 @@
   <div class="grid sm:grid-cols-2 gap-4">
     @for (f of fields(); track f.name) {
       <div [class.sm:col-span-2]="f.colSpan === 2">
-        <label class="label" [class.!text-white/70]="isDark()">{{ f.labelKey | t }}</label>
+        <label class="label" [attr.for]="f.name" [class.!text-white/70]="isDark()">{{ f.labelKey | t }}</label>
         @switch (f.kind) {
           @case ('textarea') {
             <textarea
+              [id]="f.name"
               [formControlName]="f.name"
               [rows]="f.rows ?? 3"
               [class]="inputClass()"
@@ -15,14 +16,14 @@
             ></textarea>
           }
           @case ('select') {
-            <select [formControlName]="f.name" [class]="inputClass()">
+            <select [id]="f.name" [formControlName]="f.name" [class]="inputClass()">
               @for (o of f.options; track o.value) {
                 <option [value]="o.value">{{ o.labelKey | t }}</option>
               }
             </select>
           }
           @default {
-            <input [formControlName]="f.name" [type]="f.kind" [class]="inputClass()" />
+            <input [id]="f.name" [formControlName]="f.name" [type]="f.kind" [class]="inputClass()" />
           }
         }
         @if (f.errorKey && invalid(f.name)) {
