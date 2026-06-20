@@ -265,7 +265,7 @@ const ru: Dictionary = {
     title: 'Связаться с менеджером',
     whatsapp: 'WhatsApp',
     telegram: 'Telegram',
-    call: 'Заказать звонок',
+    call: 'Позвонить',
     write: 'Написать в чат',
     open: 'Связаться'
   },
@@ -640,7 +640,7 @@ const en: Dictionary = {
     title: 'Talk to a manager',
     whatsapp: 'WhatsApp',
     telegram: 'Telegram',
-    call: 'Request a call',
+    call: 'Call us',
     write: 'Open chat',
     open: 'Contact us'
   },
