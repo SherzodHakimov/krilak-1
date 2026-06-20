@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  computed,
+  inject,
+  input,
+  signal
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '../core/i18n/translate.pipe';
 import { TranslationService } from '../core/i18n/translation.service';
@@ -40,6 +48,7 @@ export class LeadFormComponent {
 
   private readonly telegram = inject(TelegramService);
   private readonly i18n = inject(TranslationService);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly state = signal<SubmitState>('idle');
 
@@ -69,6 +78,7 @@ export class LeadFormComponent {
       state: this.state,
       form: this.form(),
       telegram: this.telegram,
+      destroyRef: this.destroyRef,
       title: this.leadTitle(),
       source: this.source(),
       fields: (value) => {

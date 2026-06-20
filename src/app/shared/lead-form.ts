@@ -1,4 +1,5 @@
-import { WritableSignal } from '@angular/core';
+import { DestroyRef, WritableSignal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup } from '@angular/forms';
 import { TelegramService } from '../core/telegram/telegram.service';
 import { LeadField, SubmitState } from '../core/telegram/telegram.types';
@@ -28,6 +29,8 @@ export interface SubmitLeadOptions {
   fields: (value: Record<string, unknown>) => LeadField[];
   /** Значение для сброса формы после успешной отправки. */
   resetValue?: unknown;
+  /** Для авто-отписки, если компонент уничтожен до ответа Telegram. */
+  destroyRef: DestroyRef;
 }
 
 /**
@@ -56,6 +59,7 @@ export function submitLead(options: SubmitLeadOptions): void {
   state.set('sending');
   telegram
     .send({ title: options.title, source: options.source, fields: options.fields(value) })
+    .pipe(takeUntilDestroyed(options.destroyRef))
     .subscribe({
       next: () => {
         state.set('success');
