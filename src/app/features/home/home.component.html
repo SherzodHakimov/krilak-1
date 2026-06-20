@@ -276,17 +276,25 @@
               }
             </div>
             <div class="flex justify-end pt-6 border-t border-brand-fog">
-              <a
-                [routerLink]="selectedObject() ? ('/configurator' | loc) : null"
-                [queryParams]="{ object: selectedObject() }"
-                class="btn-primary !py-2.5 !px-6 text-sm group transition-all duration-200"
-                [class.pointer-events-none]="!selectedObject()"
-                [class.opacity-40]="!selectedObject()"
-                [attr.aria-disabled]="!selectedObject()"
-              >
-                <span>{{ 'configurator_block.nav_next' | t }}</span>
-                <span class="group-hover:translate-x-1 transition-transform">→</span>
-              </a>
+              @if (selectedObject(); as obj) {
+                <a
+                  [routerLink]="'/configurator' | loc"
+                  [queryParams]="{ object: obj }"
+                  class="btn-primary !py-2.5 !px-6 text-sm group transition-all duration-200"
+                >
+                  <span>{{ 'configurator_block.nav_next' | t }}</span>
+                  <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </a>
+              } @else {
+                <button
+                  type="button"
+                  disabled
+                  class="btn-primary !py-2.5 !px-6 text-sm group transition-all duration-200 opacity-40 cursor-not-allowed"
+                >
+                  <span>{{ 'configurator_block.nav_next' | t }}</span>
+                  <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+              }
             </div>
           </div>
         </div>
